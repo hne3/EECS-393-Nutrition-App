@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('food',function(){
+    return \App\Http\Controllers\NutritionAPI::Food()->get();
+});
