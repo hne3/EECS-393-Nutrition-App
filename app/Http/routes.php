@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('food/{sort}',function($sort){
+    if($sort == 'id'){
+        return \App\Http\Controllers\NutritionAPI::Food()->sortByID()->get();
+    } else if ($sort == 'name'){
+        return \App\Http\Controllers\NutritionAPI::Food()->sortByName()->get();
+    } else {
+        return view('welcome');
+    }
+});
+
 Route::get('food',function(){
     return \App\Http\Controllers\NutritionAPI::Food()->get();
 });

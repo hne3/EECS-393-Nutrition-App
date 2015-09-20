@@ -8,14 +8,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Config;
-
 class NutritionAPI extends Controller
 {
     protected $base_url = 'http://api.nal.usda.gov/ndb/';
     protected $type;
     protected $form;
     protected $offset = 0;
+    protected $max = 50;
+    protected $sort = 'id';
 
     public static function Food(){
         $newAPI = new static();
@@ -24,13 +24,34 @@ class NutritionAPI extends Controller
         return $newAPI;
     }
 
+    public static function Nutrients(){
+        $newAPI = new static();
+        $newAPI->form = 'list';
+        $newAPI->type = 'n';
+    }
+
+
+    public function sortByName(){
+        $this->sort = 'name';
+        return $this;
+    }
+
+    public function sortByID(){
+        $this->sort = 'id';
+        return $this;
+    }
+
     public function get(){
-        $url = $this->base_url . $this->form . '?lt=' . $this->type . '&offset=' . $this->offset . '&api_key=' . env('NUTRITION_API_KEY', '');
+        $url = $this->buildURL();
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);
         return $output;
+    }
+
+    private function buildURL(){
+        return $this->base_url . $this->form . '?api_key=' . env('NUTRITION_API_KEY', '') . '&lt=' . $this->type . '&offset=' . $this->offset . '&max=' . $this->max . '&sort='.$this->sort;
     }
 
 }
