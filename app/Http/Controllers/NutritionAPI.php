@@ -19,20 +19,19 @@ class NutritionAPI extends Controller
 
     public static function Food(){
         $newAPI = new static();
-        $newAPI->form = 'list';
-        $newAPI->type = 'f';
+        $newAPI->form = 'reports';
         return $newAPI;
     }
 
     public static function Nutrients(){
         $newAPI = new static();
-        $newAPI->form = 'list';
-        $newAPI->type = 'n';
+        $newAPI->form = 'reports';
+        return $newAPI;
     }
 
 
     public function sortByName(){
-        $this->sort = 'name';
+        $this->sort = 'n';
         return $this;
     }
 
@@ -41,17 +40,23 @@ class NutritionAPI extends Controller
         return $this;
     }
 
+    public function toURL(){
+        return $this->buildURL();
+    }
+
     public function get(){
         $url = $this->buildURL();
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);
-        return $output;
+        $response = json_decode($output,true);
+        dd($response);
+        return $response['list']['item'];
     }
 
     private function buildURL(){
-        return $this->base_url . $this->form . '?api_key=' . env('NUTRITION_API_KEY', '') . '&lt=' . $this->type . '&offset=' . $this->offset . '&max=' . $this->max . '&sort='.$this->sort;
+        return $this->base_url . $this->form . '?api_key=' . env('NUTRITION_API_KEY', '') . '&offset=' . $this->offset . '&max=' . $this->max . '&sort='.$this->sort . '&ndbno=208';
     }
 
 }
