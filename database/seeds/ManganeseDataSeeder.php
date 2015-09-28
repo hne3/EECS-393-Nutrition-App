@@ -35,8 +35,6 @@ class ManganeseDataSeeder extends CsvSeeder
 
         DB::disableQueryLog();
 
-        DB::table($this->table)->delete();
-
         parent::run();
     }
 }

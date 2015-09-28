@@ -26,8 +26,6 @@ class FoodDataSeeder extends CsvSeeder
     {
         DB::disableQueryLog();
 
-        DB::table($this->table)->delete();
-
         parent::run();
     }
 }

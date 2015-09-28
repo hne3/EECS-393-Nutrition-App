@@ -33,9 +33,7 @@ class CalciumDataSeeder extends CsvSeeder
             $protein->save();
         }
 
-        DB::disableQueryLog();
-
-        DB::table($this->table)->delete();
+        DB::disableQueryLog();;
 
         parent::run();
     }
