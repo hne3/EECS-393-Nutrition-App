@@ -23,6 +23,30 @@
         <input type="password" name="password_confirmation">
     </div>
 
+    </div> 
+        Gender
+        <input type="radio" name="gender" value="male" checked> Male
+        <input type="radio" name="gender" value="female" checked> Female
+    </div>
+
+    <div>
+        Weight (lbs)
+        <input type="weight" name="weight">
+    </div>
+
+    <div>
+        Height
+        <input type="height" name="height">
+    </div>
+
+    <div>
+        Dietary Restrictions
+        <input type="checkbox" name="restriction1" value="nuts"> No nuts
+        <input type="checkbox" name="restriction2" value="seafood"> No seafood
+        <input type="checkbox" name="restriction3" value="dairy"> No dairy 
+        <input type="checkbox" name="restriction4" value="chocolate"> No chocolate
+    </div>
+
     <div>
         <button type="submit">Register</button>
     </div>

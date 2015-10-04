@@ -49,7 +49,45 @@
 							</div>
 						</div>
 
+						<div class="radio">
+							<p></p>
+							<p></p>
+							<label class="col-md-4 control-label">Gender</label>
+							<div class="col-md-6">
+								<label><input type="radio" name="gender">Male</label>
+        						<label><input type="radio" name="gender">Female</label>
+        					</div>
+        				</div>
+
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Weight (lbs)</label>
+        					<div class="col-md-6">
+        						<input type="weight" class="form-control" name="weight">
+        					</div>
+        				</div>
+
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Height (in)</label>
+        					<div class="col-md-6">
+        						<input type="height" class="form-control" name="height">
+        					</div>
+        				</div>
+
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Dietary Restrictions</label>
+        					<div class="col-md-6">
+        						<label><input type="checkbox" name="restriction1">No nuts</label>
+        						<label><input type="checkbox" name="restriction2">No seafood</label>
+        						<label><input type="checkbox" name="restriction3">No dairy</label> 
+        						<label><input type="checkbox" name="restriction4">No chocolate</label>
+        					</div>
+        				</div>
+
 						<div class="form-group">
+							<p><p></p></p>
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
 									Register
