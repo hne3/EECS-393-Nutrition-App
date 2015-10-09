@@ -49,21 +49,30 @@
 							</div>
 						</div>
 
+						<div class="form-group">
+							<p><p></p></p>
+							<label class="col-md-4 control-label">Age</label>
+							<div class="col-md-6">
+								<input type="number" class="form-control" name="age">
+							</div>
+						</div>
+
+<!--
 						<div class="radio">
 							<p></p>
 							<p></p>
 							<label class="col-md-4 control-label">Gender</label>
 							<div class="col-md-6">
-								<label><input type="radio" name="gender">Male</label>
-        						<label><input type="radio" name="gender">Female</label>
+								<label><input type="radio" name="gender1">Male</label>
+        						<label><input type="radio" name="gender2">Female</label>
         					</div>
         				</div>
-
+-->
         				<div class="form-group">
         					<p><p></p></p>
         					<label class="col-md-4 control-label">Weight (lbs)</label>
         					<div class="col-md-6">
-        						<input type="weight" class="form-control" name="weight">
+        						<input type="number" class="form-control" name="weight">
         					</div>
         				</div>
 
@@ -71,10 +80,10 @@
         					<p><p></p></p>
         					<label class="col-md-4 control-label">Height (in)</label>
         					<div class="col-md-6">
-        						<input type="height" class="form-control" name="height">
+        						<input type="number" class="form-control" name="height">
         					</div>
         				</div>
-
+<!--
         				<div class="form-group">
         					<p><p></p></p>
         					<label class="col-md-4 control-label">Dietary Restrictions</label>
@@ -85,7 +94,7 @@
         						<label><input type="checkbox" name="restriction4">No chocolate</label>
         					</div>
         				</div>
-
+-->
 						<div class="form-group">
 							<p><p></p></p>
 							<div class="col-md-6 col-md-offset-4">
