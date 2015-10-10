@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('age');
-            $table->string('gender');
+            $table->boolean('gender');
             $table->integer('weight');
             $table->integer('height');
-            $table->string('restriction');
+            //$table->string('restriction');
         });
     }
 

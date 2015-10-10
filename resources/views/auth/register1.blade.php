@@ -27,13 +27,13 @@
         Age
         <input type="number" name="age">
     </div>
-<!--
+
     </div> 
         Gender
-        <input type="radio" name="gender1" value="male" checked> Male
-        <input type="radio" name="gender2" value="female" checked> Female
+        <input type="radio" name="gender" value="0" checked> Male
+        <input type="radio" name="gender" value="1" checked> Female
     </div>
--->
+
     <div>
         Weight (lbs)
         <input type="number" name="weight">

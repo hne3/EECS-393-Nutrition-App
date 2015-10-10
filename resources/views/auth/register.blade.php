@@ -57,17 +57,16 @@
 							</div>
 						</div>
 
-<!--
-						<div class="radio">
+						<div class="form-group">
 							<p></p>
 							<p></p>
 							<label class="col-md-4 control-label">Gender</label>
 							<div class="col-md-6">
-								<label><input type="radio" name="gender1">Male</label>
-        						<label><input type="radio" name="gender2">Female</label>
+								<label><input type="radio" name="gender">Male</label>
+        						<label><input type="radio" name="gender">Female</label>
         					</div>
         				</div>
--->
+
         				<div class="form-group">
         					<p><p></p></p>
         					<label class="col-md-4 control-label">Weight (lbs)</label>
