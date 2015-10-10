@@ -62,8 +62,8 @@
 							<p></p>
 							<label class="col-md-4 control-label">Gender</label>
 							<div class="col-md-6">
-								<label><input type="radio" name="gender">Male</label>
-        						<label><input type="radio" name="gender">Female</label>
+								<label><input type="radio" name="gender" value="0">Male</label>
+        						<label><input type="radio" name="gender" value="1">Female</label>
         					</div>
         				</div>
 
