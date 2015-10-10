@@ -82,18 +82,46 @@
         						<input type="number" class="form-control" name="height">
         					</div>
         				</div>
-<!--
+
         				<div class="form-group">
         					<p><p></p></p>
-        					<label class="col-md-4 control-label">Dietary Restrictions</label>
+        					<p>Dietary Restrictions</p>
+        					Can you eat the following foods? 
+        					<p></p>
+        					<label class="col-md-4 control-label">Nuts</label>
         					<div class="col-md-6">
-        						<label><input type="checkbox" name="restriction1">No nuts</label>
-        						<label><input type="checkbox" name="restriction2">No seafood</label>
-        						<label><input type="checkbox" name="restriction3">No dairy</label> 
-        						<label><input type="checkbox" name="restriction4">No chocolate</label>
+        						<label><input type="radio" name="nuts" value="0">No</label>
+        						<label><input type="radio" name="nuts" value="1">Yes</label>
         					</div>
         				</div>
--->
+        			
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Seafood</label>
+        					<div class="col-md-6">
+        						<label><input type="radio" name="seafood" value="0">No</label>
+        						<label><input type="radio" name="seafood" value="1">Yes</label>
+        					</div>
+        				</div>
+
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Dairy</label>
+        					<div class="col-md-6">
+        						<label><input type="radio" name="dairy" value="0">No</label>
+        						<label><input type="radio" name="dairy" value="1">Yes</label>
+        					</div>
+        				</div>
+
+        				<div class="form-group">
+        					<p><p></p></p>
+        					<label class="col-md-4 control-label">Chocolate</label>
+        					<div class="col-md-6">
+        						<label><input type="radio" name="chocolate" value="0">No</label>
+        						<label><input type="radio" name="chocolate" value="1">Yes</label>
+        					</div>
+        				</div>
+
 						<div class="form-group">
 							<p><p></p></p>
 							<div class="col-md-6 col-md-offset-4">

@@ -56,7 +56,6 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -65,10 +64,10 @@ class AuthController extends Controller
             'gender' => $data['gender'],
             'weight' => $data['weight'],
             'height' => $data['height'],
-            /**'restriction' => $data['restriction1'],
-            'restriction' => $data['restriction2'],
-            'restriction' => $data['restriction3'],
-            'restriction' => $data['restriction4'],*/
+            'nuts' => $data['nuts'],            //cannot eat(0); can eat(1)
+            'seafood' => $data['seafood'],
+            'dairy' => $data['dairy'],
+            'chocolate' => $data['chocolate'],
         ]);
     }
 }
