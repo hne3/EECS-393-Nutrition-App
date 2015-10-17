@@ -7,8 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class Nutrient extends Model
 {
     public $timestamps = false;
-    public function foods()
+
+    protected function foods()
     {
-        return $this->belongsToMany('App\Nutrient')->withPivot('amount_in_food');
+        return $this->belongsToMany('App\Food')->withPivot('amount_in_food');
+    }
+
+    public function getFoods()
+    {
+        return $this->foods()->where('amount_in_food','>',0)->get();
+    }
+
+    public function getUnits()
+    {
+        return $this->unit;
+    }
+
+    public function getID()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->getName();
     }
 }
