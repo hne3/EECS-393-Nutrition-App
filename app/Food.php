@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     public $timestamps = false;
+    private $liked = false;
+    private $disliked = false;
+    private $score = 0;
 
     public static function GetByName($name)
     {
@@ -23,9 +26,30 @@ class Food extends Model
         return Food::where('name', 'LIKE', $name . '%')->get();
     }
 
+    public static function Recommend()
+    {
+
+    }
+
     protected function nutrients()
     {
         return $this->belongsToMany('App\Nutrient')->withPivot('amount_in_food');
+    }
+
+
+    public function flagAsLiked()
+    {
+        $GLOBALS['liked'] = true;
+        $GLOBALS['disliked'] = false;
+        $GLOBALS['score'] += 1;
+    }
+
+
+    public function flagAsDisliked()
+    {
+        $GLOBALS['liked'] = false;
+        $GLOBALS['disliked'] = true;
+        $GLOBALS['score'] -= 1;
     }
 
     public function getID()
