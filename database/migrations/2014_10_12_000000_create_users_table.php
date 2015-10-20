@@ -19,6 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('age');
+            $table->boolean('gender');
+            $table->integer('weight');
+            $table->integer('height');
+            $table->boolean('nuts');        //cannot eat(0); can eat(1)
+            $table->boolean('seafood');
+            $table->boolean('dairy');
+            $table->boolean('chocolate');
         });
     }
 

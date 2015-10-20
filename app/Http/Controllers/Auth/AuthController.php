@@ -60,6 +60,14 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'age' => $data['age'],
+            'gender' => $data['gender'],
+            'weight' => $data['weight'],
+            'height' => $data['height'],
+            'nuts' => $data['nuts'],            //cannot eat(0); can eat(1)
+            'seafood' => $data['seafood'],
+            'dairy' => $data['dairy'],
+            'chocolate' => $data['chocolate'],
         ]);
     }
 }
