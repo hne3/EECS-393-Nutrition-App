@@ -4,17 +4,17 @@
     {!! csrf_field() !!}
 
     <div>
-        Email
+        <label for="email">Email</label>
         <input type="email" name="email" value="{{ old('email') }}">
     </div>
 
     <div>
-        Password
+        <label for="password">Password</label>
         <input type="password" name="password" id="password">
     </div>
 
     <div>
-        <input type="checkbox" name="remember"> Remember Me
+        <input type="checkbox" name="remember" /><label for="checkbox">Remember Me</label>
     </div>
 
     <div>
