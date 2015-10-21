@@ -6,9 +6,10 @@
  * Time: 3:12 PM
  */
 
-namespace app;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 class Agerange extends Model
 {
 

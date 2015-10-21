@@ -6,11 +6,8 @@
  * Time: 4:50 PM
  */
 
-namespace database\seeds;
-
 use Flynsarmy\CsvSeeder\CsvSeeder;
 use Illuminate\Support\Facades\DB;
-use App\Nutrient;
 
 class AgeRangeSeeder extends CsvSeeder
 {
