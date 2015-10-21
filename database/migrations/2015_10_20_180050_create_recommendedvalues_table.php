@@ -14,7 +14,7 @@ class CreateRecommendedvaluesTable extends Migration
     {
         Schema::create('recommendedvalues', function (Blueprint $table) {
             $table->increments('id')->unsigned()->index();
-            $table->foreign('nutrient_name')->references('name')->on('nutrients');
+            $table->string('nutrient_name')->references('name')->on('nutrients');
             $table->integer('age_range')->references('id')->on('ageranges');
             $table->string('sex');
             $table->float('daily_value');
