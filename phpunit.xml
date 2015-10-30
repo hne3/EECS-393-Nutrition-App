@@ -15,15 +15,18 @@
         </testsuite>
     </testsuites>
     <filter>
-        <blacklist>
-            <file>app/Events/Event.php</file>
-            <file>app/Http/Controllers/Controller.php</file>
-            <file>app/Http/Kernel.php</file>
-            <file>app/Http/Requests/Request.php</file>
-            <file>app/Jobs/Job.php</file>
-            <directory suffix=".php">app/Http/Middleware</directory>
-            <directory suffix=".php">app/Exceptions</directory>
-        </blacklist>
+        <whitelist>
+            <directory suffix=".php">app/</directory>
+            <exclude>
+                <file>app/Events/Event.php</file>
+                <file>app/Http/Controllers/Controller.php</file>
+                <file>app/Http/Kernel.php</file>
+                <file>app/Http/Requests/Request.php</file>
+                <file>app/Jobs/Job.php</file>
+                <directory suffix=".php">app/Http/Middleware</directory>
+                <directory suffix=".php">app/Exceptions</directory>
+            </exclude>
+        </whitelist>
     </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
