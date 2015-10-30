@@ -15,7 +15,7 @@ class Nutrient extends Model
 
     public function getFoods()
     {
-        return $this->foods()->where('amount_in_food','>',0)->get();
+        return $this->foods()->where('amount_in_food', '>', 0)->get();
     }
 
     public function getUnits()
@@ -31,5 +31,20 @@ class Nutrient extends Model
     public function getName()
     {
         return $this->getName();
+    }
+
+    public static function Protein()
+    {
+        return static::find('203');
+    }
+
+    public static function Carbohydrates()
+    {
+        return static::find('205');
+    }
+
+    public static function Fat()
+    {
+        return static::find('204');
     }
 }

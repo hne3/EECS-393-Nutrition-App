@@ -11,16 +11,15 @@
 |
 */
 
+Route::get('food',['uses'=>'FoodSearchController@index','as'=>'FoodSearch']);
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/homepage1', function () {
-	return view('homepage1');
-});
-
-Route::get('/homepage2', function () {
-	return view('homepage2');
+    if(Auth::check()){
+        return redirect('home');
+    } else {
+        return view('welcome');
+    }
 });
 
 Route::get('login', function () {
@@ -39,6 +38,8 @@ Route::get('/logout', function () {
 Route::get('/home', function () {
 	return view('home', ['username' => Auth::user()['name']]);
 });
+
+Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search']);
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
