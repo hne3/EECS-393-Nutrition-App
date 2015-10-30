@@ -15,9 +15,6 @@
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist>
-            <directory suffix=".php">app/</directory>
-        </whitelist>
         <blacklist>
             <file>app/Events/Event.php</file>
             <file>app/Http/Controllers/Controller.php</file>
