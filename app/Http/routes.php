@@ -14,9 +14,28 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/homepage1', function () {
+	return view('homepage1');
+});
+
+Route::get('/homepage2', function () {
+	return view('homepage2');
+});
+
+Route::get('login', function () {
+	return view('/auth/login');
+});
+
+Route::get('/register', function () {
+	return view('/auth/register');
+});
+
 Route::get('/logout', function () {
+<<<<<<< HEAD
     Auth::logout();
     return 'You have successfully logged out.';
+>>>>>>> UserAccountsInfo
 });
 Route::get('/home', function () {
     return view('home', ['username' => Auth::user()['name']]);

@@ -30,7 +30,7 @@
 				</button>
 				<a class="navbar-brand" href="#">Laravel</a>
 			</div>
-
+<!--
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
@@ -51,7 +51,7 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
+	</nav>-->
 
 	@yield('content')
 

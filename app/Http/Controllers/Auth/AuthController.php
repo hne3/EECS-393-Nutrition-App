@@ -70,4 +70,6 @@ class AuthController extends Controller
             'chocolate' => $data['chocolate'],
         ]);
     }
+
+    protected $redirectPath = '/homepage2';
 }
