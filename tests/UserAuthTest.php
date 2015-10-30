@@ -12,33 +12,27 @@ class UserAuthTest extends TestCase
      *
      * @return void
      */
-    public function testBasicExample()
+
+    public function testWelcome()
     {
         $this->visit('/')
-             ->see('Laravel 5');
-    }
-
-    public function testHomepage1()
-    {
-        $this->visit('/homepage1')
-            ->see('You are logged out')
-            ->click('Login')
-            ->seePageIs('/login');
-        $this->visit('/homepage1')
-            ->see('You are logged out')
+            ->see('Snackr')
             ->click('Register')
-            ->seePageIs('/register');
+            ->seePageIs('/auth/register');
+        $this->visit('/')
+            ->click('Login')
+            ->seePageIs('/auth/login');
     }
 
-    public function testHomepage2() 
+    public function testHome() 
     {
-        $this->visit('/homepage2')
-            ->see('You are logged in');
+        $this->visit('/home')
+            ->see('Welcome to Snackr!');
     }
 
     public function testRegister() 
     {
-        $this->visit('/register')
+        $this->visit('/auth/register')
             ->type('user1', 'name')
             ->type('user1@case.edu', 'email')
             ->type('useruser', 'password')
@@ -52,7 +46,7 @@ class UserAuthTest extends TestCase
             ->select('0', 'dairy')
             ->select('1', 'chocolate')
             ->press('Register')
-            ->seePageIs('/homepage2');
+            ->seePageIs('/home');
 
         $this->seeInDatabase('users', 
             [   'name' => 'user1',
@@ -74,8 +68,8 @@ class UserAuthTest extends TestCase
 
         $this->actingAs($user)
             ->withSession(['in' => 'out'])
-            ->visit('/homepage2')
-            ->see('You are logged in');
+            ->visit('/home')
+            ->see('Welcome to Snackr!');
     }
 
     public function testLogout() 
@@ -84,9 +78,8 @@ class UserAuthTest extends TestCase
 
         $this->actingAs($user)
             ->withSession(['in' => 'out'])
-            ->visit('/homepage2')
+            ->visit('/home')
             ->click('Logout')
-            ->seePageIs('/logout')
-            ->see('You are logged out');
+            ->seePageIs('/');
     }
 }
