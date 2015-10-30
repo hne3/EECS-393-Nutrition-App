@@ -32,13 +32,12 @@ Route::get('/register', function () {
 });
 
 Route::get('/logout', function () {
-<<<<<<< HEAD
-    Auth::logout();
-    return 'You have successfully logged out.';
->>>>>>> UserAccountsInfo
+	Auth::logout();
+	return 'You have successfully logged out.';
 });
+
 Route::get('/home', function () {
-    return view('home', ['username' => Auth::user()['name']]);
+	return view('home', ['username' => Auth::user()['name']]);
 });
 /*
 //Login routes...
@@ -52,7 +51,3 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');*/
 
 Route::controllers(
 	['auth'=>'Auth\AuthController','password'=>'Auth\PasswordController']);
-// Need route for
-
-
-
