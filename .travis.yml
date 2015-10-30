@@ -12,8 +12,8 @@ before_script:
     - mysql -e 'create database homestead_test;'
     - composer self-update
     - composer install --no-interaction
-    - php artisan migrate --force
-    - php artisan db:seed
+    - php artisan migrate --force --env=testing
+    - php artisan db:seed --env=testing
 
 script: 
     - vendor/bin/phpunit tests
