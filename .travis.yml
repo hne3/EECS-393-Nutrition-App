@@ -9,6 +9,7 @@ php:
 
 before_script:
     - composer install --dev --prefer-source --no-interaction
-    - php artisan migrate --seed
+    - php artisan migrate --force
+    - php artisan db:seed
 
 script: phpunit tests
