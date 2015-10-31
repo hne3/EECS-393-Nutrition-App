@@ -13,7 +13,7 @@ class FoodDataSeeder extends CsvSeeder
     public function __construct()
     {
         $this->table = 'foods';
-        $this->filename = base_path().'/database/seeds/csvs/fooddata1.csv';
+        $this->filename = base_path().'/database/seeds/csvs/fooddata.csv';
     }
 
 
