@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
-use App\Food;
 
 class FoodDatabaseTest extends TestCase
 {
@@ -38,11 +37,13 @@ class FoodDatabaseTest extends TestCase
 
     public function testFoodSearchByPrefix()
     {
+        //?q=Apple&method=search
         $this->visit('/food')
             ->type('Apple', 'q')
             ->select('search', 'method')
             ->press('Go!')
-            ->seePageIs('/food?q=Apple&method=search')
+            ->seePageStartsWith('/food')
+            ->seePageHasGetParameters(['q'=>'Apple','method'=>'search'])
             ->see('Apple juice, canned or bottled, unsweetened, with added ascorbic acid');
     }
 
@@ -52,7 +53,8 @@ class FoodDatabaseTest extends TestCase
         ->type('Apple juice, canned or bottled, unsweetened, with added ascorbic acid', 'q')
         ->select('name', 'method')
         ->press('Go!')
-        ->seePageIs('/food?q=Apple+juice%2C+canned+or+bottled%2C+unsweetened%2C+with+added+ascorbic+acid&method=search')
+        ->seePageStartsWith('/food')
+        ->seePageHasGetParameters(['q'=>'Apple%20juice%2C%20canned%20or%20bottled%2C%20unsweetened%2C%20with%20added%20ascorbic%20acid','method'=>'name'])
         ->see('Apple juice, canned or bottled, unsweetened, with added ascorbic acid');
     }
 
@@ -62,7 +64,8 @@ class FoodDatabaseTest extends TestCase
             ->type('Apple', 'q')
             ->select('similar', 'method')
             ->press('Go!')
-            ->seePageIs('/food?q=Apple&method=search')
+            ->seePageStartsWith('/food')
+            ->seePageHasGetParameters(['q'=>'Apple','method'=>'similar'])
             ->see('Apples, raw, gala, with skin');
     }
 }
