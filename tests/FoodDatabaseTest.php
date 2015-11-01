@@ -1,17 +1,32 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Artisan;
+use App\Food;
 
 class FoodDatabaseTest extends TestCase
 {
-    use DatabaseMigrations;
     /**
      * A basic functional test example.
      *
      * @return void
      */
+
+    protected static $dbSeeded = false;
+
+    protected static function setupDB()
+    {
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        if(!static::$dbSeeded){
+            static::setupDB();
+            static::$dbSeeded = true;
+        }
+    }
 
     public function testFoodSearchRedirect()
     {
