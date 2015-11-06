@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -42,6 +43,19 @@ class User extends Model implements AuthenticatableContract,
     {
         $prefQueue = new \SplPriorityQueue();
         return $prefQueue;
+    }
+
+    private function history(){
+        return $this->belongsToMany('App\Food','user_history')->withPivot('timestamp','quantity');
+    }
+
+    public function addToFoodHistory(Food $food, $quantity){
+        $time = new Carbon();
+        $this->history()->save($food,['timestamp'=>$time,'quantity'=>$quantity]);
+    }
+
+    public function getFoodHistory(){
+        return $this->history()->orderBy('timestamp','DESC')->get();
     }
 
 }

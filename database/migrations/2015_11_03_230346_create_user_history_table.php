@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserHistoryTable extends Migration
 {
@@ -13,11 +14,12 @@ class CreateUserHistoryTable extends Migration
     public function up()
     {
         Schema::create('user_history', function (Blueprint $table) {
-            $table->integer('users_email')
-            $table->foreign('users_email')->references('email')->on('users');
-            $table->timestamp('date')->default(DB:raw('CURRENT_TIMESTAMP'));
-            $table->string('food_name')
-            $table->foreign('food_name')->references('name')->on('foods');
+            $table->integer('food_id')->unsigned();
+            $table->foreign('food_id')->references('id')->on('foods');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->dateTime('timestamp');
+            $table->integer('quantity');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateUserHistoryTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_history');
     }
 }
