@@ -68,11 +68,11 @@
 
                                 <div class="col-md-6 btn-group" data-toggle="buttons" role="group">
                                     <label class="btn btn-default">
-                                        <input type="radio" name="gender" value="0">
+                                        <input type="radio" role="radio" name="gender" value="0">
                                         Male
                                     </label>
                                     <label class="btn btn-default">
-                                        <input type="radio" name="gender" value="1">
+                                        <input type="radio" role="radio" name="gender" value="1">
                                         Female
                                     </label>
                                 </div>
@@ -95,49 +95,20 @@
                             </div>
                             <h3 class="text-center">Dietary Restrictions</h3>
 
-                            <p class="text-center">Can you eat the following foods?</p>
+                            <p class="text-center">Do the following dietary restrictions apply to you?</p>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Nuts</label>
+                            @foreach(\App\Restriction::all() as $r)
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{$r->display_name}}</label>
 
-                                <div class="col-md-6 btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="radio" name="nuts" value="0">No</label>
-                                    <label class="btn btn-default"><input type="radio" name="nuts" value="1">Yes</label>
+                                    <div class="col-md-6 btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default"><input type="radio" role="radio "name="restriction{{$r->id}}"
+                                                                              value="0">No</label>
+                                        <label class="btn btn-default"><input type="radio" role="radio" name="restriction{{$r->id}}"
+                                                                              value="1">Yes</label>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Seafood</label>
-
-                                <div class="col-md-6 btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="radio" name="seafood"
-                                                                          value="0">No</label>
-                                    <label class="btn btn-default"><input type="radio" name="seafood"
-                                                                          value="1">Yes</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Dairy</label>
-
-                                <div class="col-md-6 btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="radio" name="dairy" value="0">No</label>
-                                    <label class="btn btn-default"><input type="radio" name="dairy"
-                                                                          value="1">Yes</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Chocolate</label>
-
-                                <div class="col-md-6 btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="radio" name="chocolate"
-                                                                          value="0">No</label>
-                                    <label class="btn btn-default"><input type="radio" name="chocolate"
-                                                                          value="1">Yes</label>
-                                </div>
-                            </div>
-
+                            @endforeach
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary" value="Register">

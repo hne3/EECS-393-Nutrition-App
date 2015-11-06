@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VitaminEDataSeeder::class);
         $this->call(VitaminKDataSeeder::class);
         $this->call(ZincDataSeeder::class);
+        $this->call(RestrictionSeeder::class);
     }
 }

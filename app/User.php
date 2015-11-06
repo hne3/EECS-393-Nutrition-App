@@ -58,4 +58,16 @@ class User extends Model implements AuthenticatableContract,
         return $this->history()->orderBy('timestamp','DESC')->get();
     }
 
+    public function addRestriction(Restriction $r){
+        $this->restrictions()->save($r);
+    }
+
+    public function getRestrictions(){
+        return $this->restrictions()->get();
+    }
+
+    private function restrictions(){
+        return $this->belongsToMany('App\Restriction');
+    }
+
 }
