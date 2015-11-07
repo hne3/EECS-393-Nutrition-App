@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use App\Food;
+use App\Nutrient;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class FoodDatabaseTest extends TestCase
 {
@@ -10,11 +13,13 @@ class FoodDatabaseTest extends TestCase
      * @return void
      */
 
+    use WithoutMiddleware;
+
     protected static $dbSeeded = false;
 
     protected static function setupDB()
     {
-        Artisan::call('migrate');
+        Artisan::call('migrate:refresh');
         Artisan::call('db:seed');
     }
 
@@ -72,7 +77,7 @@ class FoodDatabaseTest extends TestCase
     // UNIT TESTS FOR FOOD DATABASE
     public function testFoodCreation()
     {
-        $food = App\Food::GetNameSimilarTo("apple")[0];
+        $food = Food::GetNameSimilarTo("apple")[0];
         $this->assertEquals("Babyfood, apples, dices, toddler", $food->getName());
         $this->assertEquals("3115", $food->getId());
         // 51 calories
@@ -121,24 +126,24 @@ class FoodDatabaseTest extends TestCase
 
     public function testNutrients()
     {
-        $protein = App\Nutrient::Protein();
-        $carbohydrates = App\Nutrient::Carbohydrates();
-        $fat = App\Nutrient::Fat();
+        $protein = Nutrient::Protein();
+        $carbohydrates = Nutrient::Carbohydrates();
+        $fat = Nutrient::Fat();
 
         // Test units, ID, and all foods with protein
         $this->assertEquals("g", $protein->getUnits());
         $this->assertEquals("203", $protein->getID());
-        //$this->assertEquals("59463", count($protein->getFoods()));
+        $this->assertEquals("6607", count($protein->getFoods()));
 
         // Test units, ID, and all foods with carbs
         $this->assertEquals("g", $carbohydrates->getUnits());
         $this->assertEquals("205", $carbohydrates->getID());
-        //$this->assertEquals("41580", count($carbohydrates->getFoods()));
+        $this->assertEquals("5940", count($carbohydrates->getFoods()));
 
         // Test units, ID, and all foods with fat
         $this->assertEquals("g", $fat->getUnits());
         $this->assertEquals("204", $fat->getID());
-        //$this->assertEquals("46165", count($fat->getFoods()));
+        $this->assertEquals("6595", count($fat->getFoods()));
 
     }
 }
