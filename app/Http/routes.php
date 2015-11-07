@@ -39,11 +39,15 @@ Route::get('/home', function () {
 	return view('home', ['username' => Auth::user()['name']]);
 });
 
-Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search']);
+Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search',
+	'middleware'=>'auth'
+	]);
 
-Route::get('/history', function () {
+Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood','middleware'=>'auth']);
+
+Route::get('/history', array('before' => 'auth', function() {
 	return view('history');
-});
+}));
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
