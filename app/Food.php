@@ -28,20 +28,6 @@ class Food extends Model
         return $this->belongsToMany('App\Nutrient')->withPivot('amount_in_food');
     }
 
-    public function addToQueue($queue)
-    {
-        $queue->insert(this, 0);
-    }
-    public function flagAsLiked($queue)
-    {
-        $queue->insert(this, 1);
-    }
-
-    public function flagAsDisliked($queue)
-    {
-        $queue->insert(this, 1);
-    }
-
     public function getID()
     {
         return $this->id;
