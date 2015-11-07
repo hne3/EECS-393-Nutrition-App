@@ -46,243 +46,243 @@ class Food extends Model
     public function getCaffiene()
     {
         //Caffiene's Nutrient ID is 262
-        return $this->nutrients()->whereNutrientId(262)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Caffeine()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getCaffieneUnits()
     {
-        return Nutrient::find(262)->getUnits();
+        return Nutrient::Caffeine()->getUnits();
     }
 
     public function getCalcium()
     {
         //Calcium's Nutrient ID is 301
-        return $this->nutrients()->whereNutrientId(301)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Calcium()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getCalciumUnits()
     {
-        return Nutrient::find(301)->getUnits();
+        return Nutrient::Calcium()->getUnits();
     }
 
     public function getCarbohydrates()
     {
         //Carbohydrates's Nutrient ID is 205
-        return $this->nutrients()->whereNutrientId(205)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Carbohydrates()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getCarbohydratesUnits()
     {
-        return Nutrient::find(205)->getUnits();
+        return Nutrient::Carbohydrates()->getUnits();
     }
 
     public function getCopper()
     {
         //Copper's Nutrient ID is 213
-        return $this->nutrients()->whereNutrientId(213)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Copper()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getCopperUnits()
     {
-        return Nutrient::find(213)->getUnits();
+        return Nutrient::Copper()->getUnits();
     }
 
     public function getFat()
     {
         //Fat's Nutrient ID is 204
-        return $this->nutrients()->whereNutrientId(204)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Fat()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getFatUnits()
     {
-        return Nutrient::find(204)->getUnits();
+        return Nutrient::Fat()->getUnits();
     }
 
     public function getFiber()
     {
         //Fiber's Nutrient ID is 291
-        return $this->nutrients()->whereNutrientId(291)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Fiber()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getFiberUnits()
     {
-        return Nutrient::find(291)->getUnits();
+        return Nutrient::Fiber()->getUnits();
     }
 
     public function getIron()
     {
         //Iron's Nutrient ID is 303
-        return $this->nutrients()->whereNutrientId(303)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Iron()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getIronUnits()
     {
-        return Nutrient::find(303)->getUnits();
+        return Nutrient::Iron()->getUnits();
     }
 
     public function getMagnesium()
     {
         //Magnesium's Nutrient ID is 304
-        return $this->nutrients()->whereNutrientId(304)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Magnesium()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getMagnesiumUnits()
     {
-        return Nutrient::find(304)->getUnits();
+        return Nutrient::Magnesium()->getUnits();
     }
 
     public function getManganese()
     {
         //Manganese's Nutrient ID is 315
-        return $this->nutrients()->whereNutrientId(315)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Manganese()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getManganeseUnits()
     {
-        return Nutrient::find(315)->getUnits();
+        return Nutrient::Manganese()->getUnits();
     }
 
     public function getPhosphorus()
     {
         //Phosphorus's Nutrient ID is 305
-        return $this->nutrients()->whereNutrientId(305)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Phosphorus()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getPhosphorusUnits()
     {
-        return Nutrient::find(305)->getUnits();
+        return Nutrient::Phosphorus()->getUnits();
     }
 
     public function getPotassium()
     {
         //Potassium's Nutrient ID is 306
-        return $this->nutrients()->whereNutrientId(306)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Potassium()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getPotassiumUnits()
     {
-        return Nutrient::find(306)->getUnits();
+        return Nutrient::Potassium()->getUnits();
     }
 
     public function getProtein()
     {
         //Protein's Nutrient ID is 203
-        return $this->nutrients()->whereNutrientId(203)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Protein()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getProteinUnits()
     {
-        return Nutrient::find(203)->getUnits();
+        return Nutrient::Protein()->getUnits();
     }
 
     public function getSodium()
     {
         //Sodium's Nutrient ID is 307
-        return $this->nutrients()->whereNutrientId(307)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Sodium()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getSodiumUnits()
     {
-        return Nutrient::find(307)->getUnits();
+        return Nutrient::Sodium()->getUnits();
     }
 
     public function getSugar()
     {
         //Sugar's Nutrient ID is 269
-        return $this->nutrients()->whereNutrientId(269)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Sugar()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getSugarUnits()
     {
-        return Nutrient::find(269)->getUnits();
+        return Nutrient::Sugar()->getUnits();
     }
 
     public function getVitaminA()
     {
         //VitaminA's Nutrient ID is 320
-        return $this->nutrients()->whereNutrientId(320)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminA()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminAUnits()
     {
-        return Nutrient::find(320)->getUnits();
+        return Nutrient::VitaminA()->getUnits();
     }
 
     public function getVitaminB12()
     {
         //VitaminB12's Nutrient ID is 578
-        return $this->nutrients()->whereNutrientId(578)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminB12()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminB12Units()
     {
-        return Nutrient::find(578)->getUnits();
+        return Nutrient::VitaminB12()->getUnits();
     }
 
     public function getVitaminB6()
     {
         //VitaminB6's Nutrient ID is 415
-        return $this->nutrients()->whereNutrientId(415)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminB6()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminB6Units()
     {
-        return Nutrient::find(415)->getUnits();
+        return Nutrient::VitaminB6()->getUnits();
     }
 
     public function getVitaminC()
     {
         //VitaminC's Nutrient ID is 401
-        return $this->nutrients()->whereNutrientId(401)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminC()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminCUnits()
     {
-        return Nutrient::find(401)->getUnits();
+        return Nutrient::VitaminC()->getUnits();
     }
 
     public function getVitaminD()
     {
         //VitaminD's Nutrient ID is 328
-        return $this->nutrients()->whereNutrientId(328)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminD()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminDUnits()
     {
-        return Nutrient::find(328)->getUnits();
+        return Nutrient::VitaminD()->getUnits();
     }
 
     public function getVitaminE()
     {
         //VitaminE's Nutrient ID is 323
-        return $this->nutrients()->whereNutrientId(323)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminE()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminEUnits()
     {
-        return Nutrient::find(323)->getUnits();
+        return Nutrient::VitaminE()->getUnits();
     }
 
     public function getVitaminK()
     {
         //VitaminK's Nutrient ID is 430
-        return $this->nutrients()->whereNutrientId(430)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::VitaminK()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getVitaminKUnits()
     {
-        return Nutrient::find(430)->getUnits();
+        return Nutrient::VitaminK()->getUnits();
     }
 
     public function getZinc()
     {
         //Zinc's Nutrient ID is 309
-        return $this->nutrients()->whereNutrientId(309)->first()->pivot->amount_in_food;
+        return $this->nutrients()->whereNutrientId(Nutrient::Zinc()->getID())->first()->pivot->amount_in_food;
     }
 
     public function getZincUnits()
     {
-        return Nutrient::find(309)->getUnits();
+        return Nutrient::Zinc()->getUnits();
     }
 
 }
