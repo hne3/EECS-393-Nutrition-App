@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+Use Illuminate\Support\Facades\Schema;
 
-class CreateAgerangesTable extends Migration
+class CreateAgeRangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +13,8 @@ class CreateAgerangesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ageranges', function (Blueprint $table) {
-            $table->increments('id')->unsigned()->index();
+        Schema::create('age_ranges', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('min_age');
             $table->integer('max_age');
         });
@@ -26,6 +27,6 @@ class CreateAgerangesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ageranges');
+        Schema::drop('age_ranges');
     }
 }

@@ -9,14 +9,14 @@
 use Flynsarmy\CsvSeeder\CsvSeeder;
 use Illuminate\Support\Facades\DB;
 
-class AgeRangeSeeder extends CsvSeeder
+class AgeRangeDataSeeder extends CsvSeeder
 {
     /**
      * AgeRangeSeeder constructor.
      */
     public function __construct()
     {
-        $this->table = 'ageranges';
+        $this->table = 'age_ranges';
         $this->filename = base_path().'/database/seeds/csvs/agerangedata.csv';
     }
 
@@ -29,7 +29,6 @@ class AgeRangeSeeder extends CsvSeeder
     public function run()
     {
         DB::disableQueryLog();
-
         parent::run();
     }
 }

@@ -16,7 +16,7 @@ class DailyValueSeeder extends CsvSeeder
      */
     public function __construct()
     {
-        $this->table = 'recommendedvalues';
+        $this->table = 'recommended_values';
         $this->filename = base_path().'/database/seeds/csvs/dailyvaluesdata.csv';
     }
 

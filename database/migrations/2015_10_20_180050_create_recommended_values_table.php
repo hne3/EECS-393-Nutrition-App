@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
-class CreateRecommendedvaluesTable extends Migration
+class CreateRecommendedValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +13,10 @@ class CreateRecommendedvaluesTable extends Migration
      */
     public function up()
     {
-        Schema::create('recommendedvalues', function (Blueprint $table) {
+        Schema::create('recommended_values', function (Blueprint $table) {
             $table->increments('id')->unsigned()->index();
-            $table->string('nutrient_name')->references('name')->on('nutrients');
-            $table->integer('age_range')->references('id')->on('ageranges');
+            $table->string('nutrient_id')->references('id')->on('nutrients');
+            $table->integer('age_range')->references('id')->on('age_ranges');
             $table->string('sex');
             $table->float('daily_value');
             $table->float('upper_limit');
@@ -29,6 +30,6 @@ class CreateRecommendedvaluesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('recommendedvalues');
+        Schema::drop('recommended_values');
     }
 }
