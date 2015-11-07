@@ -1,0 +1,26 @@
+language: php
+
+branches:
+    only:
+        - master
+
+php:
+    - 5.6
+
+before_script:
+    - cp .env.travis .env
+    - mysql -e 'create database homestead_test;'
+    - composer self-update
+    - composer install --no-interaction
+    - php artisan env
+    - php artisan key:generate
+    - php artisan migrate 
+    - php artisan db:seed
+
+script: 
+    - vendor/bin/phpunit tests
+    - mkdir -p build/logs
+    - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - php vendor/bin/coveralls -v

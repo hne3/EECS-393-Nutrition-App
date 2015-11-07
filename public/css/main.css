@@ -1,0 +1,56 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: #B782D5;
+}
+a:hover {
+  color: #C19AD7;
+}
+
+/*a:visited {
+  color: #AB73CB;
+}*/
+
+
+#bar {
+  background-color: #424242;
+  color: #F0F0F0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000000;
+  font-size: 100px;
+  margin-bottom: 50px;
+}
+
+#logo {
+  display: inline-block;
+  background-image: url("/img/aubergine_100.png");
+  background-repeat: no-repeat;
+  height: 100px;
+  padding-left: 75px;
+}
+
+#usersquare {
+  display: inline-block;
+  float: right;
+}
+
+#content {
+}
+
+#foodlist-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+#foodlist {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  font-size: 25px;
+}

@@ -13,7 +13,7 @@ class CarbohydrateDataSeeder extends CsvSeeder
     public function __construct()
     {
         $this->table = 'food_nutrient';
-        $this->filename = base_path().'/database/seeds/csvs/carbohydratedata.csv';
+        $this->filename = base_path().'/database/seeds/csvs/carbohydratesdata.csv';
     }
 
 

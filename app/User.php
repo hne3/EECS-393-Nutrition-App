@@ -16,6 +16,7 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    private $prefQueue;
     /**
      * The database table used by the model.
      *
@@ -28,7 +29,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'age', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +37,11 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public static function InitUserQueue()
+    {
+        $prefQueue = new \SplPriorityQueue();
+        return $prefQueue;
+    }
+
 }
