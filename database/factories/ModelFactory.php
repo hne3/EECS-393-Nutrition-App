@@ -11,11 +11,18 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->defineAs(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->defineAs(App\Food::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->getNameSimilarTo("apple"),
+        'nutrients' => $faker->getNutrients(),
     ];
 });
