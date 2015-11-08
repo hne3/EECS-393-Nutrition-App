@@ -23,6 +23,22 @@ class Food extends Model
         return Food::where('name', 'LIKE', $name . '%')->get();
     }
 
+    protected function restrictions(){
+        return $this->belongsToMany('App\Restriction');
+    }
+
+    public function addRestriction(Restriction $r){
+        $this->restrictions()->attach($r);
+    }
+
+    public function removeRestriction(Restriction $r){
+        $this->restrictions()->detach($r);
+    }
+
+    public function isRestricted(Restriction $r){
+        return $this->restrictions()->whereId($r->id)->count() > 0;
+    }
+
     protected function nutrients()
     {
         return $this->belongsToMany('App\Nutrient')->withPivot('amount_in_food');
