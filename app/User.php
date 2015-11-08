@@ -60,19 +60,35 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getDateTime(){
-        return $this->getFoodHistory()->timestamp;
+        $history = array(array());
+        $history = $this->getFoodHistory(); 
+        foreach($history as $history){
+            return $history->pivot->timestamp;
+        }   
     }
 
     public function getQuantity(){
-        return $this->getFoodHistory()->quantity;
+        $history = array();
+        $history = $this->getFoodHistory();
+        foreach($history as $history){
+            return $history->pivot->quantity;
+        }
     }
 
     public function getFoodName(){
-        return $this->getFoodHistory()->name;
+        $history = array();
+        $history = $this->getFoodHistory();
+        foreach($history as $history){
+            return $history->name;
+        }
     }
 
     public function getCalories(){
-        return $this->getFoodHistory()->calories;
+        $history = array();
+        $history = $this->getFoodHistory();
+        foreach($history as $history){
+            return $history->calories;
+        }
     }
 
 }
