@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -55,7 +56,23 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getFoodHistory(){
-        return $this->history()->orderBy('timestamp','DESC')->get();
+        return $this->history()->orderBy('timestamp', 'DESC')->get();
+    }
+
+    public function getDateTime(){
+        return $this->getFoodHistory()->timestamp;
+    }
+
+    public function getQuantity(){
+        return $this->getFoodHistory()->quantity;
+    }
+
+    public function getFoodName(){
+        return $this->getFoodHistory()->name;
+    }
+
+    public function getCalories(){
+        return $this->getFoodHistory()->calories;
     }
 
 }

@@ -10,9 +10,12 @@
             <thead>
                 <td>Date</td>
                 <td>Quantity</td>
-                <td>Food
-        @foreach($user as $users)
-            {{$user->getFoodHistory()}};
-        @endforeach
+                <td>Food</td>
+                <td>Calories (per 100g)</td>
+            </thead>
+            <br>
+            @foreach($user as $users)
+                {{$user->getDateTime()}};
+            @endforeach
     </div>
 @endsection

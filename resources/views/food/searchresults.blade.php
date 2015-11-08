@@ -12,7 +12,7 @@
                 <td>Food</td>
                 <td>Calories (per 100g)</td>
                 <td>Carbohydrates ({{$carbUnits}} per 100g)</td>
-                <td>Protein ({{$proteinUnits}} per 100)g</td>
+                <td>Protein ({{$proteinUnits}} per 100g)</td>
                 <td>Fat ({{$fatUnits}} per 100g)</td>
                 <td>Add to Food History</td>
             </thead>

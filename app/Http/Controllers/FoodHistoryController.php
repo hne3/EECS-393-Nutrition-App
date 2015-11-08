@@ -32,12 +32,4 @@ class FoodHistoryController extends Controller
 			return 'Please log in!';
 		}
 	}
-
-	public function index()
-	{
-		if (Auth::check()) {
-			$user = Auth::user();
-			$user->getFoodHistory(); 
-		}
-	}
 }
