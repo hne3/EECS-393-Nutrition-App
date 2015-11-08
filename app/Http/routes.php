@@ -47,13 +47,11 @@ Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
 	'middleware'=>'auth'
 ]);
 
-Route::get('/history', array('before' => 'auth', function() {
-	return view('history');
-}));
-
 Route::get('history', 
-	['uses'=>'FoodHistoryController@index', 'as'=>'displayHistory'
-]);
+	function() {
+		$user = Auth::user();
+		return view('history')->with('user', $user);
+});
 
 /*
 //Login routes...

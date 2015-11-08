@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
 use App\Food;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Route;
-use App\Http\Requests;
 
 class FoodHistoryController extends Controller 
 {
@@ -26,7 +27,7 @@ class FoodHistoryController extends Controller
 			}
 			$user = Auth::user();
 			$user->addToFoodHistory($food,$quantity);
-			return view('/history');
+			return Redirect::route('foodHistory');
 		} else {
 			return 'Please log in!';
 		}
@@ -34,7 +35,7 @@ class FoodHistoryController extends Controller
 
 	public function index()
 	{
-		if(Auth::check()) {
+		if (Auth::check()) {
 			$user = Auth::user();
 			$user->getFoodHistory(); 
 		}
