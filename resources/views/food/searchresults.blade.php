@@ -14,7 +14,7 @@
                 <td>Carbohydrates ({{$carbUnits}} per 100g)</td>
                 <td>Protein ({{$proteinUnits}} per 100)g</td>
                 <td>Fat ({{$fatUnits}} per 100g)</td>
-                <td>Add to Search History</td>
+                <td>Add to Food History</td>
             </thead>
             <br>
             @foreach($foods as $food)
@@ -30,7 +30,7 @@
                             {!! Form::text('quantity', null, ['class'=>'form-control','required']) !!}
                     <button class="btn btn-default" type="submit" value="addToFoodHistory">
                         Eat now</button>
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
                     </td>
 
                     

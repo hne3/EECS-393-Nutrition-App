@@ -41,13 +41,20 @@ Route::get('/home', function () {
 
 Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search',
 	'middleware'=>'auth'
-	]);
+]);
 
-Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood','middleware'=>'auth']);
+Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
+	'middleware'=>'auth'
+]);
 
 Route::get('/history', array('before' => 'auth', function() {
 	return view('history');
 }));
+
+Route::get('history', 
+	['uses'=>'FoodHistoryController@index', 'as'=>'displayHistory'
+]);
+
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

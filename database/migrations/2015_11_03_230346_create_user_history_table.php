@@ -14,12 +14,12 @@ class CreateUserHistoryTable extends Migration
     public function up()
     {
         Schema::create('user_history', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');   
+            $table->dateTime('timestamp');
+            $table->integer('quantity');                     
             $table->integer('food_id')->unsigned();
             $table->foreign('food_id')->references('id')->on('foods');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->dateTime('timestamp');
-            $table->integer('quantity');
         });
     }
 
