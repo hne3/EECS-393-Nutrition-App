@@ -22,6 +22,7 @@
                     <td>{{$food->getCarbohydrates()}}</td>
                     <td>{{$food->getProtein()}}</td>
                     <td>{{$food->getFat()}}</td>
+                    <td><button class="btn btn-default" type="submit" value="addFood">Eat now</button></td> 
                 </tr>
             @endforeach
         </table>

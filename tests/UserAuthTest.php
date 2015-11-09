@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Food;
+use App\Nutrient;
+use App\Restriction;
 
 class UserAuthTest extends TestCase
 {
@@ -40,12 +41,15 @@ class UserAuthTest extends TestCase
             ->type('21', 'age')
             ->select('0', 'gender')
             ->type('200', 'weight')
-            ->type('200', 'height')
-            ->select('0', 'nuts')
-            ->select('1', 'seafood')
-            ->select('0', 'dairy')
-            ->select('1', 'chocolate')
-            ->press('Register')
+            ->type('200', 'height');
+            $map = [];
+        $restrictions = Restriction::all();
+            foreach($restrictions as $restriction){
+                $val = round(mt_rand() / mt_getrandmax());
+                $map[$restriction->id] = $val;
+                $this->type($val,'restriction'.($restriction->id+1));
+            }
+            $this->press('Register')
             ->seePageIs('/home');
 
         $this->seeInDatabase('users', 
@@ -55,11 +59,16 @@ class UserAuthTest extends TestCase
                 'gender' => '0',
                 'weight' => '200',
                 'height' => '200',
-                'nuts' => '0',
-                'seafood' => '1',
-                'dairy' => '0',
-                'chocolate' => '1'
             ]);
+        $user = \App\User::whereEmail('user1@case.edu')->first();
+        foreach($restrictions as $restriction){
+            if($map[$restriction->id] == 1){
+                $this->seeInDatabase('restriction_user',[
+                    'user_id'=>$user->id,
+                    'restriction_id'=>$restriction->id
+                ]);
+            }
+        }
     }
 
     public function testLogin() 

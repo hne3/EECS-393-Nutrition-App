@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Restriction;
 use App\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,7 +22,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins, AuthenticatesAndRegistersUsers;
 
     /**
      * Create a new authentication controller instance.
@@ -41,11 +42,22 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
-        ]);
+            'age'=>'required|integer|min:0',
+            'gender'=>'required|integer|in:0,1',
+            'weight'=>'required|integer|min:0',
+            'height'=>'required|integer|min:0'
+        ];
+        $customMessages = [];
+        foreach(Restriction::all() as $restr){
+            $rules['restriction'.$restr->id] = "required|integer|in:0,1";
+            $customMessages['restriction'.$restr->id.'.required'] = "A response to the ".$restr->display_name.' dietary restriction is required.';
+        }
+
+        return Validator::make($data, $rules,$customMessages);
     }
 
     /**
@@ -56,19 +68,25 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $dCopy = $data;
+        $data = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'age' => $data['age'],
             'gender' => $data['gender'],
             'weight' => $data['weight'],
-            'height' => $data['height'],
-            'nuts' => $data['nuts'],            //cannot eat(0); can eat(1)
-            'seafood' => $data['seafood'],
-            'dairy' => $data['dairy'],
-            'chocolate' => $data['chocolate'],
-        ]);
+            'height' => $data['height']
+        ];
+        $user = User::create($data);
+        $restrictions = Restriction::all();
+        //cannot eat(0); can eat(1)
+        foreach($restrictions as $restr){
+            if($dCopy['restriction'.$restr->id] == 1){
+                $user->addRestriction($restr);
+            }
+        }
+        return $user;
     }
 
     protected $redirectPath = '/home';
