@@ -40,6 +40,10 @@ class FoodHistoryController extends Controller
 		$totalCalories = 0;
 		$data = [];
 		$total = [];
+        $nutrients = Nutrient::orderBy('name','ASC')->get();
+		foreach($nutrients as $nutrient){
+			$total[$nutrient->id] = 0;
+		}
 		foreach($foods as $food){
 			$actualCalories = ($food->pivot->quantity / 100) * $food->getCalories();
 			$food->actualCalories = $actualCalories;
@@ -62,6 +66,6 @@ class FoodHistoryController extends Controller
 				$total[$foodid][$nutrient->id] = 0;
 			}
 		}
-		return view('history')->with(compact('foods','totalCalories', 'data', 'total'));
+		return view('history')->with(compact('foods','totalCalories', 'data', 'total','nutrients'));
 	}
 }
