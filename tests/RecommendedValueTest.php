@@ -5,7 +5,7 @@ use App\Food;
 use App\Nutrient;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class FoodDatabaseTest extends TestCase
+class RecommendedValueTest extends TestCase
 {
     public function testRecommendedValues(){
         $u = $this->spawnUser();
