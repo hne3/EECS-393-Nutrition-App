@@ -83,7 +83,7 @@ class FoodDatabaseTest extends TestCase
         // 51 calories
         $this->assertEquals("51", $food->getCalories());
         // 0.0 caffiene
-        $this->assertEquals("0.0", $food->getCaffiene());
+        $this->assertEquals("0.0", $food->getCaffeine());
         // 10.0 calcium
         $this->assertEquals("10.0", $food->getCalcium());
         // Calcium unit: mg
