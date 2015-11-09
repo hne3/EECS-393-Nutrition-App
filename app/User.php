@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'age', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
+    protected $fillable = ['name', 'email', 'password', 'bdate', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -56,15 +56,15 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getFoodHistory(){
-        return $this->history()->orderBy('timestamp', 'DESC')->get();
+        return $this->history()->get();
     }
 
     public function getDateTime(){
-        $history = array(array());
-        $history = $this->getFoodHistory(); 
+        $history = array();
+        $history = $this->getFoodHistory();
         foreach($history as $history){
             return $history->pivot->timestamp;
-        }   
+        }
     }
 
     public function getQuantity(){

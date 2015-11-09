@@ -21,14 +21,7 @@
             <td>{{$user->getFoodName()}}</td>
             <td>{{$user->getCalories()}}</td>
         </tr>
+        {{$user->getFoodHistory()}}
         @endforeach
-    </table>
-    <table class="table">
-        <thead>
-            <td>
-
-            </td>
-        </thead>
-    </table>
 </div>
 @endsection
