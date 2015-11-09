@@ -27,6 +27,14 @@ class FoodDatabaseTest extends TestCase
         }
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+        if(static::$dbSeeded){
+            Artisan::call('migrate:reset');
+        }
+    }
+
     public function testFoodSearchRedirect()
     {
         $this->visit('/home')
@@ -128,17 +136,17 @@ class FoodDatabaseTest extends TestCase
         // Test units, ID, and all foods with protein
         $this->assertEquals("g", $protein->getUnits());
         $this->assertEquals("203", $protein->getID());
-        //$this->assertEquals("59463", count($protein->getFoods()));
+        $this->assertEquals("59463", count($protein->getFoods()));
 
         // Test units, ID, and all foods with carbs
         $this->assertEquals("g", $carbohydrates->getUnits());
         $this->assertEquals("205", $carbohydrates->getID());
-        //$this->assertEquals("41580", count($carbohydrates->getFoods()));
+        $this->assertEquals("41580", count($carbohydrates->getFoods()));
 
         // Test units, ID, and all foods with fat
         $this->assertEquals("g", $fat->getUnits());
         $this->assertEquals("204", $fat->getID());
-        //$this->assertEquals("46165", count($fat->getFoods()));
+        $this->assertEquals("46165", count($fat->getFoods()));
 
     }
 }
