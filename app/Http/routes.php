@@ -47,11 +47,7 @@ Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
 	'middleware'=>'auth'
 ]);
 
-Route::get('history', 
-	function() {
-		$user = Auth::user();
-		return view('history')->with('user', $user);
-});
+Route::get('history', ['middleware'=>'auth','uses'=>'FoodHistoryController@index','as'=>'foodhistory']);
 
 /*
 //Login routes...

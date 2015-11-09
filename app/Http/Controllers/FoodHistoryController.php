@@ -10,6 +10,7 @@ use App\Food;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Route;
+use App\Nutrient;
 
 class FoodHistoryController extends Controller 
 {
@@ -27,9 +28,40 @@ class FoodHistoryController extends Controller
 			}
 			$user = Auth::user();
 			$user->addToFoodHistory($food,$quantity);
-			return Redirect::route('foodHistory');
+			return Redirect::route('foodhistory');
 		} else {
 			return 'Please log in!';
 		}
+	}
+
+	public function index(){
+		$user = Auth::user();
+		$foods = $user->getFoodHistory();
+		$totalCalories = 0;
+		$data = [];
+		$total = [];
+		foreach($foods as $food){
+			$actualCalories = ($food->pivot->quantity / 100) * $food->getCalories();
+			$food->actualCalories = $actualCalories;
+			$totalCalories += $actualCalories;
+
+			$allNutrients = $food->nutrients;
+			$foodid = $food->id;
+			$quantity = $food->pivot->quantity;
+			foreach($allNutrients as $nutrient){
+				$data[$foodid][$nutrient->id] = $nutrient->pivot->amount_in_food * ($quantity)/100;
+				if(!array_key_exists($nutrient->id,$total)){
+					$total[$nutrient->id] = $data[$foodid][$nutrient->id];
+				} else {
+					$total[$nutrient->id] = $total[$nutrient->id] + $data[$foodid][$nutrient->id];
+				}
+			}
+			$otherNutrients = Nutrient::whereNotIn('id',$food->nutrients()->lists('nutrient_id')->toArray())->get();
+			foreach($otherNutrients as $nutrient){
+				$data[$foodid][$nutrient->id] = 0;
+				$total[$foodid][$nutrient->id] = 0;
+			}
+		}
+		return view('history')->with(compact('foods','totalCalories', 'data', 'total'));
 	}
 }

@@ -53,43 +53,12 @@ class User extends Model implements AuthenticatableContract,
 
     public function addToFoodHistory(Food $food, $quantity){
         $time = new Carbon();
+        
         $this->history()->save($food,['timestamp'=>$time,'quantity'=>$quantity]);
     }
 
     public function getFoodHistory(){
         return $this->history()->get();
-    }
-
-    public function getDateTime(){
-        $history = array();
-        $history = $this->getFoodHistory();
-        foreach($history as $history){
-            return $history->pivot->timestamp;
-        }
-    }
-
-    public function getQuantity(){
-        $history = array();
-        $history = $this->getFoodHistory();
-        foreach($history as $history){
-            return $history->pivot->quantity;
-        }
-    }
-
-    public function getFoodName(){
-        $history = array();
-        $history = $this->getFoodHistory();
-        foreach($history as $history){
-            return $history->name;
-        }
-    }
-
-    public function getCalories(){
-        $history = array();
-        $history = $this->getFoodHistory();
-        foreach($history as $history){
-            return $history->calories;
-        }
     }
 
     public function addRestriction(Restriction $r){

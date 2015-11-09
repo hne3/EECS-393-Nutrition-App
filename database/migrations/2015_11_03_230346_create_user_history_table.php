@@ -20,6 +20,7 @@ class CreateUserHistoryTable extends Migration
             $table->integer('quantity');                     
             $table->integer('food_id')->unsigned();
             $table->foreign('food_id')->references('id')->on('foods');
+            $table->integer('totalCalories');
         });
     }
 
