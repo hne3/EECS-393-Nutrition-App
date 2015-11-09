@@ -44,6 +44,10 @@ Route::get('/home', function () {
 });
 
 Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search']);
+
+Route::get('/history', function () {
+	return view('history');
+});
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
