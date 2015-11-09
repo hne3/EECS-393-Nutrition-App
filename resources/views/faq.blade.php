@@ -4,8 +4,14 @@
     <div class="container">
         <div class="jumbotron">
             <h2>FAQ</h2>
-            <p class="faq"><span class="faq">What is Snackr?</span> Snakr is an app.</p>
-            <p class="faq"><span class="faq">Why should I use Snackr?</span> Because I said so.</p>
+            <p class="faq">
+              <span class="question">What is Snackr?</span>
+              <span class="answer">Snakr is an app.</span>
+            </p>
+            <p class="faq">
+              <span class="question">Why should I use Snackr?</span> 
+              <span class="answer">Because I said so.</span>
+            </p>
         </div>
     </div>
 @endsection
