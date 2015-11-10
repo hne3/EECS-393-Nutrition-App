@@ -37,35 +37,47 @@ class FoodHistoryController extends Controller
 	public function index(){
 		$user = Auth::user();
 		$foods = $user->getFoodHistory();
-		$totalCalories = 0;
-		$data = [];
-		$total = [];
-        $nutrients = Nutrient::orderBy('name','ASC')->get();
-		foreach($nutrients as $nutrient){
-			$total[$nutrient->id] = 0;
-		}
-		foreach($foods as $food){
-			$actualCalories = ($food->pivot->quantity / 100) * $food->getCalories();
-			$food->actualCalories = $actualCalories;
-			$totalCalories += $actualCalories;
+		$timestamp = $foods->pivot->timestamp;
+		$dates = $this->parseTimestamp($timestamp, $format = 'd-m-Y');
 
-			$allNutrients = $food->nutrients;
-			$foodid = $food->id;
-			$quantity = $food->pivot->quantity;
-			foreach($allNutrients as $nutrient){
-				$data[$foodid][$nutrient->id] = $nutrient->pivot->amount_in_food * ($quantity)/100;
-				if(!array_key_exists($nutrient->id,$total)){
-					$total[$nutrient->id] = $data[$foodid][$nutrient->id];
-				} else {
-					$total[$nutrient->id] = $total[$nutrient->id] + $data[$foodid][$nutrient->id];
+		foreach($dates as $date){		
+			$totalCalories = 0;
+			$data = [];
+			$total = [];
+
+			$nutrients = Nutrient::orderBy('name','ASC')->get();
+			foreach($nutrients as $nutrient){
+				$total[$nutrient->id] = 0;
+			}
+			foreach($foods as $food){
+
+				$actualCalories = ($food->pivot->quantity / 100) * $food->getCalories();
+				$food->actualCalories = $actualCalories;
+				$totalCalories += $actualCalories;
+
+				$allNutrients = $food->nutrients;
+				$foodid = $food->id;
+				$quantity = $food->pivot->quantity;
+				foreach($allNutrients as $nutrient){
+					$data[$foodid][$nutrient->id] = $nutrient->pivot->amount_in_food * ($quantity)/100;
+					if(!array_key_exists($nutrient->id,$total)){
+						$total[$nutrient->id] = $data[$foodid][$nutrient->id];
+					} else {
+						$total[$nutrient->id] = $total[$nutrient->id] + $data[$foodid][$nutrient->id];
+					}
+				}
+				$otherNutrients = Nutrient::whereNotIn('id',$food->nutrients()->lists('nutrient_id')->toArray())->get();
+				foreach($otherNutrients as $nutrient){
+					$data[$foodid][$nutrient->id] = 0;
+					$total[$foodid][$nutrient->id] = 0;
 				}
 			}
-			$otherNutrients = Nutrient::whereNotIn('id',$food->nutrients()->lists('nutrient_id')->toArray())->get();
-			foreach($otherNutrients as $nutrient){
-				$data[$foodid][$nutrient->id] = 0;
-				$total[$foodid][$nutrient->id] = 0;
-			}
 		}
-		return view('history')->with(compact('foods','totalCalories', 'data', 'total','nutrients'));
+		return view('history')->with(compact('foods', 'dates', 'totalCalories', 'data', 'total', 'nutrients'));
+	}
+
+	public function parseTimestamp($timestamp, $format = 'd-m-Y'){
+		$date = new DateTime($timestamp);
+    	return $date->format($format);
 	}
 }

@@ -1,5 +1,3 @@
-
-
 @extends('app')
 
 @section('content')
@@ -39,9 +37,9 @@
                             <td>{{$food->actualCalories}}</td>
                             <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">View
                                 Details</a>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
+                        </tr>
+                        <tr>
+                            <td colspan="5">
                                     <div class="accordian-body collapse" id="food{{$i}}">
                                         @foreach($nutrients->chunk(11) as $chunk)
                                         <table class="table table-responsive">
@@ -58,32 +56,36 @@
                                         </table>
                                         @endforeach
                                     </div>
-                                </td>
-                            </tr>
-                            <?php $i++; ?>
-                            @endforeach
-                        </table>
-                    </div>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
+                        @endforeach
+                    </table>
+                </div>
 
-                    <div class="tabContent" id="dailyNutrients">
-                        <table class="table">
+                <div class="tabContent" id="dailyNutrients">
+                    <table class="table">
                             <thead>
                                 <th>Nutrient</th>
                                 <td>Total amount</td>
                             </thead>
                             <br>
                             <tr>
+                                <td>Date</td>
                                 <td>Calories</td>
                                 <td>{{$totalCalories}}</td>
                             </tr>
-                            @foreach($nutrients as $nutrient)
-                            <tr>
-                                <td>{{$nutrient->name}}</td>
-                                <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
-                            </tr>
+                            @foreach($dates as $date)
+                                <tr>
+                                <td>{{$date}}</td>
+                                @foreach($nutrients as $nutrient)
+                                    <td>{{$nutrient->name}}</td>
+                                    <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
+                                </tr>
+                                @endforeach
                             @endforeach
-                        </table>
-                    </div>
+                    </table>
+                </div>
 
                 </div>
             </div>

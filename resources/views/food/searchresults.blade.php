@@ -27,7 +27,7 @@
                     <td>
                         {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
-                            {!! Form::text('quantity', null, ['class'=>'form-control','required']) !!}
+                        {!! Form::text('quantity', null, ['class'=>'form-control','required']) !!}
                     <button class="btn btn-default" type="submit" value="addToFoodHistory">
                         Eat now</button>
                         {!! Form::close() !!}

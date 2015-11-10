@@ -58,7 +58,7 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getFoodHistory(){
-        return $this->history()->get();
+        return $this->history()->orderBy('timestamp','ASC')->get();
     }
 
     public function addRestriction(Restriction $r){
