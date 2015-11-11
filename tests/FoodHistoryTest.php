@@ -22,7 +22,6 @@ class FoodHistoryTest extends TestCase
         $user->seafood = '0';
         $user->dairy = '0';
         $user->chocolate = '0';
-        //$user->id = '10000';
         return $user;
     }
 
@@ -31,12 +30,6 @@ class FoodHistoryTest extends TestCase
         $user = $this->spawnUser();
 
         $this->actingAs($user)
-/*
-            ->seePageIs('/auth/login')
-            ->type($user->email, 'email')
-            ->type($user->password, 'password')
-            ->click('Login')*/
-
             ->visit('/food')
             ->type('apple', 'q')
             ->select('search', 'method')
@@ -62,7 +55,17 @@ class FoodHistoryTest extends TestCase
             // Checks name, calories, and quantity
             ->see('Apple juice, canned or bottled, unsweetened, with added ascorbic acid')
             ->see('0.46')
-            ->see('1');
+            ->see('1')
+            ->visit('http://snackr.app/history#dailyNutrients')
+            // Ensures each day's nutrients is displaying properly
+            ->see('5 days ago')
+            ->see('4 days ago')
+            ->see('3 days ago')
+            ->see('2 days ago')
+            ->see('1 day ago')
+            ->see('Today')
+            // TODO: Check each column for appropriate values
+            ->see('0');
     }
 
     // Tests user history with object manipulation
