@@ -10,9 +10,9 @@ class FoodHistoryTest extends TestCase
 
 
     public function spawnUser(){
-        $user = new App\User();
-        $user->name = 'HistoryTest';
-        $user->email = 'htest@test.com';
+        $user = factory(App\User::class)->create();
+        $user->name = 'FoodHistoryTest';
+        $user->email = 'foodhistorytest@test.com';
         $user->password = 'password';
         $user->gender = 'female';
         $user->weight = '110';
@@ -22,7 +22,7 @@ class FoodHistoryTest extends TestCase
         $user->seafood = '0';
         $user->dairy = '0';
         $user->chocolate = '0';
-        $user->id = '10000';
+        //$user->id = '10000';
         return $user;
     }
 
@@ -30,17 +30,20 @@ class FoodHistoryTest extends TestCase
     public function logFoodUI(){
         $user = $this->spawnUser();
 
-        $this->visit('/food')
+        $this->actingAs($user)
+/*
+            ->seePageIs('/auth/login')
+            ->type($user->email, 'email')
+            ->type($user->password, 'password')
+            ->click('Login')*/
 
-            ->type($user->email, 'E-Mail Address')
-            ->type($user->password, 'Password')
-            ->click('Login')
-
+            ->visit('/food')
             ->type('apple', 'q')
+            ->select('search', 'method')
             ->press('Go!')
             ->see('Apple juice, canned or bottled, unsweetened, with added ascorbic acid')
-            ->type('1', 'q')
-            ->click('Eat now');
+            ->type('1', 'quantity')
+            ->press('Eat now');
     }
 
     // Logs a food via direct variable manipulation
@@ -51,6 +54,7 @@ class FoodHistoryTest extends TestCase
         return $user;
     }
 
+    // Tests user history via direct UI manipulation
     public function testHistoryViaUI(){
         $this->logFoodUI();
 
@@ -61,10 +65,10 @@ class FoodHistoryTest extends TestCase
             ->see('1');
     }
 
+    // Tests user history with object manipulation
     public function testHistoryUnit(){
         $u = $this->logFoodUnit();
-        $food = App\Food::SearchByName('apple')[0];
         $this->assertEquals('1', count($u->getFoodHistory()));
-        $this->assertEquals($food, $u->getFoodHistory());
+        $this->assertEquals('Apple juice, canned or bottled, unsweetened, with added ascorbic acid', $u->getFoodHistory()[0]->name);
     }
 }
