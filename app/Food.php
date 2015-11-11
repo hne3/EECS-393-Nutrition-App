@@ -62,7 +62,7 @@ class Food extends Model
         static::$respectRestrictions = (bool)$restrictions;
     }
 
-    protected function nutrients()
+    public function nutrients()
     {
         return $this->belongsToMany('App\Nutrient')->withPivot('amount_in_food');
     }

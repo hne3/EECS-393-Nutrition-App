@@ -6,15 +6,17 @@
             <h3>Food Search</h3>
             @include('food.searchbar')
         </div>
-        <br>
+        <br><br>
         <table class="table">
             <thead>
                 <td>Food</td>
                 <td>Calories (per 100g)</td>
                 <td>Carbohydrates ({{$carbUnits}} per 100g)</td>
-                <td>Protein ({{$proteinUnits}} per 100)g</td>
+                <td>Protein ({{$proteinUnits}} per 100g)</td>
                 <td>Fat ({{$fatUnits}} per 100g)</td>
+                <td>Add to Food History</td>
             </thead>
+            <br>
             @foreach($foods as $food)
                 <tr>
                     <td>{{$food->getName()}}</td>
@@ -22,7 +24,16 @@
                     <td>{{$food->getCarbohydrates()}}</td>
                     <td>{{$food->getProtein()}}</td>
                     <td>{{$food->getFat()}}</td>
-                    <td><button class="btn btn-default" type="submit" value="addFood">Eat now</button></td> 
+                    <td>
+                        {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
+                        {!! Form::hidden('foodid',$food->id)!!}
+                        {!! Form::text('quantity', null, ['class'=>'form-control','required']) !!}
+                    <button class="btn btn-default" type="submit" value="addToFoodHistory">
+                        Eat now</button>
+                        {!! Form::close() !!}
+                    </td>
+
+                    
                 </tr>
             @endforeach
         </table>

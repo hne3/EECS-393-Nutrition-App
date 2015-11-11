@@ -43,11 +43,16 @@ Route::get('/home', function () {
 	return view('home', ['username' => Auth::user()['name']]);
 });
 
-Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search']);
+Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search',
+	'middleware'=>'auth'
+]);
 
-Route::get('/history', function () {
-	return view('history');
-});
+Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
+	'middleware'=>'auth'
+]);
+
+Route::get('history', ['middleware'=>'auth','uses'=>'FoodHistoryController@index','as'=>'foodhistory']);
+
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
