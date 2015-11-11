@@ -24,18 +24,19 @@
                     <table class="table">
                         <thead>
                             <td>Date</td>
-                            <td>Today's Date</td>
                             <td>Quantity</td>
                             <td>Food</td>
                             <td>Calories</td>
                             <td>Details</td>
                         </thead>
                         <br>
-                        <?php $i = 0;?>
+                        <?php $i = 0;
+                        ?>
                         @foreach($foods as $food)
+
                         <tr>
-                            <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-                            <td>{{var_dump($date < 'Wednesday/11/21/2015')}}</td>
+                            {{--Decides if the date the food was logged is the same as today's date--}}
+                            <td>{{$givenDate = \Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
                             <td>{{$food->pivot->quantity}}</td>
                             <td>{{$food->getName()}}</td>
                             <td>{{$food->actualCalories}}</td>
@@ -66,7 +67,6 @@
                             @endforeach
                         </table>
                     </div>
-
                     <div class="tabContent" id="dailyNutrients">
                         <table class="table">
                             <thead>
@@ -74,18 +74,23 @@
                                 <td>Total amount</td>
                             </thead>
                             <br>
-                            <tr>
+                                <tr>
                                 <td>Calories</td>
-                                <td>{{$totalCalories}}</td>
+                                    @if($date >= $givenDate)
+                                    <td>{{$totalCalories}}</td>
+                                    @endif
                             </tr>
-                            @foreach($nutrients as $nutrient)
+                                    @foreach($nutrients as $nutrient)
                             <tr>
                                 <td>{{$nutrient->name}}</td>
+                                @if($date >= $givenDate)
                                 <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
+                                    @endif
                             </tr>
                             @endforeach
                         </table>
                     </div>
+
 
                 </div>
             </div>
