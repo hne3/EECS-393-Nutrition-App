@@ -24,6 +24,7 @@
                     <table class="table">
                         <thead>
                             <td>Date</td>
+                            <td>Today's Date</td>
                             <td>Quantity</td>
                             <td>Food</td>
                             <td>Calories</td>
@@ -34,6 +35,7 @@
                         @foreach($foods as $food)
                         <tr>
                             <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
+                            <td>{{var_dump($date < 'Wednesday/11/21/2015')}}</td>
                             <td>{{$food->pivot->quantity}}</td>
                             <td>{{$food->getName()}}</td>
                             <td>{{$food->actualCalories}}</td>

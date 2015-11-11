@@ -34,6 +34,7 @@ class FoodHistoryController extends Controller
 		}
 	}
 
+//	Displays individual food history and daily nutritional requirement fulfillment.
 	public function index(){
 		$user = Auth::user();
 		$foods = $user->getFoodHistory();
@@ -41,6 +42,7 @@ class FoodHistoryController extends Controller
 		$data = [];
 		$total = [];
         $nutrients = Nutrient::orderBy('name','ASC')->get();
+		$date = date('l/m/d/Y');
 		foreach($nutrients as $nutrient){
 			$total[$nutrient->id] = 0;
 		}
@@ -66,6 +68,6 @@ class FoodHistoryController extends Controller
 				$total[$foodid][$nutrient->id] = 0;
 			}
 		}
-		return view('history')->with(compact('foods','totalCalories', 'data', 'total','nutrients'));
+		return view('history')->with(compact('foods','totalCalories', 'data', 'total','nutrients', 'date'));
 	}
 }
