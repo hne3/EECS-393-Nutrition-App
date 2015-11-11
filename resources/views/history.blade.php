@@ -50,7 +50,7 @@
                       </thead>
                       <tr>
                         @foreach($chunk as $nutrient)
-                        <td>{{$total[$nutrient->id]}}</td>
+                        <td>{{$nutrient->id}}</td>
                         @endforeach
                       </tr>
                     </table>
@@ -64,26 +64,35 @@
           </div>
 
           <div class="tabContent" id="dailyNutrients">
-            <?php $dateFirst = \Carbon\Carbon::Parse($foods->get(0)->pivot->timestamp)->toFormattedDateString() ?>
             <table class="table">
               <thead>               
                 <th>Nutrient</th>
-                <?php 
-                $day = 0;
-                foreach($foods as $food) 
-                  if($dateFirst != \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString()) ?>
-                    <th>{{$date = \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString()}}</th>
-
+                    <th>5 days ago</th>
+                    <th>4 days ago</th>
+                    <th>3 days ago</th>
+                    <th>2 days ago</th>
+                    <th>1 day ago</th>
+                    <th>Today</th>
                     </thead>
                     <br>
                     <tr>
                     <td>Calories</td>
-                    <td>{{$totalCalories}}</td>
+                    <td>{{$previousTotalCalories[4]}}</td>
+                    <td>{{$previousTotalCalories[3]}}</td>
+                    <td>{{$previousTotalCalories[2]}}</td>
+                    <td>{{$previousTotalCalories[1]}}</td>
+                    <td>{{$previousTotalCalories[0]}}</td>
+                    <td>{{$todayTotalCalories}}</td>
                     </tr>
                     <tr>                                
-                    @foreach($nutrients as $nutrient)
+                    @foreach($allNutrients as $nutrient)
                     <td>{{$nutrient->name}}</td>
-                    <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
+                    <td>{{$previousNutrientTotals[$nutrient->id][4]}}</td>
+                    <td>{{$previousNutrientTotals[$nutrient->id][3]}}</td>
+                    <td>{{$previousNutrientTotals[$nutrient->id][2]}}</td>
+                    <td>{{$previousNutrientTotals[$nutrient->id][1]}}</td>
+                    <td>{{$previousNutrientTotals[$nutrient->id][0]}}</td>
+                    <td>{{$todayNutrientTotals[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
                     </tr>
                     @endforeach
               </table>
@@ -91,25 +100,6 @@
           </div>
         </div>
         <br><br><br>
-
-<?php
-$datePrevious = \Carbon\Carbon::Parse($foods->get(0)->pivot->timestamp)->toFormattedDateString();
-echo "$datePrevious";
-foreach ($foods as $food){
-  $dateCurrent = \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString(); 
-  if ($datePrevious == $dateCurrent) {
-    foreach($nutrients as $nutrient) {
-      echo "$nutrient->name";
-      echo "$total[$nutrient->id] $nutrient->getUnits()";
-    }
-  }
-  else {
-    $total[$nutrient->id] = 0;
-    echo "$dateCurrent";
-    $datePrevious = $dateCurrent;
-  }
-}
-?>
       </div>
     </body>
     @endsection

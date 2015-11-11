@@ -52,7 +52,7 @@ class FoodHistoryController extends Controller
         $nutrients = Nutrient::orderBy('name', 'ASC')->get();
         foreach ($nutrients as $nutrient) {
             $todayNutrientTotals[$nutrient->id] = 0;
-            $previousNutrientTotals[$nutrient->id] = array_pad([], $numDays, 0);
+            $previousNutrientTotals[$nutrient->id] = array_pad([], $numDays, 0); 
             $previousTotalCalories = array_pad([],$numDays,0);
         }
         foreach ($foods as $food) {
@@ -90,6 +90,7 @@ class FoodHistoryController extends Controller
                 //Ignore this. Ideally, we would filter the query to only return items that fall in the previous two categories.
             }
         }
-        return view('history')->with(compact('foods', 'dates', 'totalCalories', 'data', 'total', 'nutrients'));
+        return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
+            'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals'));
     }
 }
