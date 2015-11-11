@@ -32,7 +32,7 @@ class FoodSearchController extends Controller
             $restrictions = [];
             if($useRestrictions == 0){
                 Food::ObeyRestrictions(false);
-            } else {
+            } else if(Auth::check()){
                 $user = Auth::user();
                 $restrictions = $user->getRestrictions();
             }
