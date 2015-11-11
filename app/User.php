@@ -67,7 +67,7 @@ class User extends Model implements AuthenticatableContract,
         return $this->restrictions()->get();
     }
 
-    private function restrictions(){
+    public function restrictions(){
         return $this->belongsToMany('App\Restriction');
     }
 

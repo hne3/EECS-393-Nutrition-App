@@ -2,26 +2,40 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Food extends Model
 {
     public $timestamps = false;
-    public $respectRestrictions = true;
+    public $respectRestrictionsPublic = true;
 
-    public static function GetByName($name)
+    private static $respectRestrictions = true;
+
+    public static function GetByName($name, $restrictions = [])
     {
-        return Food::where('name', $name)->get();
+        return Food::where('name', $name)->RestrictedBy($restrictions)->get();
     }
 
-    public static function GetNameSimilarTo($name)
+    public static function GetNameSimilarTo($name,$restrictions = [])
     {
-        return Food::where('name', 'LIKE', '%' . $name . '%')->get();
+        return Food::where('name', 'LIKE', '%' . $name . '%')->RestrictedBy($restrictions)->get();
     }
 
-    public static function SearchByName($name)
+    public static function SearchByName($name, $restrictions = [])
     {
-        return Food::where('name', 'LIKE', $name . '%')->get();
+        return Food::where('name', 'LIKE', $name . '%')->RestrictedBy($restrictions)->get();
+    }
+
+    public function scopeRestrictedBy($query, $restrictions){
+        if(!static::$respectRestrictions || count($restrictions) == 0){
+            return $query;
+        } else {
+            $restrictionIDs = $restrictions->lists('id')->toArray();
+            return $query->whereNotIn('id',Food::whereIn('id',DB::table('food_restriction')->whereIn('restriction_id',$restrictionIDs)->lists('food_id'))->lists('id')->toArray());
+        }
     }
 
     protected function restrictions()
@@ -44,9 +58,8 @@ class Food extends Model
         return $this->restrictions()->whereId($r->id)->count() > 0;
     }
 
-    public static function ObeyRestrictions($shouldObey)
-    {
-
+    public static function ObeyRestrictions($restrictions){
+        static::$respectRestrictions = (bool)$restrictions;
     }
 
     protected function nutrients()
