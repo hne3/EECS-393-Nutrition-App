@@ -7,9 +7,14 @@
     <title>Laravel</title>
 
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="{{ asset('/js/faq.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,6 +40,7 @@
             @if(Auth::check())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('/faq') }}">FAQ</a></li>
                 </ul>
             @endif
             <ul class="nav navbar-nav navbar-right">
