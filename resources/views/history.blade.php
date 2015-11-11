@@ -33,9 +33,9 @@
                         <?php $i = 0;
                         ?>
                         @foreach($foods as $food)
-
+                            {{--Displays all foods, regardless of date, but including date/timestamp marker--}}
                         <tr>
-                            {{--Decides if the date the food was logged is the same as today's date--}}
+                            {{--Registers given date--}}
                             <td>{{$givenDate = \Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
                             <td>{{$food->pivot->quantity}}</td>
                             <td>{{$food->getName()}}</td>
@@ -67,6 +67,7 @@
                             @endforeach
                         </table>
                     </div>
+                {{--Only displays nutritional conntent if today's date matches the given date--}}
                     <div class="tabContent" id="dailyNutrients">
                         <table class="table">
                             <thead>
