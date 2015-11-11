@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Food;
 
+
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -31,7 +32,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'age', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
+    protected $fillable = ['name', 'email', 'password', 'bdate', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -52,11 +53,12 @@ class User extends Model implements AuthenticatableContract,
 
     public function addToFoodHistory(Food $food, $quantity){
         $time = new Carbon();
+        
         $this->history()->save($food,['timestamp'=>$time,'quantity'=>$quantity]);
     }
 
     public function getFoodHistory(){
-        return $this->history()->orderBy('timestamp','DESC')->get();
+        return $this->history()->orderBy('timestamp','ASC')->get();
     }
 
     public function addRestriction(Restriction $r){

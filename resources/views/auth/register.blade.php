@@ -56,10 +56,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Age</label>
-
+                                <label class="col-md-4 control-label">Birthdate</label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="age">
+                                    <input type="date" class="form-control" name="bdate">
                                 </div>
                             </div>
 
