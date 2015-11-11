@@ -2,95 +2,115 @@
 
 @section('content')
 <body onload="init()">
-    <div class="container">
-        <div id="Tabs">
-            <div id="Content_Area">
+  <div class="container">
+    <div id="Tabs">
+      <div id="Content_Area">
 
-                <div class="jumbotron">
-                    <h2>Your Food History</h2>
-                </div>
-                <div>
-                    <ul id="tabs">
-                        <li><a href="#individualFoods">Individual Foods</a></li>
-                        <li><a href="#dailyNutrients">Daily Nutrients</a></li>
-                    </ul>
-                </div>
-
-                <br>
-
-                <div class="tabContent" id="individualFoods">
-                    <table class="table">
-                        <thead>
-                            <td>Date</td>
-                            <td>Quantity</td>
-                            <td>Food</td>
-                            <td>Calories</td>
-                            <td>Details</td>
-                        </thead>
-                        <br>
-                        <?php $i = 0;?>
-                        @foreach($foods as $food)
-                        <tr>
-                            <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-                            <td>{{$food->pivot->quantity}}</td>
-                            <td>{{$food->getName()}}</td>
-                            <td>{{$food->actualCalories}}</td>
-                            <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">View
-                                Details</a>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                    <div class="accordian-body collapse" id="food{{$i}}">
-                                        @foreach($nutrients->chunk(11) as $chunk)
-                                        <table class="table table-responsive">
-                                            <thead>
-                                                @foreach($chunk as $nutrient)
-                                                <th>{{$nutrient->name}}</th>
-                                                @endforeach
-                                            </thead>
-                                            <tr>
-                                                @foreach($chunk as $nutrient)
-                                                <td>{{$total[$nutrient->id]}}</td>
-                                                @endforeach
-                                            </tr>
-                                        </table>
-                                        @endforeach
-                                    </div>
-                            </td>
-                        </tr>
-                        <?php $i++; ?>
-                        @endforeach
-                    </table>
-                </div>
-
-                <div class="tabContent" id="dailyNutrients">
-                    <table class="table">
-                            <thead>
-                                <th>Nutrient</th>
-                                <td>Total amount</td>
-                            </thead>
-                            <br>
-                            <tr>
-                                <td>Date</td>
-                                <td>Calories</td>
-                                <td>{{$totalCalories}}</td>
-                            </tr>
-                            @foreach($dates as $date)
-                                <tr>
-                                <td>{{$date}}</td>
-                                @foreach($nutrients as $nutrient)
-                                    <td>{{$nutrient->name}}</td>
-                                    <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
-                                </tr>
-                                @endforeach
-                            @endforeach
-                    </table>
-                </div>
-
-                </div>
-            </div>
-            <br><br><br>
+        <div class="jumbotron">
+          <h2>Your Food History</h2>
         </div>
+        <div>
+          <ul id="tabs">
+            <li><a href="#individualFoods">Individual Foods</a></li>
+            <li><a href="#dailyNutrients">Daily Nutrients</a></li>
+          </ul>
+        </div>
+
+        <br>
+
+        <div class="tabContent" id="individualFoods">
+          <table class="table">
+            <thead>
+              <td>Date</td>
+              <td>Quantity</td>
+              <td>Food</td>
+              <td>Calories</td>
+              <td>Details</td>
+            </thead>
+            <br>
+            <?php $i = 0;?>
+            @foreach($foods as $food)
+            <tr>
+              <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
+              <td>{{$food->pivot->quantity}}</td>
+              <td>{{$food->getName()}}</td>
+              <td>{{$food->actualCalories}}</td>
+              <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">View
+                Details</a>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="accordian-body collapse" id="food{{$i}}">
+                    @foreach($nutrients->chunk(11) as $chunk)
+                    <table class="table table-responsive">
+                      <thead>
+                        @foreach($chunk as $nutrient)
+                        <th>{{$nutrient->name}}</th>
+                        @endforeach
+                      </thead>
+                      <tr>
+                        @foreach($chunk as $nutrient)
+                        <td>{{$total[$nutrient->id]}}</td>
+                        @endforeach
+                      </tr>
+                    </table>
+                    @endforeach
+                  </div>
+                </td>
+              </tr>
+              <?php $i++; ?>
+              @endforeach
+            </table>
+          </div>
+
+          <div class="tabContent" id="dailyNutrients">
+            <?php $dateFirst = \Carbon\Carbon::Parse($foods->get(0)->pivot->timestamp)->toFormattedDateString() ?>
+            <table class="table">
+              <thead>               
+                <th>Nutrient</th>
+                <?php 
+                $day = 0;
+                foreach($foods as $food) 
+                  if($dateFirst != \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString()) ?>
+                    <th>{{$date = \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString()}}</th>
+
+                    </thead>
+                    <br>
+                    <tr>
+                    <td>Calories</td>
+                    <td>{{$totalCalories}}</td>
+                    </tr>
+                    <tr>                                
+                    @foreach($nutrients as $nutrient)
+                    <td>{{$nutrient->name}}</td>
+                    <td>{{$total[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
+                    </tr>
+                    @endforeach
+              </table>
+            </div>
+          </div>
+        </div>
+        <br><br><br>
+
+<?php
+$datePrevious = \Carbon\Carbon::Parse($foods->get(0)->pivot->timestamp)->toFormattedDateString();
+echo "$datePrevious";
+foreach ($foods as $food){
+  $dateCurrent = \Carbon\Carbon::Parse($food->pivot->timestamp)->toFormattedDateString(); 
+  if ($datePrevious == $dateCurrent) {
+    foreach($nutrients as $nutrient) {
+      echo "$nutrient->name";
+      echo "$total[$nutrient->id] $nutrient->getUnits()";
+    }
+  }
+  else {
+    $total[$nutrient->id] = 0;
+    echo "$dateCurrent";
+    $datePrevious = $dateCurrent;
+  }
+}
+?>
+      </div>
     </body>
     @endsection
 

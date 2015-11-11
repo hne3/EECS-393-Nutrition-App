@@ -36,11 +36,7 @@ class FoodHistoryController extends Controller
 
 	public function index(){
 		$user = Auth::user();
-		$foods = $user->getFoodHistory();
-		$timestamp = $foods->pivot->timestamp;
-		$dates = $this->parseTimestamp($timestamp, $format = 'd-m-Y');
-
-		foreach($dates as $date){		
+		$foods = $user->getFoodHistory();	
 			$totalCalories = 0;
 			$data = [];
 			$total = [];
@@ -72,12 +68,6 @@ class FoodHistoryController extends Controller
 					$total[$foodid][$nutrient->id] = 0;
 				}
 			}
-		}
 		return view('history')->with(compact('foods', 'dates', 'totalCalories', 'data', 'total', 'nutrients'));
-	}
-
-	public function parseTimestamp($timestamp, $format = 'd-m-Y'){
-		$date = new DateTime($timestamp);
-    	return $date->format($format);
 	}
 }
