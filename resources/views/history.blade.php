@@ -27,6 +27,7 @@
               <td>Food</td>
               <td>Quantity</td>
               <td>Calories</td>
+              <td>Your Rating</td>
               <td></td><td></td>
               <td></td>
             </thead>
@@ -39,6 +40,7 @@
                 style="color:black; text-decoration:none">{{$food->getName()}}</td>
               <td>{{$food->pivot->quantity}} g</td>
               <td>{{$food->actualCalories}} kcal</td>
+              <td>{{$food->pivot->rating}}</td>
               <td></td><td></td>
               </tr>
               <tr>

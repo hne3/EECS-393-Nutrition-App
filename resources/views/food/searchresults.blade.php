@@ -12,6 +12,7 @@
                 <td></td>
                 <td><b>Food (100 g)</td>
                 <td><b>Calories</td>
+                <td><b>Your Rating</td>
                 <td><b>Quantity</td>
                 <td></td>
             </thead>
@@ -24,7 +25,8 @@
                     <td>
                         {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
-                        {!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams']) !!}
+                        {!! Form::select('rating', array('1'=>'1', '2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5'), ['class'=>'form-control', 'id'=>'rating']) !!}</td>
+                    <td>{!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams']) !!}
                         <style>#qu{width:70px; height:20px;}</style></td> 
                     <td><button class="btn btn-default btn-xs" type="submit" value="addToFoodHistory">
                         Eat now</button>{!! Form::close() !!}</td> 

@@ -27,8 +27,9 @@ class FoodHistoryController extends Controller
             if ($quantity == null || $quantity == 0) {
                 return 'Invalid Quantity.';
             }
+            $rating = Request::get('rating');
             $user = Auth::user();
-            $user->addToFoodHistory($food, $quantity);
+            $user->addToFoodHistory($food, $quantity, $rating);
             return Redirect::route('foodhistory');
         } else {
             return 'Please log in!';
