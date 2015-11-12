@@ -35,7 +35,7 @@
             @foreach($foods as $food)
             <tr>
               <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-              <td><a href="#" data-toggle="collapse" data-target="#food{{$i}}" 
+              <td><a data-toggle="collapse" data-target="#food{{$i}}" 
                 style="color:black; text-decoration:none">{{$food->getName()}}</td>
               <td>{{$food->pivot->quantity}} g</td>
               <td>{{$food->actualCalories}} kcal</td>

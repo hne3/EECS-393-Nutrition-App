@@ -9,16 +9,18 @@
         <br><br>
         <table class="table">
             <thead>
+                <td></td>
                 <td><b>Food (100 g)</td>
-                <td><b>Calories</td><td></td>
+                <td><b>Calories</td>
                 <td><b>Quantity</td>
                 <td></td>
             </thead>
             <?php $i = 0;?>
             @foreach($foods as $food)
                 <tr>
-                    <td><a href="#" data-toggle="collapse" data-target="#food{{$i}}" style="color:black; text-decoration:none">{{$food->getName()}}</a></td>
-                    <td>{{$food->getCalories()}} kcal</td><td></td>
+                    <td></td>
+                    <td><a data-toggle="collapse" data-target="#food{{$i}}" style="color:black; text-decoration:none">{{$food->getName()}}</a></td>
+                    <td>{{$food->getCalories()}} kcal</td>
                     <td>
                         {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
@@ -29,7 +31,7 @@
                 </tr>
                 <tr>
                     <td colspan="7">
-                    <div class="accordian-body collapse" id="food{{$i}}">
+                    <div class="accordion-body collapse" id="food{{$i}}">
                     <table class="table" style="background-color:#f6f6f6">
                         <thead>
                                 <td><b>Caffeine</b></td>
