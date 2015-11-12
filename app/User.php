@@ -81,4 +81,9 @@ class User extends Model implements AuthenticatableContract,
         }
         return true;
     }
+
+    public function getFoodSuggestion(){
+        $suggestion = Food::orderByRaw("RAND()")->first();
+        return $suggestion;
+    }
 }

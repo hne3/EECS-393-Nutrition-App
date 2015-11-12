@@ -51,6 +51,10 @@ Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
 	'middleware'=>'auth'
 ]);
 
+Route::get('suggestion',['uses'=>'SuggestionController@index','as'=>'suggestion',
+	'middleware'=>'auth'
+]);
+
 Route::get('history', ['middleware'=>'auth','uses'=>'FoodHistoryController@index','as'=>'foodhistory']);
 
 /*
