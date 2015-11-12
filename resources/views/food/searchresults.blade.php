@@ -17,7 +17,7 @@
             <?php $i = 0;?>
             @foreach($foods as $food)
                 <tr>
-                    <td><a href="#" data-toggle="collapse" data-target="#details" style="color:black; text-decoration:none">{{$food->getName()}}</a></td>
+                    <td><a href="#" data-toggle="collapse" data-target="#food{{$i}}" style="color:black; text-decoration:none">{{$food->getName()}}</a></td>
                     <td>{{$food->getCalories()}} kcal</td><td></td>
                     <td>
                         {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
@@ -26,11 +26,10 @@
                         <style>#qu{width:70px; height:20px;}</style></td> 
                     <td><button class="btn btn-default btn-xs" type="submit" value="addToFoodHistory">
                         Eat now</button>{!! Form::close() !!}</td> 
-                    <!-- <td><a href="#" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#details">Details</a></td> -->
                 </tr>
                 <tr>
                     <td colspan="7">
-                    <div class="accordian-body collapse" id="details">
+                    <div class="accordian-body collapse" id="food{{$i}}">
                     <table class="table" style="background-color:#f6f6f6">
                         <thead>
                                 <td><b>Caffeine</b></td>
@@ -89,6 +88,7 @@
                     </div>
                     </td>
                 </tr>
+                <?php $i++; ?>
             @endforeach
         </table>
 
