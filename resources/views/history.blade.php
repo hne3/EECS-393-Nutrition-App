@@ -24,8 +24,8 @@
           <table class="table">
             <thead>
               <td>Date</td>
-              <td>Quantity</td>
               <td>Food</td>
+              <td>Quantity</td>
               <td>Calories</td>
               <td></td><td></td>
               <td></td>
@@ -35,16 +35,16 @@
             @foreach($foods as $food)
             <tr>
               <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-              <td>{{$food->pivot->quantity}}</td>
-              <td>{{$food->getName()}}</td>
+              <td><a href="#" data-toggle="collapse" data-target="#food{{$i}}" 
+                style="color:black; text-decoration:none">{{$food->getName()}}</td>
+              <td>{{$food->pivot->quantity}} g</td>
               <td>{{$food->actualCalories}} kcal</td>
               <td></td><td></td>
-              <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">Details</a>
               </tr>
-                <tr>
-               <td colspan="7">
+              <tr>
+              <td colspan="7">
                     <div class="accordian-body collapse" id="food{{$i}}">
-                        <table class="table" style="background-color:#ededed">
+                        <table class="table" style="background-color:#f6f6f6">
                             <thead>
                                 <td><b>Caffeine</b></td>
                                 <td><b>Calcium</b></td>
