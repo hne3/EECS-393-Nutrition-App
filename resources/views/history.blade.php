@@ -34,7 +34,7 @@
               <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
               <td>{{$food->pivot->quantity}}</td>
               <td>{{$food->getName()}}</td>
-              <td>{{$food->actualCalories}}</td>
+              <td>{{$food->actualCalories}} kcal</td>
               <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">View
                 Details</a>
               </tr>
@@ -57,17 +57,17 @@
                             </thead>
                             <br>
                             <tr>
-                                <td>{{$data[$food->id][262]}}</td>
-                                <td>{{$data[$food->id][301]}}</td>
-                                <td>{{$data[$food->id][205]}}</td>
-                                <td>{{$data[$food->id][312]}}</td>
-                                <td>{{$data[$food->id][204]}}</td>
-                                <td>{{$data[$food->id][291]}}</td>
-                                <td>{{$data[$food->id][303]}}</td>
-                                <td>{{$data[$food->id][304]}}</td>
-                                <td>{{$data[$food->id][315]}}</td>
-                                <td>{{$data[$food->id][305]}}</td>
-                                <td>{{$data[$food->id][306]}}</td>
+                                <td>{{$data[$food->id][262]}} mg</td>
+                                <td>{{$data[$food->id][301]}} mg</td>
+                                <td>{{$data[$food->id][205]}} g</td>
+                                <td>{{$data[$food->id][312]}} mg</td>
+                                <td>{{$data[$food->id][204]}} g</td>
+                                <td>{{$data[$food->id][291]}} g</td>
+                                <td>{{$data[$food->id][303]}} mg</td>
+                                <td>{{$data[$food->id][304]}} mg</td>
+                                <td>{{$data[$food->id][315]}} mg</td>
+                                <td>{{$data[$food->id][305]}} mg</td>
+                                <td>{{$data[$food->id][306]}} mg</td>
                             </tr>
                         </table>
                         <table class="table">
@@ -86,17 +86,17 @@
                             </thead>
                             <br>
                             <tr>
-                                <td>{{$data[$food->id][203]}}</td>
-                                <td>{{$data[$food->id][307]}}</td>
-                                <td>{{$data[$food->id][269]}}</td>
-                                <td>{{$data[$food->id][320]}}</td>
-                                <td>{{$data[$food->id][578]}}</td>
-                                <td>{{$data[$food->id][415]}}</td>
-                                <td>{{$data[$food->id][401]}}</td>
-                                <td>{{$data[$food->id][328]}}</td>
-                                <td>{{$data[$food->id][323]}}</td>
-                                <td>{{$data[$food->id][430]}}</td>
-                                <td>{{$data[$food->id][309]}}</td>
+                                <td>{{$data[$food->id][203]}} g</td>
+                                <td>{{$data[$food->id][307]}} mg</td>
+                                <td>{{$data[$food->id][269]}} g</td>
+                                <td>{{$data[$food->id][320]}} ug</td>
+                                <td>{{$data[$food->id][578]}} ug</td>
+                                <td>{{$data[$food->id][415]}} mg</td>
+                                <td>{{$data[$food->id][401]}} mg</td>
+                                <td>{{$data[$food->id][328]}} ug</td>
+                                <td>{{$data[$food->id][323]}} mg</td>
+                                <td>{{$data[$food->id][430]}} ug</td>
+                                <td>{{$data[$food->id][309]}} mg</td>
                             </tr>
                         </table>
                       </div>
@@ -111,31 +111,26 @@
             <table class="table">
               <thead>               
                 <th>Nutrient</th>
-                    <th>5 days ago</th>
-                    <th>4 days ago</th>
-                    <th>3 days ago</th>
-                    <th>2 days ago</th>
+                @for($a = 5; $a > 1; $a--)
+                    <th>{{$a}} days ago</th>
+                @endfor
                     <th>1 day ago</th>
                     <th>Today</th>
                     </thead>
                     <br>
                     <tr>
                     <td>Calories</td>
-                    <td>{{$previousTotalCalories[4]}}</td>
-                    <td>{{$previousTotalCalories[3]}}</td>
-                    <td>{{$previousTotalCalories[2]}}</td>
-                    <td>{{$previousTotalCalories[1]}}</td>
-                    <td>{{$previousTotalCalories[0]}}</td>
-                    <td>{{$todayTotalCalories}}</td>
+                @for($a = 4; $a >= 0; $a--)
+                    <td>{{$previousTotalCalories[$a]}} kcal</td>
+                @endfor
+                    <td>{{$todayTotalCalories}} kcal</td>
                     </tr>
                     <tr>                                
-                    @foreach($allNutrients as $nutrient)
+                    @foreach($nutrients as $nutrient)
                     <td>{{$nutrient->name}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][4]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][3]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][2]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][1]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][0]}}</td>
+                @for($a = 4; $a >= 0; $a--)
+                    <td>{{$previousNutrientTotals[$nutrient->id][$a]}} {{$nutrient->getUnits()}}</td>
+                @endfor
                     <td>{{$todayNutrientTotals[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
                     </tr>
                     @endforeach
