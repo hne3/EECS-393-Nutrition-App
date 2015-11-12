@@ -39,6 +39,23 @@ class FoodHistoryController extends Controller
     {
         $user = Auth::user();
         $foods = $user->getFoodHistory();
+        $nutrients = Nutrient::orderBy('name', 'ASC')->get();
+        $data = [];
+
+        //for calculating individual food nutrient values scaled by quantity
+        foreach($foods as $food) {
+            $allNutrients1 = $food->nutrients;
+            $foodid1 = $food->id;
+            $quantity1 = $food->pivot->quantity;
+            foreach($allNutrients1 as $nutrient) {
+                $data[$foodid1][$nutrient->id] = $nutrient->pivot->amount_in_food * ($quantity1)/100;
+            }
+            $otherNutrients = Nutrient::whereNotIn('id', $food->nutrients()->lists('nutrient_id')->toArray())->get();
+            foreach($otherNutrients as $nutrient)
+                $data[$foodid1][$nutrient->id] = 0;
+        }       
+
+        //for calculating daily total
         $todayTotalCalories = 0;
         $todayData = [];
         $todayNutrientTotals = [];
@@ -49,7 +66,6 @@ class FoodHistoryController extends Controller
         $previousTotalCalories = [];
         $previousNutrientTotals = [];
 
-        $nutrients = Nutrient::orderBy('name', 'ASC')->get();
         foreach ($nutrients as $nutrient) {
             $todayNutrientTotals[$nutrient->id] = 0;
             $previousNutrientTotals[$nutrient->id] = array_pad([], $numDays, 0); 
@@ -91,6 +107,6 @@ class FoodHistoryController extends Controller
             }
         }
         return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
-            'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals'));
+            'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals'));
     }
 }
