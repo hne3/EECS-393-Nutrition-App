@@ -111,36 +111,67 @@
 
             <div role="tabpanel" class="tab-pane" id="dailyNutrients">
             <table class="table">
-              <thead>               
-                <th>Nutrient</th>
-                @for($a = 5; $a > 1; $a--)
+              <td></td>
+              <td><table class="table">
+                <thead>               
+                  <th>Nutrient</th>
+                  @for($a = 5; $a > 1; $a--)
                     <th>{{$a}} days ago</th>
-                @endfor
-                    <th>1 day ago</th>
-                    <th>Today</th>
-                    </thead>
-                    <br>
-                    <tr>
-                    <td>Calories</td>
-                @for($a = 4; $a >= 0; $a--)
+                  @endfor
+                  <th>1 day ago</th>
+                  <th>Today</th>
+                </thead>
+              <tr>
+                  <td>Calories</td>
+                  @for($a = 4; $a >= 0; $a--)
                     <td>{{$previousTotalCalories[$a]}} kcal</td>
-                @endfor
-                    <td>{{$todayTotalCalories}} kcal</td>
-                    </tr>
-                    <tr>                                
-                    @foreach($nutrients as $nutrient)
+                  @endfor
+                  <td>{{$todayTotalCalories}} kcal</td>
+              </tr>
+              <tr>                                
+                  @foreach($nutrients as $nutrient)
                     <td>{{$nutrient->name}}</td>
-                @for($a = 4; $a >= 0; $a--)
+                  @for($a = 4; $a >= 0; $a--)
                     <td>{{$previousNutrientTotals[$nutrient->id][$a]}} {{$nutrient->getUnits()}}</td>
-                @endfor
+                  @endfor
                     <td>{{$todayNutrientTotals[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
-                    </tr>
-                    @endforeach
-              </table>
+              </tr>
+                  @endforeach
+                </table></td> <!-- ends left table -->
+
+                <td><table class="table">
+                  <thead>
+                    <th>Recommended</th>
+                  </thead>
+                  <tr><td>{{$vals->getRecommendedCalories()}} kcal</td></tr>
+                  <tr><td>{{$vals->getRecommendedCaffeine()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedCalcium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedCarbohydrates()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedCopper()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedFat()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedFiber()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedIron()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedMagnesium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedManganese()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedPhosphorus()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedPotassium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedProtein()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedSodium()}} mg</td></tr>  
+                  <tr><td>{{$vals->getRecommendedSugar()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminA()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminB12()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminB6()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminC()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminD()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminE()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminK()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedZinc()}} mg</td></tr>
+                </table></td> <!-- ends right table -->
+
+              </table> <!-- ends entire table -->
             </div> <!--ends tabpanel-->
 
             </div> <!--ends tab-content-->
-            dd($vals)
         </div>
         <br><br><br>
     </body>
