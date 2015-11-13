@@ -26,6 +26,10 @@ Route::get('/faq', function () {
   return view('faq');
 });
 
+Route::get('/about', function () {
+	return view('about');
+});
+
 Route::get('login', function () {
 	return view('/auth/login');
 });
@@ -48,6 +52,10 @@ Route::get('food',['uses'=>'FoodSearchController@index','as'=>'food_search',
 ]);
 
 Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
+	'middleware'=>'auth'
+]);
+
+Route::get('suggestion',['uses'=>'SuggestionController@index','as'=>'suggestion',
 	'middleware'=>'auth'
 ]);
 
