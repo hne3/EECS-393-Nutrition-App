@@ -51,6 +51,14 @@ Route::post('food',['uses'=>'FoodHistoryController@addFood','as'=>'addFood',
 	'middleware'=>'auth'
 ]);
 
+Route::get('favorites', ['uses'=>'FoodSearchController@favorites','as'=>'favoritesSearch',
+  'middleware'=>'auth'
+]);
+
+Route::post('favorites', ['uses'=>'FavoriteFoodController@addFavorite','as'=>'addFavorite',
+  'middleware'=>'auth'
+]);
+
 Route::get('history', ['middleware'=>'auth','uses'=>'FoodHistoryController@index','as'=>'foodhistory']);
 
 /*
