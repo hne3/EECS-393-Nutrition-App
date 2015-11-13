@@ -12,6 +12,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Route;
 use App\Nutrient;
+use App\RecommendedValue;
+use App\AgeRange;
 
 class FoodHistoryController extends Controller
 {
@@ -54,7 +56,9 @@ class FoodHistoryController extends Controller
             $otherNutrients = Nutrient::whereNotIn('id', $food->nutrients()->lists('nutrient_id')->toArray())->get();
             foreach($otherNutrients as $nutrient)
                 $data[$foodid1][$nutrient->id] = 0;
-        }       
+        } 
+
+        $vals = RecommendedValue::GetRecommendedValues($user);      
 
         //for calculating daily total
         $todayTotalCalories = 0;
@@ -108,6 +112,6 @@ class FoodHistoryController extends Controller
             }
         }
         return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
-            'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals'));
+            'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals', 'vals'));
     }
 }

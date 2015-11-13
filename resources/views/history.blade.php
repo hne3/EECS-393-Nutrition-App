@@ -140,6 +140,7 @@
             </div> <!--ends tabpanel-->
 
             </div> <!--ends tab-content-->
+            dd($vals)
         </div>
         <br><br><br>
     </body>
