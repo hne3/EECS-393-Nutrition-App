@@ -17,11 +17,9 @@ class FoodHistoryTest extends TestCase
         $user->gender = 'female';
         $user->weight = '110';
         $user->height = '60';
-        $user->age = '23';
-        $user->nuts = '0';
-        $user->seafood = '0';
-        $user->dairy = '0';
-        $user->chocolate = '0';
+        $ageTemp = new \Carbon\Carbon();
+        $ageTemp->addYear(-23);
+        $user->bdate = $ageTemp->toDateString();
         return $user;
     }
 
@@ -43,7 +41,7 @@ class FoodHistoryTest extends TestCase
     public function logFoodUnit(){
         $user = $this->spawnUser();
         $food = App\Food::SearchByName('apple')[0];
-        $user->addToFoodHistory($food, '1');
+        $user->addToFoodHistory($food, 1,1);
         return $user;
     }
 
