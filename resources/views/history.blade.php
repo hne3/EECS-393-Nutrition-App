@@ -3,182 +3,180 @@
 @section('content')
 <body onload="init()">
   <div class="container">
-    <div id="Tabs">
-      <div id="Content_Area">
 
-        <div class="jumbotron">
-          <h2>Your Food History</h2>
-        </div>
         <div>
-          <ul id="tabs">
-            <li><a href="#individualFoods">Individual Foods</a></li>
-            <li><a href="#dailyNutrients">Daily Nutrients</a></li>
+          <div class="text-center"><h3>Your Food History</div></h3>
+          <br>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#individualFoods" aria-controls="individualFoods" role="tab" data-toggle="tab" style="color:black">
+                Individual Foods</a></li>
+            <li role="presentation">
+              <a href="#dailyNutrients" aria-controls="dailyNutrients" role="tab" data-toggle="tab" style="color:black">
+                Daily Nutrients</a></li>
           </ul>
         </div>
 
         <br>
 
-        <div class="tabContent" id="individualFoods">
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="individualFoods">
           <table class="table">
             <thead>
               <td>Date</td>
-              <td>Quantity</td>
               <td>Food</td>
+              <td>Quantity</td>
               <td>Calories</td>
-              <td>Details</td>
+              <td>Your Rating</td>
+              <td></td><td></td>
+              <td></td>
             </thead>
             <br>
             <?php $i = 0;?>
             @foreach($foods as $food)
             <tr>
               <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-              <td>{{$food->pivot->quantity}}</td>
-              <td>{{$food->getName()}}</td>
-              <td>{{$food->actualCalories}}</td>
-              <td><a href="#" class="btn btn-default" data-toggle="collapse" data-target="#food{{$i}}">View
-                Details</a>
+              <td><a data-toggle="collapse" data-target="#food{{$i}}" 
+                style="color:black; text-decoration:none">{{$food->getName()}}</td>
+              <td>{{$food->pivot->quantity}} g</td>
+              <td>{{$food->actualCalories}} kcal</td>
+              <td>{{$food->pivot->rating}}</td>
+              <td></td><td></td>
               </tr>
               <tr>
-                <td colspan="5">
-                  <div class="accordian-body collapse" id="food{{$i}}">
-                    @foreach($nutrients->chunk(11) as $chunk)
-                    <table class="table table-responsive">
-                      <thead>
-                        @foreach($chunk as $nutrient)
-                        <th>{{$nutrient->name}}</th>
-                        @endforeach
-                      </thead>
-                      <tr>
-                        @foreach($chunk as $nutrient)
-                        <td>{{$nutrient->id}}</td>
-                        @endforeach
-                      </tr>
-                    </table>
-                    @endforeach
-                  </div>
-                </td>
-              </tr>
+              <td colspan="7">
+                    <div class="accordian-body collapse" id="food{{$i}}">
+                        <table class="table" style="background-color:#f6f6f6">
+                            <thead>
+                                <td><b>Caffeine</b></td>
+                                <td><b>Calcium</b></td>
+                                <td><b>Carbohydrates</b></td>
+                                <td><b>Copper</b></td>
+                                <td><b>Fat</b></td>
+                                <td><b>Fiber</b></td>
+                                <td><b>Iron</b></td>
+                                <td><b>Magnesium</b></td>
+                                <td><b>Manganese</b></td>
+                                <td><b>Phosphorus</b></td>
+                                <td><b>Potassium</b></td>
+                            </thead>
+                            <tr>
+                                <td>{{$data[$food->id][262]}} mg</td>
+                                <td>{{$data[$food->id][301]}} mg</td>
+                                <td>{{$data[$food->id][205]}} g</td>
+                                <td>{{$data[$food->id][312]}} mg</td>
+                                <td>{{$data[$food->id][204]}} g</td>
+                                <td>{{$data[$food->id][291]}} g</td>
+                                <td>{{$data[$food->id][303]}} mg</td>
+                                <td>{{$data[$food->id][304]}} mg</td>
+                                <td>{{$data[$food->id][315]}} mg</td>
+                                <td>{{$data[$food->id][305]}} mg</td>
+                                <td>{{$data[$food->id][306]}} mg</td>
+                            </tr>
+                            <br>
+                            <thead>
+                                <td><b>Protein</b></td>
+                                <td><b>Sodium</b></td>
+                                <td><b>Sugar</b></td>
+                                <td><b>Vitamin A</b></td>
+                                <td><b>Vitamin B12</b></td>
+                                <td><b>Vitamin B6</b></td>
+                                <td><b>Vitamin C</b></td>
+                                <td><b>Vitamin D</b></td>
+                                <td><b>Vitamin E</b></td>
+                                <td><b>Vitamin K</b></td>
+                                <td><b>Zinc</b></td>
+                            </thead>
+                            <tr>
+                                <td>{{$data[$food->id][203]}} g</td>
+                                <td>{{$data[$food->id][307]}} mg</td>
+                                <td>{{$data[$food->id][269]}} g</td>
+                                <td>{{$data[$food->id][320]}} ug</td>
+                                <td>{{$data[$food->id][578]}} ug</td>
+                                <td>{{$data[$food->id][415]}} mg</td>
+                                <td>{{$data[$food->id][401]}} mg</td>
+                                <td>{{$data[$food->id][328]}} ug</td>
+                                <td>{{$data[$food->id][323]}} mg</td>
+                                <td>{{$data[$food->id][430]}} ug</td>
+                                <td>{{$data[$food->id][309]}} mg</td>
+                            </tr>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
               <?php $i++; ?>
               @endforeach
             </table>
-          </div>
+          </div> 
 
-          <div class="tabContent" id="dailyNutrients">
+            <div role="tabpanel" class="tab-pane" id="dailyNutrients">
             <table class="table">
-              <thead>               
-                <th>Nutrient</th>
-                    <th>5 days ago</th>
-                    <th>4 days ago</th>
-                    <th>3 days ago</th>
-                    <th>2 days ago</th>
-                    <th>1 day ago</th>
-                    <th>Today</th>
-                    </thead>
-                    <br>
-                    <tr>
-                    <td>Calories</td>
-                    <td>{{$previousTotalCalories[4]}}</td>
-                    <td>{{$previousTotalCalories[3]}}</td>
-                    <td>{{$previousTotalCalories[2]}}</td>
-                    <td>{{$previousTotalCalories[1]}}</td>
-                    <td>{{$previousTotalCalories[0]}}</td>
-                    <td>{{$todayTotalCalories}}</td>
-                    </tr>
-                    <tr>                                
-                    @foreach($allNutrients as $nutrient)
+              <td></td>
+              <td><table class="table">
+                <thead>               
+                  <th>Nutrient</th>
+                  @for($a = 5; $a > 1; $a--)
+                    <th>{{$a}} days ago</th>
+                  @endfor
+                  <th>1 day ago</th>
+                  <th>Today</th>
+                </thead>
+              <tr>
+                  <td>Calories</td>
+                  @for($a = 4; $a >= 0; $a--)
+                    <td>{{$previousTotalCalories[$a]}} kcal</td>
+                  @endfor
+                  <td>{{$todayTotalCalories}} kcal</td>
+              </tr>
+              <tr>                                
+                  @foreach($nutrients as $nutrient)
                     <td>{{$nutrient->name}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][4]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][3]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][2]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][1]}}</td>
-                    <td>{{$previousNutrientTotals[$nutrient->id][0]}}</td>
+                  @for($a = 4; $a >= 0; $a--)
+                    <td>{{$previousNutrientTotals[$nutrient->id][$a]}} {{$nutrient->getUnits()}}</td>
+                  @endfor
                     <td>{{$todayNutrientTotals[$nutrient->id]}} {{$nutrient->getUnits()}}</td>
-                    </tr>
-                    @endforeach
-              </table>
-            </div>
-          </div>
+              </tr>
+                  @endforeach
+                </table></td> <!-- ends left table -->
+
+                <td><table class="table">
+                  <thead>
+                    <th>Recommended</th>
+                  </thead>
+                  <tr><td>{{$vals->getRecommendedCalories()}} kcal</td></tr>
+                  <tr><td>{{$vals->getRecommendedCaffeine()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedCalcium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedCarbohydrates()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedCopper()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedFat()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedFiber()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedIron()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedMagnesium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedManganese()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedPhosphorus()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedPotassium()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedProtein()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedSodium()}} mg</td></tr>  
+                  <tr><td>{{$vals->getRecommendedSugar()}} g</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminA()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminB12()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminB6()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminC()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminD()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminE()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminK()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedZinc()}} mg</td></tr>
+                </table></td> <!-- ends right table -->
+
+              </table> <!-- ends entire table -->
+            </div> <!--ends tabpanel-->
+
+            </div> <!--ends tab-content-->
         </div>
         <br><br><br>
-      </div>
     </body>
     @endsection
 
 
-    <style type="text/css">
-    ul#tabs { list-style-type: none; margin: 20px 0 0 0; padding: 0 0 -10px 0; }
-    ul#tabs li { display: inline; }
-    ul#tabs li a { color: #d3d3d3; background-color: #ffffff; border: 1px solid #c9c3ba; padding: 0.3em; text-decoration: none; }
-    ul#tabs li a:hover { background-color: #f1f0ee; }
-    ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold;}
-    div.tabContent { border: 0 0 10px 0 solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee;}
-    div.tabContent.hide { display: none; }
-    </style>
 
-    <script type="text/javascript">
-    var tabLinks = new Array();
-    var contentDivs = new Array();
-
-    function init() {
-
-      // Grab the tab links and content divs from the page
-      var tabListItems = document.getElementById('tabs').childNodes;
-      for ( var i = 0; i < tabListItems.length; i++ ) {
-        if ( tabListItems[i].nodeName == "LI" ) {
-          var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
-          var id = getHash( tabLink.getAttribute('href') );
-          tabLinks[id] = tabLink;
-          contentDivs[id] = document.getElementById( id );
-      }
-  }
-
-      // Assign onclick events to the tab links, and
-      // highlight the first tab
-      var i = 0;
-
-      for ( var id in tabLinks ) {
-        tabLinks[id].onclick = showTab;
-        tabLinks[id].onfocus = function() { this.blur() };
-        if ( i == 0 ) tabLinks[id].className = 'selected';
-        i++;
-    }
-
-      // Hide all content divs except the first
-      var i = 0;
-
-      for ( var id in contentDivs ) {
-        if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
-        i++;
-    }
-}
-
-function showTab() {
-  var selectedId = getHash( this.getAttribute('href') );
-
-      // Highlight the selected tab, and dim all others.
-      // Also show the selected content div, and hide all others.
-      for ( var id in contentDivs ) {
-        if ( id == selectedId ) {
-          tabLinks[id].className = 'selected';
-          contentDivs[id].className = 'tabContent';
-      } else {
-          tabLinks[id].className = '';
-          contentDivs[id].className = 'tabContent hide';
-      }
-  }
-
-      // Stop the browser following the link
-      return false;
-  }
-
-  function getFirstChildWithTagName( element, tagName ) {
-      for ( var i = 0; i < element.childNodes.length; i++ ) {
-        if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
-    }
-}
-
-function getHash( url ) {
-  var hashPos = url.lastIndexOf ( '#' );
-  return url.substring( hashPos + 1 );
-}
-    </script>
+    
