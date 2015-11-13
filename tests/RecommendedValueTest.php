@@ -105,11 +105,9 @@ class RecommendedValueTest extends TestCase
         $user->gender = 'female';
         $user->weight = '110';
         $user->height = '60';
-        $user->age = '23';
-        $user->nuts = '0';
-        $user->seafood = '0';
-        $user->dairy = '0';
-        $user->chocolate = '0';
+        $ageTemp = new \Carbon\Carbon();
+        $ageTemp->addYear(-23);
+        $user->bdate = $ageTemp->toDateString();
         return $user;
     }
 }

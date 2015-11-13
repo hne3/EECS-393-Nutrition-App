@@ -8,13 +8,15 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class RecommendedValue extends Model
 {
     public static function GetRecommendedValues(User $user)
     {
-        $ageRange = AgeRange::where('min_age','<=',$user->age)->where('max_age','>=',$user->age)->first();
+        $age = Carbon::Parse($user->bdate)->diffInYears();
+        $ageRange = AgeRange::where('min_age','<=',$age)->where('max_age','>=',$age)->first();
         $gender = ($user->gender == 0)?'M':'F';
         $results = RecommendedValue::where('age_range',$ageRange->id)->where('sex',$gender)->select('nutrient_id','daily_value','upper_limit')->get();
         return new RecommendedValues($results->toArray());

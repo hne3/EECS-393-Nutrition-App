@@ -48,13 +48,13 @@ class User extends Model implements AuthenticatableContract,
     }
 
     private function history(){
-        return $this->belongsToMany('App\Food','user_history')->withPivot('timestamp','quantity');
+        return $this->belongsToMany('App\Food','user_history')->withPivot('timestamp','quantity', 'rating');
     }
 
-    public function addToFoodHistory(Food $food, $quantity){
+    public function addToFoodHistory(Food $food, $quantity, $rating){
         $time = new Carbon();
         
-        $this->history()->save($food,['timestamp'=>$time,'quantity'=>$quantity]);
+        $this->history()->save($food,['timestamp'=>$time,'quantity'=>$quantity, 'rating'=>$rating]);
     }
 
     public function getFoodHistory(){
