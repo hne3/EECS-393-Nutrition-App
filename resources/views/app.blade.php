@@ -43,6 +43,10 @@
                     <li><a href="{{ url('/faq') }}">FAQ</a></li>
                     <li><a href="{{ url('/about') }}">About Us</a></li>
                 </ul>
+            @else
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/about') }}">About Us</a></li>
+                </ul>
             @endif
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
