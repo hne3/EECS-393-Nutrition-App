@@ -47,12 +47,12 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'bdate'=>'required|date',
-            'gender'=>'required|integer|in:0,1',
+            'gender'=>'required|integer|in:1,2',
             'daily_calories'=>'required|integer|min:0',
         ];
         $customMessages = [];
         foreach(Restriction::all() as $restr){
-            $rules['restriction'.$restr->id] = "required|integer|in:0,1";
+            $rules['restriction'.$restr->id] = "required|integer|in:1,2";
             $customMessages['restriction'.$restr->id.'.required'] = "A response to the ".$restr->display_name.' dietary restriction is required.';
         }
 
@@ -73,14 +73,14 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'bdate' => $data['bdate'],
-            'gender' => $data['gender'],
+            'gender' => $data['gender']-1,
             'daily_calories' => $data['daily_calories'],
         ];
         $user = User::create($data);
         $restrictions = Restriction::all();
         //cannot eat(0); can eat(1)
         foreach($restrictions as $restr){
-            if($dCopy['restriction'.$restr->id] == 1){
+            if($dCopy['restriction'.$restr->id]-1 == 1){
                 $user->addRestriction($restr);
             }
         }

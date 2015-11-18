@@ -69,14 +69,14 @@
                                 <label class="col-md-4 control-label">Gender</label>
 
                                 <div class="col-md-6 btn-group" data-toggle="buttons" role="group">
-                                    <label class="btn btn-default @if(old('gender') == 0) active @endif">
-                                        <input type="radio" role="radio" name="gender" value="0"
-                                               @if(old('gender') == 0) checked="checked" @endif>
-                                        Male
-                                    </label>
                                     <label class="btn btn-default @if(old('gender') == 1) active @endif">
                                         <input type="radio" role="radio" name="gender" value="1"
                                                @if(old('gender') == 1) checked="checked" @endif>
+                                        Male
+                                    </label>
+                                    <label class="btn btn-default @if(old('gender') == 2) active @endif">
+                                        <input type="radio" role="radio" name="gender" value="2"
+                                               @if(old('gender') == 2) checked="checked" @endif>
                                         Female
                                     </label>
                                 </div>
@@ -100,14 +100,14 @@
                                     <label class="col-md-4 control-label">{{$r->display_name}}</label>
 
                                     <div class="col-md-6 btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default @if(old('restriction'.$r->id) == 0) active @endif"><input
-                                                    type="radio" role="radio " name="restriction{{$r->id}}"
-                                                    value="0"
-                                                    @if(old('restriction'.$r->id) == 0) checked="checked" @endif>No</label>
                                         <label class="btn btn-default @if(old('restriction'.$r->id) == 1) active @endif"><input
-                                                    type="radio" role="radio" name="restriction{{$r->id}}"
+                                                    type="radio" role="radio " name="restriction{{$r->id}}"
                                                     value="1"
-                                                    @if(old('restriction'.$r->id) == 1) checked="checked" @endif>Yes</label>
+                                                    @if(old('restriction'.$r->id) == 1) checked="checked" @endif>No</label>
+                                        <label class="btn btn-default @if(old('restriction'.$r->id) == 2) active @endif"><input
+                                                    type="radio" role="radio" name="restriction{{$r->id}}"
+                                                    value="2"
+                                                    @if(old('restriction'.$r->id) == 2) checked="checked" @endif>Yes</label>
                                     </div>
                                 </div>
                             @endforeach

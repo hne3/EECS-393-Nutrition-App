@@ -41,15 +41,14 @@ class UserAuthTest extends TestCase
             ->type('useruser', 'password')
             ->type('useruser', 'password_confirmation')
             ->type($birthday->toDateTimeString(), 'bdate')
-            ->select('0', 'gender')
-            ->type('200', 'weight')
-            ->type('200', 'height');
+            ->select('1', 'gender')
+            ->type('2000', 'daily_calories');
         $map = [];
         $restrictions = Restriction::all();
         foreach ($restrictions as $restriction) {
             $val = round(mt_rand() / mt_getrandmax());
             $map[$restriction->id] = $val;
-            $this->type($val, 'restriction' . ($restriction->id + 1));
+            $this->type($val + 1, 'restriction' . ($restriction->id + 1));
         }
         $this->press('Register')
             ->seePageIs('/home');
@@ -59,9 +58,8 @@ class UserAuthTest extends TestCase
                 'name' => 'user1',
                 'email' => 'user1@case.edu',
                 'bdate' =>  $birthday->toDateString(),
-                'gender' => '0s',
-                'weight' => '200',
-                'height' => '200',
+                'gender' => '0',
+                'daily_calories' => '2000',
             ]);
         $user = \App\User::whereEmail('user1@case.edu')->first();
         foreach ($restrictions as $restriction) {
