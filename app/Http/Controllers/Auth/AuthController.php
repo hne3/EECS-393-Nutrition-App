@@ -48,8 +48,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
             'bdate'=>'required|date',
             'gender'=>'required|integer|in:0,1',
-            'weight'=>'required|integer|min:0',
-            'height'=>'required|integer|min:0'
+            'daily_calories'=>'required|integer|min:0',
         ];
         $customMessages = [];
         foreach(Restriction::all() as $restr){
@@ -75,8 +74,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'bdate' => $data['bdate'],
             'gender' => $data['gender'],
-            'weight' => $data['weight'],
-            'height' => $data['height']
+            'daily_calories' => $data['daily_calories'],
         ];
         $user = User::create($data);
         $restrictions = Restriction::all();

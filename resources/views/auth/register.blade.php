@@ -57,41 +57,40 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Birthdate</label>
+
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" name="bdate">
+                                    <input type="date" class="form-control" name="bdate" value="{{ old('bdate') }}">
                                 </div>
                             </div>
+
+                            <p>{{old('gender')}}</p>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Gender</label>
 
                                 <div class="col-md-6 btn-group" data-toggle="buttons" role="group">
-                                    <label class="btn btn-default">
-                                        <input type="radio" role="radio" name="gender" value="0">
+                                    <label class="btn btn-default @if(old('gender') == 0) active @endif">
+                                        <input type="radio" role="radio" name="gender" value="0"
+                                               @if(old('gender') == 0) checked="checked" @endif>
                                         Male
                                     </label>
-                                    <label class="btn btn-default">
-                                        <input type="radio" role="radio" name="gender" value="1">
+                                    <label class="btn btn-default @if(old('gender') == 1) active @endif">
+                                        <input type="radio" role="radio" name="gender" value="1"
+                                               @if(old('gender') == 1) checked="checked" @endif>
                                         Female
                                     </label>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Weight (lbs)</label>
+                                <label class="col-md-4 control-label">Daily Calorie Limit (kcal)</label>
 
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="weight">
+                                    <input type="number" class="form-control" name="daily_calories"
+                                           value="{{old('daily_calories')}}">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Height (in)</label>
-
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="height">
-                                </div>
-                            </div>
                             <h3 class="text-center">Dietary Restrictions</h3>
 
                             <p class="text-center">Do the following dietary restrictions apply to you?</p>
@@ -101,10 +100,14 @@
                                     <label class="col-md-4 control-label">{{$r->display_name}}</label>
 
                                     <div class="col-md-6 btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default"><input type="radio" role="radio "name="restriction{{$r->id}}"
-                                                                              value="0">No</label>
-                                        <label class="btn btn-default"><input type="radio" role="radio" name="restriction{{$r->id}}"
-                                                                              value="1">Yes</label>
+                                        <label class="btn btn-default @if(old('restriction'.$r->id) == 0) active @endif"><input
+                                                    type="radio" role="radio " name="restriction{{$r->id}}"
+                                                    value="0"
+                                                    @if(old('restriction'.$r->id) == 0) checked="checked" @endif>No</label>
+                                        <label class="btn btn-default @if(old('restriction'.$r->id) == 1) active @endif"><input
+                                                    type="radio" role="radio" name="restriction{{$r->id}}"
+                                                    value="1"
+                                                    @if(old('restriction'.$r->id) == 1) checked="checked" @endif>Yes</label>
                                     </div>
                                 </div>
                             @endforeach
