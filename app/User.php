@@ -83,7 +83,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function getFoodSuggestion(){
 
-$score = DB::raw('
+$score = \DB::select(\DB::raw('
 SELECT 
     foods.id as food_id, foods.name, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score,
     SUM(fn.amount_in_food / rem_nutr.remaining_val) as num, (2000 / foods.calories) as den
@@ -105,14 +105,14 @@ FROM
             INNER JOIN 
         (SELECT nutrient_id, daily_value
          FROM recommended_values
-         WHERE age_range = 2 AND sex = 'F') AS nutr ON nutr.nutrient_id = fn.nutrient_id
+         WHERE age_range = 2 AND sex = "F") AS nutr ON nutr.nutrient_id = fn.nutrient_id
     WHERE
         timestamp > DATE_SUB(NOW(), INTERVAL 24 HOUR)
             AND 
         users.id = 1
     GROUP BY 
         nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id 
-GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;')
+GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
 
         // $recommended = \DB::table('recommended_values')
         //         ->select('nutrient_id', 'daily_value')
@@ -138,6 +138,6 @@ GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;')
         //             ->groupBy('fn.nutrient_id')
         //             ->orderBy('score', 'desc');
 
-        return $score;
+        return $score[0];
     }
 }
