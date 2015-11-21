@@ -61,6 +61,10 @@ Route::get('suggestion',['uses'=>'SuggestionController@index','as'=>'suggestion'
 
 Route::get('history', ['middleware'=>'auth','uses'=>'FoodHistoryController@index','as'=>'foodhistory']);
 
+Route::get('map', function() {
+	return view('map');
+});
+
 /*
 //Login routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
