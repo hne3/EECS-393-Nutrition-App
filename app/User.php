@@ -83,10 +83,9 @@ class User extends Model implements AuthenticatableContract,
 
     public function getFoodSuggestion(){
 
-$score = \DB::select(\DB::raw('
+$foodSuggestion = \DB::select(\DB::raw('
 SELECT 
-    foods.id as food_id, foods.name, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score,
-    SUM(fn.amount_in_food / rem_nutr.remaining_val) as num, (2000 / foods.calories) as den
+    foods.*, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score
 FROM
     foods
         INNER JOIN
@@ -137,7 +136,9 @@ GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
         //             ->groupBy('foods.id')
         //             ->groupBy('fn.nutrient_id')
         //             ->orderBy('score', 'desc');
-
-        return $score[0];
+        
+        $random = rand(0, 500);
+        $foodReturn = Food::where('name', $foodSuggestion[$random]->name)->first();
+        return $foodReturn;
     }
 }
