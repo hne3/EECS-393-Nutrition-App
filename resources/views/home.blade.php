@@ -4,8 +4,9 @@
     <div class="container">
         <div class="jumbotron">
             <div class="text-center">
-                <h2><b>Welcome to Snackr!</b></h2>
-                <small><i>Effortless nutrition, every day</i></small>
+                <img src="img/altlogo.png" class="img-rounded" alt="Welcome to Snackr" width="700">
+                <br>
+                <img src="img/subtext.png" class="img-rounded" alt="Welcome to Snackr" width="450">
                 <br>
                 <br>
                 <a class="btn btn-snackr" href="{{route('food_search')}}">Start a food search></a>
