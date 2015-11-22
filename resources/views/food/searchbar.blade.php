@@ -22,7 +22,7 @@
     </div>
     <div class="col-sm-3">
         <br>
-        {!! Form::select('sort',['alpha'=>'Alphabetical','cal'=>'Low to High Calories'],$sort,['class'=>'form-control']) !!}
+        {!! Form::select('sort',['alpha'=>'Alphabetical','cal'=>'Low to High Calories','sugar'=>'Low to High Sugar','fat'=>'Low to High Fat'],$sort,['class'=>'form-control']) !!}
         <br><br>
     </div>
 </div>
