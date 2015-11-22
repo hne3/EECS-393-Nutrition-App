@@ -27,7 +27,7 @@ class FoodSearchController extends Controller
             $useRestrictions = 1;
         }
         if($query == null){
-            return view('food.index')->with(compact('method','query','useRestrictions'));
+            return view('food.index')->with(compact('method','query','useRestrictions','sort'));
         } else {
             $foods = null;
             $restrictions = [];
