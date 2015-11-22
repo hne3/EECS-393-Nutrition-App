@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Snackr</a>
+            <a class="navbar-brand" href="/home">Snackr</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             @if(Auth::check())
