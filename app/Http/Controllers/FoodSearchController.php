@@ -52,8 +52,11 @@ class FoodSearchController extends Controller
 
             if($sort == 'cal'){
                 $foods = $foods->sortBy('calories');}
-            //  else if($sort = 'sugar') {
-            //     $foods = $foods->sortBy($foods->getSugar());
+              else if($sort = 'sugar') {
+                  $foods = $foods->sortBy(function ($food) {
+                      return $food->getSugar();
+                  });
+              }
             // } else if($sort = 'fat') {
             //     $foods = $foods->sortBy($foods->getSugar());
             // } else {
