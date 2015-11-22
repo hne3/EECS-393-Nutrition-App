@@ -20,5 +20,10 @@
         {!! Form::select('restrictions',['1'=>'Use Dietary Restrictions','0'=>'Ignore Dietary Restrictions'],$useRestrictions,['class'=>'form-control']) !!}
         <br><br>
     </div>
+    <div class="col-sm-3">
+        <br>
+        {!! Form::select('sort',['alpha'=>'Alphabetical','cal'=>'Low to High Calories'],$sort,['class'=>'form-control']) !!}
+        <br><br>
+    </div>
 </div>
 {!! Form::close() !!}

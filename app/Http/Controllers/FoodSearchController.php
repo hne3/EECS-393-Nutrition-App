@@ -20,6 +20,7 @@ class FoodSearchController extends Controller
     public function index(Request $request)
     {
         $method = $request->get('method');
+        $sort = $request->get('sort');
         $query = $request->get('q');
         $useRestrictions = $request->get('restrictions');
         if($useRestrictions == null) {
@@ -48,8 +49,18 @@ class FoodSearchController extends Controller
             } else {
                 $foods = Food::SearchByName($query,$restrictions);
             }
-            return view('food.searchresults')->with(compact('foods','method','query','useRestrictions','fatUnits','carbUnits','proteinUnits'));
+
+            if($sort == 'cal'){
+                $foods = $foods->sortBy('calories');}
+            //  else if($sort = 'sugar') {
+            //     $foods = $foods->sortBy($foods->getSugar());
+            // } else if($sort = 'fat') {
+            //     $foods = $foods->sortBy($foods->getSugar());
+            // } else {
+            //     $foods = $foods->sortBy('name');
+            // }
+
+            return view('food.searchresults')->with(compact('foods','method','query','useRestrictions','fatUnits','carbUnits','proteinUnits','sort'));
         }
     }
-
 }
