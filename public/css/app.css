@@ -3047,6 +3047,52 @@ fieldset[disabled] a.btn {
     color: #d9534f;
     background-color: #fff; }
 
+.btn-snackr {
+  color: #FFFFFF;
+  background-color: #A663C7;
+  border-color: #130269;
+}
+
+.btn-snackr:hover,
+.btn-snackr:focus,
+.btn-snackr:active,
+.btn-snackr.active,
+.open .dropdown-toggle.btn-snackr {
+  color: #FFFFFF;
+  background-color: #49247A;
+  border-color: #130269;
+}
+
+.btn-snackr:active,
+.btn-snackr.active,
+.open .dropdown-toggle.btn-snackr {
+  background-image: none;
+}
+
+.btn-snackr.disabled,
+.btn-snackr[disabled],
+fieldset[disabled] .btn-snackr,
+.btn-snackr.disabled:hover,
+.btn-snackr[disabled]:hover,
+fieldset[disabled] .btn-snackr:hover,
+.btn-snackr.disabled:focus,
+.btn-snackr[disabled]:focus,
+fieldset[disabled] .btn-snackr:focus,
+.btn-snackr.disabled:active,
+.btn-snackr[disabled]:active,
+fieldset[disabled] .btn-snackr:active,
+.btn-snackr.disabled.active,
+.btn-snackr[disabled].active,
+fieldset[disabled] .btn-snackr.active {
+  background-color: #A663C7;
+  border-color: #130269;
+}
+
+.btn-snackr .badge {
+  color: #A663C7;
+  background-color: #FFFFFF;
+}
+
 .btn-link {
   color: #337ab7;
   font-weight: normal;
@@ -5720,6 +5766,8 @@ button.close {
 .visible-print {
   display: none !important; }
 
+
+
 @media print {
   .visible-print {
     display: block !important; }
@@ -5752,5 +5800,6 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+
 
 /*# sourceMappingURL=app.css.map */

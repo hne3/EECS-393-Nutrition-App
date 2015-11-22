@@ -8,10 +8,10 @@
                 <small><i>Effortless nutrition, every day</i></small>
                 <br>
                 <br>
-                <a class="btn btn-primary" href="{{route('food_search')}}">Start a food search></a>
+                <a class="btn btn-snackr" href="{{route('food_search')}}">Start a food search></a>
                 <br>
                 <br>
-                <a class="btn btn-primary" href="{{route('suggestion')}}">Get a food suggestion></a>
+                <a class="btn btn-snackr" href="{{route('suggestion')}}">Get a food suggestion></a>
                 <br>
                 <br>
                 <img src="img/aubergine.png" class="img-rounded" alt="Welcome to Snackr" width="155" height="236">
@@ -19,3 +19,4 @@
         </div>
     </div>
 @endsection
+
