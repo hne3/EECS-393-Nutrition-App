@@ -15,6 +15,7 @@ use App\Nutrient;
 use App\RecommendedValue;
 use App\RecommendedValues;
 use App\AgeRange;
+use Khill\Lavacharts\Lavacharts;
 
 class FoodHistoryController extends Controller
 {
@@ -102,7 +103,7 @@ class FoodHistoryController extends Controller
                 }
             } else if ($daysSinceEaten <= $numDays) {
                 //We want this many days worth of food data aggregated
-                $previousTotalCalories[$daysSinceEaten - 1] += $actualCalories;
+                $previousTotalCalories[$daysSinceEaten - 1] += $actualCalories;            
                 $allNutrients = $food->nutrients;
                 $quantity = $food->pivot->quantity;
                 foreach ($allNutrients as $nutrient) {
@@ -113,7 +114,20 @@ class FoodHistoryController extends Controller
                 //Ignore this. Ideally, we would filter the query to only return items that fall in the previous two categories.
             }
         }
+
+        //for creating graphs
+        $caloriesG = \Lava::DataTable();
+        $caloriesG ->addStringColumn('When')
+                   ->addNumberColumn('Calories (kcal)')
+                   ->addNumberColumn('Recommended');
+
+        $sugarFatG = \Lava::DataTable();
+        $sugarFatG ->addStringColumn('When')
+                   ->addNumberColumn('Sugar (g)')
+                   ->addNumberColumn('Fat (g)');
+
         return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
-            'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals', 'vals'));
+            'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals', 'vals',
+            'caloriesG', 'sugarFatG'));
     }
 }

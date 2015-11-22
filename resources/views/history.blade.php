@@ -14,6 +14,9 @@
             <li role="presentation">
               <a href="#dailyNutrients" aria-controls="dailyNutrients" role="tab" data-toggle="tab" style="color:black">
                 Daily Nutrients</a></li>
+            <li role="presentation">
+              <a href="#graphs" aria-controls="graphs" role="tab" data-toggle="tab" style="color:black">
+                Graphs</a></li>
           </ul>
         </div>
 
@@ -111,7 +114,6 @@
 
             <div role="tabpanel" class="tab-pane" id="dailyNutrients">
             <table class="table">
-              <td></td>
               <td><table class="table">
                 <thead>               
                   <th>Nutrient</th>
@@ -169,8 +171,30 @@
                 </table></td> <!-- ends right table -->
 
               </table> <!-- ends entire table -->
-            </div> <!--ends tabpanel-->
+            </div> <!--ends daily nutrients tabpanel-->
 
+            <div role="tabpanel" class="tab-pane" id="graphs">
+              <div id="calories_div" align="center"></div>
+              <?php 
+                $calChart = \Lava::LineChart('Calories')
+                          ->dataTable($caloriesG)
+                          ->title('Calories');
+                for($a = 4; $a >= 0; $a--) 
+                  $caloriesG ->addRow(array($a.' days ago', $previousTotalCalories[$a], $vals->getRecommendedCalories()));
+                $caloriesG ->addRow(array('Today', $todayTotalCalories, $vals->getRecommendedCalories()));
+                echo \Lava::render('LineChart', 'Calories', 'calories_div', array('width'=>100, 'height'=>100)); ?>
+<!--
+                <div id="sugar_div" align="center"></div>
+                <?php
+                  // $sfChart = \Lava::LineChart('Sugar and Fat')
+                  //          ->dataTable($sugarFatG)
+                  //          ->title('Sugar and Fat');
+                  // for($a = 4; $a >= 0; $a--)
+                  //   $sugarFatG ->addRow(array($a.' days ago', $previousNutrientTotals[269][$a], $vals->getRecommendedSugar()));
+                  // $sugarFatG ->addRow(array('Today', $todayNutrientTotals[269], $vals->getRecommendedSugar()));
+                  // echo \Lava::render('LineChart', 'Sugar', 'sugar_div', array('width'=>100, 'height'=>100));
+                ?>-->
+            </div> <!--ends graph tabpanel-->
             </div> <!--ends tab-content-->
         </div>
         <br><br><br>
