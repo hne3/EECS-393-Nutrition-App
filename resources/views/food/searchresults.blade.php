@@ -40,7 +40,7 @@
 
                 </tr>
                 <tr>
-                    <td colspan="7">
+                    <td colspan="7" class="hiddenRow">
                         <div class="accordion-body collapse" id="food{{$i}}">
                             <table class="table" style="background-color:#f6f6f6">
                                 <thead>

@@ -19,7 +19,7 @@ class RecommendedValue extends Model
         $ageRange = AgeRange::where('min_age','<=',$age)->where('max_age','>=',$age)->first();
         $gender = ($user->gender == 0)?'M':'F';
         $results = RecommendedValue::where('age_range',$ageRange->id)->where('sex',$gender)->select('nutrient_id','daily_value','upper_limit')->get();
-        return new RecommendedValues($results->toArray());
+        return new RecommendedValues($results->toArray(),$user->daily_calories);
     }
 }
 
@@ -27,13 +27,15 @@ class RecommendedValues
 {
     private $dailyInfo = [];
     private $upperLimits = [];
+    private $calories;
 
     /**
      * RecommendedValues constructor.
      * @param $data
      */
-    public function __construct($data)
+    public function __construct($data, $calories)
     {
+        $this->calories = $calories;
         foreach($data as $r){
             $this->dailyInfo[$r['nutrient_id']] = $r['daily_value'];
             $upperlimit = $r['upper_limit'];
@@ -49,10 +51,13 @@ class RecommendedValues
         }
     }
 
+    public function getRecommendedById($id){
+        return $this->dailyInfo[$id];
+    }
+
     public function getRecommendedCalories()
     {
-        //Unknown how calorie data is stored.
-        return null;
+        return $this->calories;
     }
 
     public function getRecommendedProtein()
