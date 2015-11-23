@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'bdate', 'gender', 'weight', 'height', 'nuts', 'seafood', 'dairy', 'chocolate'];
+    protected $fillable = ['name', 'email', 'password', 'bdate', 'gender', 'daily_calories'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -82,7 +82,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getFoodSuggestion(){
-
 $score = \DB::select(\DB::raw('
 SELECT 
     foods.id as food_id, foods.name, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score,

@@ -1,20 +1,19 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="text-center">
             <h3>Food Search</h3>
 
             <p></p>
             @include('food.searchbar')
         </div>
-        <br><br>
         <table class="table">
             <thead>
             <td></td>
             <td><b>Food (100 g)</td>
             <td><b>Calories</td>
-            <td><b>Rate and Eat</td>
+            <td><b><center>Rate and Eat</td>
             </thead>
             <?php $i = 0;?>
             @foreach($foods as $food)
@@ -27,9 +26,9 @@
                         {!! Form::open(['route'=>'addFood','method'=>'POST','class'=>'form-inline']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
                         {!! Form::select('rating', array('1'=>'1', '2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5'), 1,['class'=>'form-control', 'id'=>'rating']) !!}
-                        {!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams']) !!}
+                        {!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams', 'style'=>'width:70px']) !!}
                         {{--<style>#qu {--}}
-                                {{--width: 70px;--}}
+                                {{--width: 50px;--}}
                                 {{--height: 20px;--}}
                             {{--}</style>--}}
                         <button class="btn btn-default" type="submit" value="addToFoodHistory">
@@ -40,7 +39,7 @@
 
                 </tr>
                 <tr>
-                    <td colspan="7">
+                    <td colspan="7" class="hiddenRow">
                         <div class="accordion-body collapse" id="food{{$i}}">
                             <table class="table" style="background-color:#f6f6f6">
                                 <thead>

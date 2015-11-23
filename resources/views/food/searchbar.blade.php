@@ -1,4 +1,5 @@
 {!! Form::open(['route'=>'food_search','method'=>'GET']) !!}
+<div class="container-fluid">
 <div class="form-group">
     <div class="col-sm-7">
         <br>
@@ -25,5 +26,6 @@
         {!! Form::select('sort',['alpha'=>'Alphabetical','cal'=>'Low to High Calories','sugar'=>'Low to High Sugar','fat'=>'Low to High Fat'],$sort,['class'=>'form-control']) !!}
         <br><br>
     </div>
+</div>
 </div>
 {!! Form::close() !!}

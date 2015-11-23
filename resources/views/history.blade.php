@@ -2,7 +2,7 @@
 
 @section('content')
 <body>
-  <div class="container">
+  <div class="container-fluid">
 
         <div>
           <div class="text-center"><h3>Your Food History</div></h3>
@@ -23,94 +23,96 @@
         <br>
 
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="individualFoods">
-          <table class="table">
-            <thead>
-              <td>Date</td>
-              <td>Food</td>
-              <td>Quantity</td>
-              <td>Calories</td>
-              <td>Your Rating</td>
-              <td></td><td></td>
-              <td></td>
-            </thead>
-            <br>
-            <?php $i = 0;?>
-            @foreach($foods as $food)
-            <tr>
-              <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
-              <td><a data-toggle="collapse" data-target="#food{{$i}}" 
-                style="color:black; text-decoration:none">{{$food->getName()}}</td>
-              <td>{{$food->pivot->quantity}} g</td>
-              <td>{{$food->actualCalories}} kcal</td>
-              <td>{{$food->pivot->rating}}</td>
-              <td></td><td></td>
-              </tr>
-              <tr>
-              <td colspan="7">
-                    <div class="accordian-body collapse" id="food{{$i}}">
-                        <table class="table" style="background-color:#f6f6f6">
-                            <thead>
-                                <td><b>Caffeine</b></td>
-                                <td><b>Calcium</b></td>
-                                <td><b>Carbohydrates</b></td>
-                                <td><b>Copper</b></td>
-                                <td><b>Fat</b></td>
-                                <td><b>Fiber</b></td>
-                                <td><b>Iron</b></td>
-                                <td><b>Magnesium</b></td>
-                                <td><b>Manganese</b></td>
-                                <td><b>Phosphorus</b></td>
-                                <td><b>Potassium</b></td>
-                            </thead>
-                            <tr>
-                                <td>{{$data[$food->id][262]}} mg</td>
-                                <td>{{$data[$food->id][301]}} mg</td>
-                                <td>{{$data[$food->id][205]}} g</td>
-                                <td>{{$data[$food->id][312]}} mg</td>
-                                <td>{{$data[$food->id][204]}} g</td>
-                                <td>{{$data[$food->id][291]}} g</td>
-                                <td>{{$data[$food->id][303]}} mg</td>
-                                <td>{{$data[$food->id][304]}} mg</td>
-                                <td>{{$data[$food->id][315]}} mg</td>
-                                <td>{{$data[$food->id][305]}} mg</td>
-                                <td>{{$data[$food->id][306]}} mg</td>
-                            </tr>
-                            <br>
-                            <thead>
-                                <td><b>Protein</b></td>
-                                <td><b>Sodium</b></td>
-                                <td><b>Sugar</b></td>
-                                <td><b>Vitamin A</b></td>
-                                <td><b>Vitamin B12</b></td>
-                                <td><b>Vitamin B6</b></td>
-                                <td><b>Vitamin C</b></td>
-                                <td><b>Vitamin D</b></td>
-                                <td><b>Vitamin E</b></td>
-                                <td><b>Vitamin K</b></td>
-                                <td><b>Zinc</b></td>
-                            </thead>
-                            <tr>
-                                <td>{{$data[$food->id][203]}} g</td>
-                                <td>{{$data[$food->id][307]}} mg</td>
-                                <td>{{$data[$food->id][269]}} g</td>
-                                <td>{{$data[$food->id][320]}} ug</td>
-                                <td>{{$data[$food->id][578]}} ug</td>
-                                <td>{{$data[$food->id][415]}} mg</td>
-                                <td>{{$data[$food->id][401]}} mg</td>
-                                <td>{{$data[$food->id][328]}} ug</td>
-                                <td>{{$data[$food->id][323]}} mg</td>
-                                <td>{{$data[$food->id][430]}} ug</td>
-                                <td>{{$data[$food->id][309]}} mg</td>
-                            </tr>
-                        </table>
-                      </div>
-                    </td>
-                  </tr>
-              <?php $i++; ?>
-              @endforeach
-            </table>
-          </div> 
+            <div role="tabpanel" class="tab-pane active" id="individualFoods">
+                <table class="table">
+                    <thead>
+                    <td>Date</td>
+                    <td>Food</td>
+                    <td>Quantity</td>
+                    <td>Calories</td>
+                    <td>Your Rating</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </thead>
+                    <br>
+                    <?php $i = 0;?>
+                    @foreach($foods as $food)
+                        <tr>
+                            <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
+                            <td><a data-toggle="collapse" data-target="#food{{$i}}"
+                                   style="color:black; text-decoration:none">{{$food->getName()}}</td>
+                            <td>{{$food->pivot->quantity}} g</td>
+                            <td>{{$food->actualCalories}} kcal</td>
+                            <td>{{$food->pivot->rating}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div class="accordian-body collapse" id="food{{$i}}">
+                                    <table class="table" style="background-color:#f6f6f6">
+                                        <thead>
+                                        <td><b>Caffeine</b></td>
+                                        <td><b>Calcium</b></td>
+                                        <td><b>Carbohydrates</b></td>
+                                        <td><b>Copper</b></td>
+                                        <td><b>Fat</b></td>
+                                        <td><b>Fiber</b></td>
+                                        <td><b>Iron</b></td>
+                                        <td><b>Magnesium</b></td>
+                                        <td><b>Manganese</b></td>
+                                        <td><b>Phosphorus</b></td>
+                                        <td><b>Potassium</b></td>
+                                        </thead>
+                                        <tr>
+                                            <td>{{$data[$food->id][262]}} mg</td>
+                                            <td>{{$data[$food->id][301]}} mg</td>
+                                            <td>{{$data[$food->id][205]}} g</td>
+                                            <td>{{$data[$food->id][312]}} mg</td>
+                                            <td>{{$data[$food->id][204]}} g</td>
+                                            <td>{{$data[$food->id][291]}} g</td>
+                                            <td>{{$data[$food->id][303]}} mg</td>
+                                            <td>{{$data[$food->id][304]}} mg</td>
+                                            <td>{{$data[$food->id][315]}} mg</td>
+                                            <td>{{$data[$food->id][305]}} mg</td>
+                                            <td>{{$data[$food->id][306]}} mg</td>
+                                        </tr>
+                                        <br>
+                                        <thead>
+                                        <td><b>Protein</b></td>
+                                        <td><b>Sodium</b></td>
+                                        <td><b>Sugar</b></td>
+                                        <td><b>Vitamin A</b></td>
+                                        <td><b>Vitamin B12</b></td>
+                                        <td><b>Vitamin B6</b></td>
+                                        <td><b>Vitamin C</b></td>
+                                        <td><b>Vitamin D</b></td>
+                                        <td><b>Vitamin E</b></td>
+                                        <td><b>Vitamin K</b></td>
+                                        <td><b>Zinc</b></td>
+                                        </thead>
+                                        <tr>
+                                            <td>{{$data[$food->id][203]}} g</td>
+                                            <td>{{$data[$food->id][307]}} mg</td>
+                                            <td>{{$data[$food->id][269]}} g</td>
+                                            <td>{{$data[$food->id][320]}} ug</td>
+                                            <td>{{$data[$food->id][578]}} ug</td>
+                                            <td>{{$data[$food->id][415]}} mg</td>
+                                            <td>{{$data[$food->id][401]}} mg</td>
+                                            <td>{{$data[$food->id][328]}} ug</td>
+                                            <td>{{$data[$food->id][323]}} mg</td>
+                                            <td>{{$data[$food->id][430]}} ug</td>
+                                            <td>{{$data[$food->id][309]}} mg</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
+                    @endforeach
+                </table>
+            </div>
 
             <div role="tabpanel" class="tab-pane" id="dailyNutrients">
             <table class="table">
@@ -199,7 +201,7 @@
         </div>
         <br><br><br>
     </body>
-    @endsection
+@endsection
 
 
 
