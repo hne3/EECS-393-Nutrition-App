@@ -46,6 +46,7 @@ class FoodHistoryController extends Controller
         $foods = $user->getFoodHistory();
         $nutrients = Nutrient::orderBy('name', 'ASC')->get();
         $data = [];
+        $dailyCalories = $user->daily_calories;
 
         //for calculating individual food nutrient values scaled by quantity
         foreach($foods as $food) {
@@ -118,8 +119,7 @@ class FoodHistoryController extends Controller
         //for creating graphs
         $caloriesG = \Lava::DataTable();
         $caloriesG ->addStringColumn('When')
-                   ->addNumberColumn('Calories (kcal)')
-                   ->addNumberColumn('Recommended');
+                   ->addNumberColumn('Calories');
 
         $sugarFatG = \Lava::DataTable();
         $sugarFatG ->addStringColumn('When')
@@ -128,6 +128,6 @@ class FoodHistoryController extends Controller
 
         return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
             'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals', 'vals',
-            'caloriesG', 'sugarFatG'));
+            'dailyCalories', 'caloriesG', 'sugarFatG'));
     }
 }
