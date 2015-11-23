@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<body onload="init()">
+<body>
   <div class="container">
 
         <div>
@@ -15,7 +15,7 @@
               <a href="#dailyNutrients" aria-controls="dailyNutrients" role="tab" data-toggle="tab" style="color:black">
                 Daily Nutrients</a></li>
             <li role="presentation">
-              <a href="#graphs" aria-controls="graphs" role="tab" data-toggle="tab" style="color:black">
+              <a href="#graphs" aria-controls="graphs" role="tab" data-toggle="tab" style="color:black" onclick="setTimeout(function(){lava.charts.LineChart.Calories.redraw()},2);">
                 Graphs</a></li>
           </ul>
         </div>
@@ -182,7 +182,7 @@
                 for($a = 4; $a >= 0; $a--) 
                   $caloriesG ->addRow(array($a.' days ago', $previousTotalCalories[$a], $vals->getRecommendedCalories()));
                 $caloriesG ->addRow(array('Today', $todayTotalCalories, $vals->getRecommendedCalories()));
-                echo \Lava::render('LineChart', 'Calories', 'calories_div', array('width'=>100, 'height'=>100)); ?>
+                echo \Lava::render('LineChart', 'Calories', 'calories_div'); ?>
 <!--
                 <div id="sugar_div" align="center"></div>
                 <?php
