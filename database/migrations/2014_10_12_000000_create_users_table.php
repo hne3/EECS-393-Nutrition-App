@@ -22,8 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->date('bdate');
             $table->boolean('gender');
-            $table->integer('weight');
-            $table->integer('height');
+            $table->integer('daily_calories');
         });
     }
 
