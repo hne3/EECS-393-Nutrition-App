@@ -10,7 +10,7 @@
             <thead>
             <td><b>Food</td>
             <td><b>Calories (per 100g)</td>
-            <td><b>Quantity</td>
+            <td><b>Eat</td>
             <td></td>
             </thead>
             <br>
@@ -18,11 +18,12 @@
                     <td>{{$food->getName()}}</td>
                     <td>{{$food->getCalories()}} kcal</td>
                     <td>
-                        {!! Form::open(['route'=>'addFood','method'=>'POST']) !!}
+                        {!! Form::open(['route'=>'addFood','method'=>'POST', 'class'=>'form-inline']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
-                        {!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams']) !!}
-                        <style>#qu{width:70px; height:20px;}</style></td> 
-                    <td><button class="btn btn-default btn-xs" type="submit" value="addToFoodHistory">
+                        {!! Form::select('rating', array('1'=>'1', '2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5'), 1,['class'=>'form-control', 'id'=>'rating']) !!}
+                        {!! Form::text('quantity', null, ['class'=>'form-control','required', 'id'=>'qu', 'placeholder'=>'grams', 'style'=>'width:70px']) !!}
+                    
+                    <button class="btn btn-default" type="submit" value="addToFoodHistory">
                         Eat now</button>{!! Form::close() !!}</td>
                 </tr>
                 <tr>
@@ -92,7 +93,7 @@
             </thead>
         </table>
         <div style="text-align:center">
-        <a class="btn btn-default" href="{{route('suggestion')}}">Get another suggestion</a>
+        <a class="btn btn-snackr" href="{{route('suggestion')}}">Get another suggestion</a>
         </div> 
     </div>
 @endsection

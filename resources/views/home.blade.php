@@ -38,6 +38,7 @@
         <style>
         .faq > .question{
             font-size:18px;
+            color: #8D1E93;
         }
         .faq > .answer{
             font-size:15px;

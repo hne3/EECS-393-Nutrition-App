@@ -21,7 +21,7 @@
             <div class="row text-center" style="padding-left:70px; padding-right:70px">
             <p class="faq">
               <span class="question">What is Snackr?</span><br>
-              <span class="answer">Snackr is personal nutrition tracker with a smart food discovery tool.</span>
+              <span class="answer">Snackr is a personal nutrition tracker with a smart food discovery tool.</span>
             </p>
             <p class="faq">
               <span class="question">Why should I use Snackr?</span><br>
@@ -40,6 +40,7 @@
         <style>
         .faq > .question{
             font-size:18px;
+            color: #8D1E93;
         }
         .faq > .answer{
             font-size:15px;
