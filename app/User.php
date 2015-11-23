@@ -82,7 +82,9 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function getFoodSuggestion(){
-
+        $age = Carbon::Parse($this->bdate)->diffInYears();
+        $ageRange = AgeRange::where('min_age','<=',$age)->where('max_age','>=',$age)->first();
+        $gender = ($this->gender == 1)?'F':'M';
 $foodSuggestion = \DB::select(\DB::raw('
 SELECT 
     foods.*, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score
@@ -104,11 +106,11 @@ FROM
             INNER JOIN 
         (SELECT nutrient_id, daily_value
          FROM recommended_values
-         WHERE age_range = 2 AND sex = "F") AS nutr ON nutr.nutrient_id = fn.nutrient_id
+         WHERE age_range = '.$ageRange->id.' AND sex = \''.$gender.'\') AS nutr ON nutr.nutrient_id = fn.nutrient_id
     WHERE
         timestamp > DATE_SUB(NOW(), INTERVAL 24 HOUR)
             AND 
-        users.id = 1
+        users.id = '.$this->id.'
     GROUP BY 
         nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id 
 GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
@@ -137,7 +139,7 @@ GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
         //             ->groupBy('fn.nutrient_id')
         //             ->orderBy('score', 'desc');
         
-        $random = rand(0, 500);
+        $random = rand(0, 200);
         $foodReturn = Food::where('name', $foodSuggestion[$random]->name)->first();
         return $foodReturn;
     }
