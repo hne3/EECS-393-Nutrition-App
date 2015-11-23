@@ -40,7 +40,7 @@ Route::get('/register', function () {
 
 Route::get('/logout', function () {
 	Auth::logout();
-	return 'You have successfully logged out.';
+	return redirect('home');
 });
 
 Route::get('/home', function () {

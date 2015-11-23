@@ -42,16 +42,12 @@
                 </a>
             </li>
             @if (Auth::guest())
-                <li><a href="{{ url('/auth/login') }}">Login</a></li>
-                <li><a href="{{ url('/auth/register') }}">Register</a></li>
             @else
                 <li class="sidebar-brand">{{ Auth::user()->name }}</li>
                 <li><a href="{{ url('/suggestion') }}">Food Suggestion</a></li>
                 <li><a href="{{ url('/food') }}">Food Search</a></li>
                 <li><a href="{{ url('/history') }}">Food History</a></li>
             @endif
-            <li><a href="{{ url('/faq') }}">FAQ</a></li>
-            <li><a href="{{ url('/about') }}">About Us</a></li>
             @if(Auth::check())
                 <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
             @endif
@@ -60,13 +56,14 @@
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
+    <div id="page"><style>#page{padding: 20px 20px 50px 20px; max-width: 1500px;}</style>
     @yield('content')
+    </div>
 </div>
 <!-- /#wrapper -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="{{ asset('/js/faq.js') }}"></script>
 
 <!-- Menu Toggle Script -->
 <script>

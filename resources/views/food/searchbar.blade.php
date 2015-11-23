@@ -1,4 +1,5 @@
 {!! Form::open(['route'=>'food_search','method'=>'GET']) !!}
+<div class="container-fluid">
 <div class="form-group">
     <div class="col-sm-7">
         <br>
@@ -20,5 +21,6 @@
         {!! Form::select('restrictions',['1'=>'Use Dietary Restrictions','0'=>'Ignore Dietary Restrictions'],$useRestrictions,['class'=>'form-control']) !!}
         <br><br>
     </div>
+</div>
 </div>
 {!! Form::close() !!}

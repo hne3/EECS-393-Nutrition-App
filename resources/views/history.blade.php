@@ -2,7 +2,7 @@
 
 @section('content')
     <body>
-    <div class="container">
+    <div class="container-fluid">
 
         <div>
             <div class="text-center"><h3>Your Food History</div>
@@ -149,6 +149,7 @@
         </div> <!--ends tab-content-->
     </div>
     <br><br><br>
+
     </body>
 @endsection
 
