@@ -126,8 +126,30 @@ class FoodHistoryController extends Controller
                    ->addNumberColumn('Sugar (g)')
                    ->addNumberColumn('Fat (g)');
 
+        $mineralsG = \Lava::DataTable();
+        $mineralsG ->addStringColumn('When')
+                   ->addNumberColumn('Calcium')
+                   ->addNumberColumn('Copper')
+                   ->addNumberColumn('Iron')
+                   ->addNumberColumn('Magnesium')
+                   ->addNumberColumn('Manganese')
+                   ->addNumberColumn('Phosphorus')
+                   ->addNumberColumn('Potassium')
+                   ->addNumberColumn('Sodium')
+                   ->addNumberColumn('Zinc');
+
+        $vitaminsG = \Lava::DataTable();
+        $vitaminsG ->addStringColumn('When')
+                   ->addNumberColumn('Vitamin A')
+                   ->addNumberColumn('Vitamin B12')
+                   ->addNumberColumn('Vitamin B6')
+                   ->addNumberColumn('Vitamin C')
+                   ->addNumberColumn('Vitamin D')
+                   ->addNumberColumn('Vitamin E')
+                   ->addNumberColumn('Vitamin K');
+
         return view('history')->with(compact('foods', 'dates', 'todayTotalCalories', 'data', 'total', 'nutrients', 
             'allNutrients1', 'allNutrients', 'todayNutrientTotals', 'previousTotalCalories', 'previousNutrientTotals', 'vals',
-            'dailyCalories', 'caloriesG', 'sugarFatG'));
+            'dailyCalories', 'caloriesG', 'sugarFatG', 'mineralsG', 'vitaminsG'));
     }
 }

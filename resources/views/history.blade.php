@@ -18,7 +18,9 @@
               <a href="#graphs" aria-controls="graphs" role="tab" data-toggle="tab" style="color:black" onclick="setTimeout(
               function(){
               lava.charts.LineChart.Calories.redraw();
-              lava.charts.LineChart.[\"Sugar and Fat\"].redraw();},2);">
+              lava.charts.LineChart['Sugar and Fat'].redraw();
+              lava.charts.LineChart.Minerals.redraw();
+              lava.charts.LineChart.Vitamins.redraw();},2);">
                 Graphs</a></li>
           </ul>
         </div>
@@ -42,7 +44,7 @@
                     <?php $i = 0;?>
                     @foreach($foods as $food)
                         <tr>
-                            <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->toDayDateTimeString()}}</td>
+                            <td>{{\Carbon\Carbon::Parse($food->pivot->timestamp)->setTimeZone("EST")->toDayDateTimeString()}}</td>
                             <td><a data-toggle="collapse" data-target="#food{{$i}}"
                                    style="color:black; text-decoration:none">{{$food->getName()}}</td>
                             <td>{{$food->pivot->quantity}} g</td>
@@ -179,17 +181,18 @@
             </div> <!--ends daily nutrients tabpanel-->
 
             <div role="tabpanel" class="tab-pane" id="graphs">
-              <div id="calories_div" align="center"></div>
+              <div id="calories_div" align="center" style="height:400px; width: 950px; padding-left: 0px">
               <?php 
                 $calChart = \Lava::LineChart('Calories')
                           ->dataTable($caloriesG)
-                          ->title('Calories');
+                          ->title('Percent of Daily Calories Fulfilled');
                 for($a = 4; $a >= 0; $a--) 
                   $caloriesG ->addRow(array($a.' days ago', $previousTotalCalories[$a] * 100/$dailyCalories));
                 $caloriesG ->addRow(array('Today', $todayTotalCalories * 100/$dailyCalories));
                 echo \Lava::render('LineChart', 'Calories', 'calories_div'); ?>
+              </div>
 
-                <div id="sugarfat_div" align="center"></div>
+                <div id="sugarfat_div" align="center" style="height:400px; width: 950px; padding-left: 0px">
                 <?php
                   $sfChart = \Lava::LineChart('Sugar and Fat')
                            ->dataTable($sugarFatG)
@@ -197,9 +200,62 @@
                   for($a = 4; $a >= 0; $a--)
                     $sugarFatG ->addRow(array($a.' days ago', $previousNutrientTotals[269][$a], $previousNutrientTotals[204][$a]));
                   $sugarFatG ->addRow(array('Today', $todayNutrientTotals[269], $todayNutrientTotals[204]));
-                  echo \Lava::render('LineChart', 'Sugar and Fat', 'sugarfat_div', array('width'=>100, 'height'=>100));
-                ?>
+                  echo \Lava::render('LineChart', 'Sugar and Fat', 'sugarfat_div');
+                ?></div>
 
+                <div id="minerals_div" align="center" style="height:400px; width: 950px; padding-left: 0px">
+                <?php
+                  $mineralsChart = \Lava::LineChart('Minerals')
+                                 ->dataTable($mineralsG)
+                                 ->title('Percent of Daily Minerals Fulfilled');
+                  for($a = 4; $a >= 0; $a--)
+                    $mineralsG ->addRow(array($a.' days ago', 
+                      $previousNutrientTotals[301][$a] * 100/$vals->getRecommendedCalcium(),
+                      $previousNutrientTotals[312][$a] * 100/$vals->getRecommendedCopper(),
+                      $previousNutrientTotals[303][$a] * 100/$vals->getRecommendedIron(),
+                      $previousNutrientTotals[304][$a] * 100/$vals->getRecommendedMagnesium(),
+                      $previousNutrientTotals[315][$a] * 100/$vals->getRecommendedManganese(),
+                      $previousNutrientTotals[305][$a] * 100/$vals->getRecommendedPhosphorus(),
+                      $previousNutrientTotals[306][$a] * 100/$vals->getRecommendedPotassium(),
+                      $previousNutrientTotals[307][$a] * 100/$vals->getRecommendedSodium(),
+                      $previousNutrientTotals[309][$a] * 100/$vals->getRecommendedZinc()));
+                  $mineralsG ->addRow(array('Today', 
+                      $todayNutrientTotals[301] * 100/$vals->getRecommendedCalcium(),
+                      $todayNutrientTotals[312] * 100/$vals->getRecommendedCopper(),
+                      $todayNutrientTotals[303] * 100/$vals->getRecommendedIron(),
+                      $todayNutrientTotals[304] * 100/$vals->getRecommendedMagnesium(),
+                      $todayNutrientTotals[315] * 100/$vals->getRecommendedManganese(),
+                      $todayNutrientTotals[305] * 100/$vals->getRecommendedPhosphorus(),
+                      $todayNutrientTotals[306] * 100/$vals->getRecommendedPotassium(),
+                      $todayNutrientTotals[307] * 100/$vals->getRecommendedSodium(),
+                      $todayNutrientTotals[309] * 100/$vals->getRecommendedZinc()));
+                  echo \Lava::render('LineChart', 'Minerals', 'minerals_div');
+                ?></div>
+
+                <div id="vitamins_div" align="center" style="height:400px; width: 950px; padding-left: 0px">
+                <?php
+                  $vitaminsChart = \Lava::LineChart('Vitamins')
+                                 ->dataTable($vitaminsG)
+                                 ->title('Percent of Daily Vitamins Fulfilled');
+                  for($a = 4; $a >= 0; $a--)
+                    $vitaminsG ->addRow(array($a.' days ago', 
+                      $previousNutrientTotals[320][$a] * 100/$vals->getRecommendedVitaminA(),
+                      $previousNutrientTotals[578][$a] * 100/$vals->getRecommendedVitaminB12(),
+                      $previousNutrientTotals[415][$a] * 100/$vals->getRecommendedVitaminB6(),
+                      $previousNutrientTotals[401][$a] * 100/$vals->getRecommendedVitaminC(),
+                      $previousNutrientTotals[328][$a] * 100/$vals->getRecommendedVitaminD(),
+                      $previousNutrientTotals[323][$a] * 100/$vals->getRecommendedVitaminE(),
+                      $previousNutrientTotals[430][$a] * 100/$vals->getRecommendedVitaminK()));
+                  $vitaminsG ->addRow(array('Today', 
+                      $todayNutrientTotals[320] * 100/$vals->getRecommendedVitaminA(),
+                      $todayNutrientTotals[578] * 100/$vals->getRecommendedVitaminB12(),
+                      $todayNutrientTotals[415] * 100/$vals->getRecommendedVitaminB6(),
+                      $todayNutrientTotals[401] * 100/$vals->getRecommendedVitaminC(),
+                      $todayNutrientTotals[328] * 100/$vals->getRecommendedVitaminD(),
+                      $todayNutrientTotals[323] * 100/$vals->getRecommendedVitaminE(),
+                      $todayNutrientTotals[430] * 100/$vals->getRecommendedVitaminK()));
+                  echo \Lava::render('LineChart', 'Vitamins', 'vitamins_div');
+                ?></div>
             </div> <!--ends graph tabpanel-->
             </div> <!--ends tab-content-->
         </div>

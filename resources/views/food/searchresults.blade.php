@@ -13,7 +13,7 @@
             <td></td>
             <td><b>Food (100 g)</td>
             <td><b>Calories</td>
-            <td><b><center>Rate and Eat</td>
+            <td><b>Rate and Eat</td>
             </thead>
             <?php $i = 0;?>
             @foreach($foods as $food)
