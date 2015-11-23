@@ -46,6 +46,7 @@
                 <li class="sidebar-brand">{{ Auth::user()->name }}</li>
                 <li><a href="{{ url('/suggestion') }}">Food Suggestion</a></li>
                 <li><a href="{{ url('/food') }}">Food Search</a></li>
+                <li><a href="{{ url('/map') }}">Nearby Food</a></li>
                 <li><a href="{{ url('/history') }}">Food History</a></li>
             @endif
 
