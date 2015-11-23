@@ -112,9 +112,8 @@ FROM
             AND 
         users.id = '.$this->id.'
     GROUP BY 
-        nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id 
+        nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id  and foods.id not in (select food_id from food_restriction as fr inner join restriction_user as ru on ru.restriction_id = fr.restriction_id where user_id = \'.$this->id.\')
 GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
-
         // $recommended = \DB::table('recommended_values')
         //         ->select('nutrient_id', 'daily_value')
         //         ->where('age_range', '=', 2)        //get user's age range

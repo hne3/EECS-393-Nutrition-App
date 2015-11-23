@@ -10,10 +10,15 @@
         </div>
         <table class="table">
             <thead>
-            <td></td>
-            <td><b>Food (100 g)</td>
-            <td><b>Calories</td>
-            <td><b>Eat</td>
+            <th></th>
+            <th>Food (100 g)</th>
+            <th>Calories</th>
+            @if($sort == 'sugar')
+                <th>Sugar</th>
+                @elseif($sort == 'fat')
+                <th>Fat</th>
+                @endif
+            <th><b>Eat</b></th>
             </thead>
             <?php $i = 0;?>
             @foreach($foods as $food)
@@ -22,6 +27,11 @@
                     <td><a data-toggle="collapse" data-target="#food{{$i}}"
                            style="color:black; text-decoration:none">{{$food->getName()}}</a></td>
                     <td>{{$food->getCalories()}} kcal</td>
+                    @if($sort == 'sugar')
+                        <td>{{$food->getSugar()}} {{\App\Nutrient::Sugar()->getUnits()}}</td>
+                        @elseif($sort == 'fat')
+                        <td>{{$food->getFat()}} {{\App\Nutrient::Fat()->getUnits()}}</td>
+                    @endif
                     <td>
                         {!! Form::open(['route'=>'addFood','method'=>'POST','class'=>'form-inline']) !!}
                         {!! Form::hidden('foodid',$food->id)!!}
