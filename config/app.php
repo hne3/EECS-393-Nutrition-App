@@ -146,7 +146,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Khill\Lavacharts\Laravel\LavaChartsServiceProvider::class
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
 
     ],
 
@@ -201,7 +201,7 @@ return [
         'HTML'=> Illuminate\Html\HtmlFacade::class,
 
         'Flash' => Laracasts\Flash\FlashServiceProvider::class,
-        'Lava'  => Khill\Lavacharts\Laravel\LavaChartsServiceProvider::class
+        'Lava'  => Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
 
     ],
 
