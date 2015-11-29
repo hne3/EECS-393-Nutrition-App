@@ -85,6 +85,30 @@ class User extends Model implements AuthenticatableContract,
         $age = Carbon::Parse($this->bdate)->diffInYears();
         $ageRange = AgeRange::where('min_age','<=',$age)->where('max_age','>=',$age)->first();
         $gender = ($this->gender == 1)?'F':'M';
+        if($this->getFoodHistory()->first() == null){
+            $foodSuggestion = \DB::select(\DB::raw('
+SELECT 
+    foods.*, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score
+FROM
+    foods
+        INNER JOIN
+    food_nutrient AS fn ON foods.id = fn.food_id
+        INNER JOIN   
+    (SELECT 
+        users.id, daily_value AS remaining_val, nutrient_id
+    FROM
+        users
+            INNER JOIN 
+        recommended_values
+    WHERE
+        users.id = '.$this->id.' 
+            AND 
+        recommended_values.age_range = '.$ageRange->id.' AND recommended_values.sex = \''.$gender.'\'
+    GROUP BY 
+        nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id  and foods.id not in (select food_id from food_restriction as fr inner join restriction_user as ru on ru.restriction_id = fr.restriction_id where user_id = \'.$this->id.\')
+GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
+        }
+        else {
 $foodSuggestion = \DB::select(\DB::raw('
 SELECT 
     foods.*, SUM(fn.amount_in_food / rem_nutr.remaining_val) / (2000 / foods.calories) as score
@@ -114,29 +138,8 @@ FROM
     GROUP BY 
         nutrient_id) AS rem_nutr ON rem_nutr.nutrient_id = fn.nutrient_id  and foods.id not in (select food_id from food_restriction as fr inner join restriction_user as ru on ru.restriction_id = fr.restriction_id where user_id = \'.$this->id.\')
 GROUP BY foods.id order by score DESC, foods.id, fn.nutrient_id;'));
-        // $recommended = \DB::table('recommended_values')
-        //         ->select('nutrient_id', 'daily_value')
-        //         ->where('age_range', '=', 2)        //get user's age range
-        //         ->where('sex', '=', 'F');            //get user's gender
+        }
 
-        // $user_rec = \DB::table('users')
-        //         ->join('user_history as uh', 'users.id', '=', 'uh.user_id')
-        //         ->join('food_nutrient as fn', 'fn.food_id', '=', 'uh.food_id')
-        //         ->join($recommended->toSql().' as nutr', 'nutr.nutrient_id', '=', 'fn.nutrient_id')
-        //         ->select('users.id', 'fn.nutrient_id', 
-        //             'nutr.daily_value - SUM((quantity * amount_in_food / 100)) as remaining_val')
-        //         ->where('timestamp', '>', 'strtotime(date(Y-m-d) -1 day') 
-        //             ->where('users.id', '=', 1)
-        //             ->groupBy('nutrient_id');
-
-        // $score = \DB::table('foods')
-        //             ->join('food_nutrient as fn', 'foods.id', '=', 'fn.food_id')
-        //             ->join($user_rec->toSql().' as rem_nutr', 'rem_nutr.nutrient_id', '=', 'fn.nutrient_id')
-        //             ->select('foods.id as food_id', 'foods.name', 
-        //                 DB::raw('SUM(fn.amount_in_food/rem_nutr.remaining_val)/(2000/foods.calories) as score'))
-        //             ->groupBy('foods.id')
-        //             ->groupBy('fn.nutrient_id')
-        //             ->orderBy('score', 'desc');
         $random = rand(0, 200);
         $foodReturn = Food::where('name', $foodSuggestion[$random]->name)->first();
         return $foodReturn;

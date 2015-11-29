@@ -187,7 +187,7 @@
                           ->dataTable($caloriesG)
                           ->title('Percent of Daily Calories Fulfilled');
                 for($a = 4; $a >= 0; $a--) 
-                  $caloriesG ->addRow(array($a.' days ago', $previousTotalCalories[$a] * 100/$dailyCalories));
+                  $caloriesG ->addRow(array(($a+1).' days ago', $previousTotalCalories[$a] * 100/$dailyCalories));
                 $caloriesG ->addRow(array('Today', $todayTotalCalories * 100/$dailyCalories));
                 echo \Lava::render('LineChart', 'Calories', 'calories_div'); ?>
               </div>
@@ -198,7 +198,7 @@
                            ->dataTable($sugarFatG)
                            ->title('Sugar and Fat');
                   for($a = 4; $a >= 0; $a--)
-                    $sugarFatG ->addRow(array($a.' days ago', $previousNutrientTotals[269][$a], $previousNutrientTotals[204][$a]));
+                    $sugarFatG ->addRow(array(($a+1).' days ago', $previousNutrientTotals[269][$a], $previousNutrientTotals[204][$a]));
                   $sugarFatG ->addRow(array('Today', $todayNutrientTotals[269], $todayNutrientTotals[204]));
                   echo \Lava::render('LineChart', 'Sugar and Fat', 'sugarfat_div');
                 ?></div>
@@ -209,7 +209,7 @@
                                  ->dataTable($mineralsG)
                                  ->title('Percent of Daily Minerals Fulfilled');
                   for($a = 4; $a >= 0; $a--)
-                    $mineralsG ->addRow(array($a.' days ago', 
+                    $mineralsG ->addRow(array(($a+1).' days ago', 
                       $previousNutrientTotals[301][$a] * 100/$vals->getRecommendedCalcium(),
                       $previousNutrientTotals[312][$a] * 100/$vals->getRecommendedCopper(),
                       $previousNutrientTotals[303][$a] * 100/$vals->getRecommendedIron(),
@@ -238,7 +238,7 @@
                                  ->dataTable($vitaminsG)
                                  ->title('Percent of Daily Vitamins Fulfilled');
                   for($a = 4; $a >= 0; $a--)
-                    $vitaminsG ->addRow(array($a.' days ago', 
+                    $vitaminsG ->addRow(array(($a+1).' days ago', 
                       $previousNutrientTotals[320][$a] * 100/$vals->getRecommendedVitaminA(),
                       $previousNutrientTotals[578][$a] * 100/$vals->getRecommendedVitaminB12(),
                       $previousNutrientTotals[415][$a] * 100/$vals->getRecommendedVitaminB6(),
