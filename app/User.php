@@ -18,7 +18,6 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
-    private $prefQueue;
     /**
      * The database table used by the model.
      *
@@ -39,12 +38,6 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    public static function InitUserQueue()
-    {
-        $prefQueue = new \SplPriorityQueue();
-        return $prefQueue;
-    }
 
     private function history(){
         return $this->belongsToMany('App\Food','user_history')->withPivot('timestamp','quantity', 'rating');

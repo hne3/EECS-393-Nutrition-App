@@ -99,6 +99,34 @@ class FoodDatabaseTest extends TestCase
         $this->assertEquals("51", $food->getCalories());
         // 0.0 caffiene
         $this->assertEquals("0.0", $food->getCaffeine());
+        $this->assertEquals("mg", $food->getCaffieneUnits());
+        // 0.02 mg copper
+        $this->assertEquals("0.02", $food->getCopper());
+        $this->assertEquals("mg", $food->getCopperUnits());
+        // 0.1 g fat
+        $this->assertEquals("0.1", $food->getFat());
+        $this->assertEquals("g", $food->getFatUnits());
+        // 0.9 g fiber
+        $this->assertEquals("0.9", $food->getFiber());
+        $this->assertEquals("g", $food->getFiberUnits());
+        // 0.2 mg iron
+        $this->assertEquals("0.2", $food->getIron());
+        $this->assertEquals("mg", $food->getIronUnits());
+        // 6.0 mg magnesium
+        $this->assertEquals("6.0", $food->getMagnesium());
+        $this->assertEquals("mg", $food->getMagnesiumUnits());
+        // 13.0 mg phosphorus
+        $this->assertEquals("13.0", $food->getPhosphorus());
+        $this->assertEquals("mg", $food->getPhosphorusUnits());
+        // 0.04 mg manganese
+        $this->assertEquals("0.04", $food->getManganese());
+        $this->assertEquals("mg", $food->getManganeseUnits());
+        // 0 mg potassium
+        $this->assertEquals("0", $food->getPotassium());
+        $this->assertEquals("mg", $food->getPotassiumUnits());
+        // 0 mg sodium
+        $this->assertEquals("0", $food->getSodium());
+        $this->assertEquals("mg", $food->getSodiumUnits());
         // 10.0 calcium
         $this->assertEquals("10.0", $food->getCalcium());
         // Calcium unit: mg
