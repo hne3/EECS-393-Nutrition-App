@@ -11,4 +11,8 @@ class Restriction extends Model
     public function getDisplayName(){
         return $this->display_name;
     }
+
+    public function restrictedFoods(){
+        return $this->belongsToMany('App\Food');
+    }
 }

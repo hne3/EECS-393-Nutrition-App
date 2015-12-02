@@ -38,5 +38,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DailyValueSeeder::class);
         $this->call(AgeRangeDataSeeder::class);
         $this->call(RestrictionSeeder::class);
+        $this->call(NutAllergyBasicSeeder::class);
     }
 }
