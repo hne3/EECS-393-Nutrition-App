@@ -35,6 +35,7 @@ class TestRestrictions extends TestCase
         $this->actingAs($user)
             ->visit('/food')
             ->type('nuts', 'q')
+            ->select('1', 'restrictions')
             ->select('search', 'method')
             ->press('Go!')
             ->dontSee($f);
@@ -44,15 +45,20 @@ class TestRestrictions extends TestCase
         $user = $this->spawnUser();
         $r = App\Restriction::all()[0];
         $this->assertEquals($r->getDisplayName(), "Nut Allergy");
+
         // Spawns food and detaches + reattaches restriction
         $f = App\Food::GetNameSimilarTo("nuts", [])[0];
         App\Food::ObeyRestrictions($r);
+
         if($f->isRestricted($r)){
             $f->removeRestriction($r);
+            $this->assertEquals($f->isRestricted($r), false);
         }
+
         $f->addRestriction($r);
         $this-> assertEquals($user->canEatFood($f), false);
         $this->assertEquals($f->isRestricted($r), true);
+
         $sample = $user->getFoodSuggestion();
         $this->assertEquals($user->canEatFood($sample), true);
     }
