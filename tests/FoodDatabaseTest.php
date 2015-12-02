@@ -83,6 +83,8 @@ class FoodDatabaseTest extends TestCase
         $this->visit('/food')
             ->type('Apple', 'q')
             ->select('similar', 'method')
+            ->select('1', 'restrictions')
+            ->select('cal', 'sort')
             ->press('Go!')
             ->seePageStartsWith('/food')
             ->seePageHasGetParameters(['q'=>'Apple','method'=>'similar'])
