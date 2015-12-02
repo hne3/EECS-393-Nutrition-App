@@ -31,14 +31,29 @@ class FoodDatabaseTest extends TestCase
             static::$dbSeeded = true;
         }
     }
-//
-//    public function testFoodSearchRedirect()
-//    {
-//        $this->visit('/home')
-//            ->see('Snackr')
-//            ->click('Search')
-//            ->seePageIs('/food');
-//    }
+
+   public function spawnUser(){
+        $user = factory(App\User::class)->create();
+        $user->name = 'FoodHistoryTest';
+        $user->email = 'foodhistorytest@test.com';
+        $user->password = 'password';
+        $user->gender = 'female';
+        $ageTemp = new \Carbon\Carbon();
+        $ageTemp->addYear(-23);
+        $user->bdate = $ageTemp->toDateString();
+        $user->daily_calories = 1500;
+        return $user;
+    } 
+
+   public function testFoodSearchRedirect()
+   {
+        $user = $this->spawnUser();
+        $this->actingAs($user)
+           ->visit('/home')
+           ->see('Snackr')
+           ->click('Food Search')
+           ->seePageIs('/food');
+   }
 
     public function testFoodSearchByPrefix()
     {
