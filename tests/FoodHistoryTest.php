@@ -15,11 +15,10 @@ class FoodHistoryTest extends TestCase
         $user->email = 'foodhistorytest@test.com';
         $user->password = 'password';
         $user->gender = 'female';
-        $user->weight = '110';
-        $user->height = '60';
         $ageTemp = new \Carbon\Carbon();
         $ageTemp->addYear(-23);
         $user->bdate = $ageTemp->toDateString();
+        $user->daily_calories = 1500;
         return $user;
     }
 

@@ -19,7 +19,7 @@ class RecommendedValueTest extends TestCase
         // fiber
         $this->assertEquals($val->getRecommendedFiber(), '38.0');
         // calcium
-        $this->assertEquals($val->getRecommendedCalcium(), '1.0');
+        $this->assertEquals($val->getRecommendedCalcium(), '1000.0');
         // iron
         $this->assertEquals($val->getRecommendedIron(), '8.0');
         // magnesium
@@ -64,7 +64,7 @@ class RecommendedValueTest extends TestCase
         // fiber
         $this->assertEquals($val->getUpperLimitFiber(), null);
         // calcium
-        $this->assertEquals($val->getUpperLimitCalcium(), '2.0');
+        $this->assertEquals($val->getUpperLimitCalcium(), '2500.0');
         // iron
         $this->assertEquals($val->getUpperLimitIron(), '45.0');
         // magnesium

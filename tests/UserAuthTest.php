@@ -28,7 +28,7 @@ class UserAuthTest extends TestCase
     public function testHome()
     {
         $this->visit('/home')
-            ->see('Welcome to Snackr!');
+            ->see('Snackr');
     }
 
     public function testRegister()
@@ -79,7 +79,7 @@ class UserAuthTest extends TestCase
         $this->actingAs($user)
             ->withSession(['in' => 'out'])
             ->visit('/home')
-            ->see('Welcome to Snackr!');
+            ->see($user->name);
     }
 
     public function testLogout()
