@@ -38,7 +38,7 @@ class Food extends Model
         }
     }
 
-    protected function restrictions()
+    public function restrictions()
     {
         return $this->belongsToMany('App\Restriction');
     }

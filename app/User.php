@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-    private function history(){
+    public function history(){
         return $this->belongsToMany('App\Food','user_history')->withPivot('timestamp','quantity', 'rating');
     }
 

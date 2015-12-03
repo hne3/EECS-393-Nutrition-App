@@ -18,7 +18,7 @@ class TestRestrictions extends TestCase
         $user->name = 'FoodHistoryTest';
         $user->email = 'foodhistorytest@test.com';
         $user->password = 'password';
-        $user->gender = 'female';
+        $user->gender = 'F';
         $user->weight = '110';
         $user->height = '60';
         $ageTemp = new \Carbon\Carbon();
@@ -43,8 +43,9 @@ class TestRestrictions extends TestCase
 
     public function testRestrictions(){
         $user = $this->spawnUser();
-        $r = App\Restriction::all()[0];
+        //$r = App\Restriction::all()[0];
         $this->assertEquals($r->getDisplayName(), "Nut Allergy");
+        $this->assertEquals($user->getRestrictions(), $r);
 
         // Spawns food and detaches + reattaches restriction
         $f = App\Food::GetNameSimilarTo("nuts", [])[0];
