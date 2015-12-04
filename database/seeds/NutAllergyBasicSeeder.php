@@ -11,11 +11,19 @@ class NutAllergyBasicSeeder extends Seeder
      */
     public function run()
     {
+        $nuts = ['acorn', 'cashew', 'pecan', 'nut', 'almond', 'pistachio'];
+        $nutFoodsArray = array();
+
         //Retrieve all foods with nut in the name. Super rudimentary way to filter, but this will just show that the API works.
-        $nutFoods = \App\Food::GetNameSimilarTo('nut')->lists('id')->toArray();
+
+        foreach($nuts as $nut) {
+            $nutFoodsArray = array_merge($nutFoodsArray, \App\Food::GetNameSimilarTo($nut)->lists('id')->toArray());
+        }
+
+        $nutFoodsArray = array_unique($nutFoodsArray);
 
         $restriction = App\Restriction::find(1);
 
-        $restriction->restrictedFoods()->attach($nutFoods);
+        $restriction->restrictedFoods()->attach($nutFoodsArray);
     }
 }

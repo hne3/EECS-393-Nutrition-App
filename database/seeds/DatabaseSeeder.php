@@ -39,5 +39,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AgeRangeDataSeeder::class);
         $this->call(RestrictionSeeder::class);
         $this->call(NutAllergyBasicSeeder::class);
+        $this->call(SeaFoodAllergyBasicSeeder::class);
+        $this->call(DairyAllergyBasicSeeder::class);
+        $this->call(LactoseAllergyBasicSeeder::class);
+        $this->call(ChocolateAllergyBasicSeeder::class);
     }
 }

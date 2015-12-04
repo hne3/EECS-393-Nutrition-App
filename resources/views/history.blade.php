@@ -170,10 +170,10 @@
                   <tr><td>{{$vals->getRecommendedVitaminA()}} ug</td></tr>
                   <tr><td>{{$vals->getRecommendedVitaminB12()}} ug</td></tr>
                   <tr><td>{{$vals->getRecommendedVitaminB6()}} mg</td></tr>
-                  <tr><td>{{$vals->getRecommendedVitaminC()}} ug</td></tr>
-                  <tr><td>{{$vals->getRecommendedVitaminD()}} mg</td></tr>
-                  <tr><td>{{$vals->getRecommendedVitaminE()}} ug</td></tr>
-                  <tr><td>{{$vals->getRecommendedVitaminK()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminC()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminD()}} ug</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminE()}} mg</td></tr>
+                  <tr><td>{{$vals->getRecommendedVitaminK()}} ug</td></tr>
                   <tr><td>{{$vals->getRecommendedZinc()}} mg</td></tr>
                 </table></td> <!-- ends right table -->
 
@@ -186,8 +186,9 @@
                 $calChart = \Lava::LineChart('Calories')
                           ->dataTable($caloriesG)
                           ->title('Percent of Daily Calories Fulfilled');
-                for($a = 4; $a >= 0; $a--) 
+                for($a = 4; $a >= 1; $a--) 
                   $caloriesG ->addRow(array(($a+1).' days ago', $previousTotalCalories[$a] * 100/$dailyCalories));
+                $caloriesG ->addRow(array('1 day ago', $previousTotalCalories[0] * 100/$dailyCalories));
                 $caloriesG ->addRow(array('Today', $todayTotalCalories * 100/$dailyCalories));
                 echo \Lava::render('LineChart', 'Calories', 'calories_div'); ?>
               </div>
@@ -197,8 +198,9 @@
                   $sfChart = \Lava::LineChart('Sugar and Fat')
                            ->dataTable($sugarFatG)
                            ->title('Sugar and Fat');
-                  for($a = 4; $a >= 0; $a--)
+                  for($a = 4; $a >= 1; $a--)
                     $sugarFatG ->addRow(array(($a+1).' days ago', $previousNutrientTotals[269][$a], $previousNutrientTotals[204][$a]));
+                  $sugarFatG ->addRow(array('1 day ago', $previousNutrientTotals[269][0], $previousNutrientTotals[204][0]));
                   $sugarFatG ->addRow(array('Today', $todayNutrientTotals[269], $todayNutrientTotals[204]));
                   echo \Lava::render('LineChart', 'Sugar and Fat', 'sugarfat_div');
                 ?></div>
@@ -208,7 +210,7 @@
                   $mineralsChart = \Lava::LineChart('Minerals')
                                  ->dataTable($mineralsG)
                                  ->title('Percent of Daily Minerals Fulfilled');
-                  for($a = 4; $a >= 0; $a--)
+                  for($a = 4; $a >= 1; $a--)
                     $mineralsG ->addRow(array(($a+1).' days ago', 
                       $previousNutrientTotals[301][$a] * 100/$vals->getRecommendedCalcium(),
                       $previousNutrientTotals[312][$a] * 100/$vals->getRecommendedCopper(),
@@ -219,6 +221,16 @@
                       $previousNutrientTotals[306][$a] * 100/$vals->getRecommendedPotassium(),
                       $previousNutrientTotals[307][$a] * 100/$vals->getRecommendedSodium(),
                       $previousNutrientTotals[309][$a] * 100/$vals->getRecommendedZinc()));
+                  $mineralsG ->addRow(array('1 day ago', 
+                      $previousNutrientTotals[301][0] * 100/$vals->getRecommendedCalcium(),
+                      $previousNutrientTotals[312][0] * 100/$vals->getRecommendedCopper(),
+                      $previousNutrientTotals[303][0] * 100/$vals->getRecommendedIron(),
+                      $previousNutrientTotals[304][0] * 100/$vals->getRecommendedMagnesium(),
+                      $previousNutrientTotals[315][0] * 100/$vals->getRecommendedManganese(),
+                      $previousNutrientTotals[305][0] * 100/$vals->getRecommendedPhosphorus(),
+                      $previousNutrientTotals[306][0] * 100/$vals->getRecommendedPotassium(),
+                      $previousNutrientTotals[307][0] * 100/$vals->getRecommendedSodium(),
+                      $previousNutrientTotals[309][0] * 100/$vals->getRecommendedZinc()));
                   $mineralsG ->addRow(array('Today', 
                       $todayNutrientTotals[301] * 100/$vals->getRecommendedCalcium(),
                       $todayNutrientTotals[312] * 100/$vals->getRecommendedCopper(),
@@ -237,7 +249,7 @@
                   $vitaminsChart = \Lava::LineChart('Vitamins')
                                  ->dataTable($vitaminsG)
                                  ->title('Percent of Daily Vitamins Fulfilled');
-                  for($a = 4; $a >= 0; $a--)
+                  for($a = 4; $a >= 1; $a--)
                     $vitaminsG ->addRow(array(($a+1).' days ago', 
                       $previousNutrientTotals[320][$a] * 100/$vals->getRecommendedVitaminA(),
                       $previousNutrientTotals[578][$a] * 100/$vals->getRecommendedVitaminB12(),
@@ -246,6 +258,14 @@
                       $previousNutrientTotals[328][$a] * 100/$vals->getRecommendedVitaminD(),
                       $previousNutrientTotals[323][$a] * 100/$vals->getRecommendedVitaminE(),
                       $previousNutrientTotals[430][$a] * 100/$vals->getRecommendedVitaminK()));
+                  $vitaminsG ->addRow(array('1 day ago', 
+                      $previousNutrientTotals[320][0] * 100/$vals->getRecommendedVitaminA(),
+                      $previousNutrientTotals[578][0] * 100/$vals->getRecommendedVitaminB12(),
+                      $previousNutrientTotals[415][0] * 100/$vals->getRecommendedVitaminB6(),
+                      $previousNutrientTotals[401][0] * 100/$vals->getRecommendedVitaminC(),
+                      $previousNutrientTotals[328][0] * 100/$vals->getRecommendedVitaminD(),
+                      $previousNutrientTotals[323][0] * 100/$vals->getRecommendedVitaminE(),
+                      $previousNutrientTotals[430][0] * 100/$vals->getRecommendedVitaminK()));
                   $vitaminsG ->addRow(array('Today', 
                       $todayNutrientTotals[320] * 100/$vals->getRecommendedVitaminA(),
                       $todayNutrientTotals[578] * 100/$vals->getRecommendedVitaminB12(),
