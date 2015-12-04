@@ -91,6 +91,25 @@ class FoodDatabaseTest extends TestCase
             ->see('Apples, raw, gala, with skin');
     }
 
+    public function testSearchSorting()
+    {
+        $this->visit('/food')
+            ->type('pear', 'q')
+            ->select('search', 'method')
+            ->select('sugar', 'sort')
+            ->press('Go!')
+            ->seePageHasGetParameters(['q'=>'pear','method'=>'search', 'sort'=>'sugar'])
+            ->see('Pears, dried, sulfured, stewed, with added sugar');
+
+        $this->visit('/food')
+            ->type('pear', 'q')
+            ->select('search', 'method')
+            ->select('fat', 'sort')
+            ->press('Go!')
+            ->seePageHasGetParameters(['q'=>'pear', 'method'=>'search', 'sort'=>'fat'])
+            ->see('Pear nectar, canned, with added ascorbic acid');
+    }
+
     // UNIT TESTS FOR FOOD DATABASE
     public function testFoodCreation()
     {

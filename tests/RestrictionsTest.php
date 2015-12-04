@@ -63,7 +63,7 @@ class RestrictionsTest extends TestCase
         $sample1 = $user->getFoodSuggestion();
         $sample2 = $user->getFoodSuggestion();
         $this->assertNotEquals($sample1, $sample2);
-        $this->assertEquals($user->canEatFood($sample), true); 
+        $this->assertEquals($user->canEatFood($sample1), true); 
     }
 
 }

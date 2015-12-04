@@ -78,7 +78,7 @@ class UserAuthTest extends TestCase
 
         $this->actingAs($user)
             ->withSession(['in' => 'out'])
-            ->visit('/home')
+            ->visit('/')
             ->see($user->name);
     }
 
