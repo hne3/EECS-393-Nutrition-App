@@ -1,36 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use App\User;
 use App\Food;
 use App\Nutrient;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class TestRestrictions extends TestCase
+class RestrictionsTest extends TestCase
 {
 
-    function __construct()
-    {
-        parent::setUp();
-    }
 
     public function spawnUser(){
         $user = factory(App\User::class)->create();
-        $user->name = 'FoodHistoryTest';
-        $user->email = 'foodhistorytest@test.com';
+        $user->name = 'FoodRestrictionTest';
+        $user->email = 'foodrestrictiontest@test.com';
         $user->password = 'password';
-        $user->gender = 'F';
-        $user->weight = '110';
-        $user->height = '60';
+        $user->gender = 'female';
         $ageTemp = new \Carbon\Carbon();
         $ageTemp->addYear(-23);
         $user->bdate = $ageTemp->toDateString();
-        $r = App\Restriction::all()[0];
-        $user->addRestriction($r);
+        $user->daily_calories = 1500;
         return $user;
     }
 
     public function testRestrictionsUI(){
         $user = $this->spawnUser();
+        $r = App\Restriction::all()[0];
+        $user->addRestriction($r);
         $f = App\Food::SearchByName("nuts", []);
         $this->actingAs($user)
             ->visit('/food')
@@ -43,12 +39,13 @@ class TestRestrictions extends TestCase
 
     public function testRestrictions(){
         $user = $this->spawnUser();
-        //$r = App\Restriction::all()[0];
+        $r = App\Restriction::all()[0];
+        $user->addRestriction($r);
+
         $this->assertEquals($user->addRestriction($r), null);
         $this->assertEquals($r->getDisplayName(), "Nut Allergy");
-        $this->assertEquals($user->getRestrictions(), $r);
 
-        // Spawns food and detaches + reattaches restriction
+        //Spawns food and detaches + reattaches restriction
         $f = App\Food::GetNameSimilarTo("nuts", [])[0];
         App\Food::ObeyRestrictions($r);
         $this->assertEquals(App\Food::ObeyRestrictions($r), null);
@@ -60,7 +57,6 @@ class TestRestrictions extends TestCase
         }
 
         $f->addRestriction($r);
-        $this->addRestriction($f->addRestriction($r), null);
         $this-> assertEquals($user->canEatFood($f), false);
         $this->assertEquals($f->isRestricted($r), true);
 
