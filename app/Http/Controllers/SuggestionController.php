@@ -24,9 +24,6 @@ class SuggestionController extends Controller
     {
         $user = Auth::user();
         $food = $user->getFoodSuggestion();
-        $carbUnits = Nutrient::Carbohydrates()->getUnits();
-        $proteinUnits = Nutrient::Protein()->getUnits();
-        $fatUnits = Nutrient::Fat()->getUnits();
-        return view('suggestion.index')->with(compact('food', 'carbUnits', 'proteinUnits', 'fatUnits'));
+        return view('suggestion.index')->with(compact('food'));
     }
 }

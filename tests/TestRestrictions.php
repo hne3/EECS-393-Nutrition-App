@@ -44,24 +44,30 @@ class TestRestrictions extends TestCase
     public function testRestrictions(){
         $user = $this->spawnUser();
         //$r = App\Restriction::all()[0];
+        $this->assertEquals($user->addRestriction($r), null);
         $this->assertEquals($r->getDisplayName(), "Nut Allergy");
         $this->assertEquals($user->getRestrictions(), $r);
 
         // Spawns food and detaches + reattaches restriction
         $f = App\Food::GetNameSimilarTo("nuts", [])[0];
         App\Food::ObeyRestrictions($r);
+        $this->assertEquals(App\Food::ObeyRestrictions($r), null);
 
         if($f->isRestricted($r)){
             $f->removeRestriction($r);
+            $this->assertEquals($f->removeRestriction($r), null);
             $this->assertEquals($f->isRestricted($r), false);
         }
 
         $f->addRestriction($r);
+        $this->addRestriction($f->addRestriction($r), null);
         $this-> assertEquals($user->canEatFood($f), false);
         $this->assertEquals($f->isRestricted($r), true);
 
-        $sample = $user->getFoodSuggestion();
-        $this->assertEquals($user->canEatFood($sample), true);
+        $sample1 = $user->getFoodSuggestion();
+        $sample2 = $user->getFoodSuggestion();
+        $this->assertNotEquals($sample1, $sample2);
+        //$this->assertEquals($user->canEatFood($sample), true); 
     }
 
 }

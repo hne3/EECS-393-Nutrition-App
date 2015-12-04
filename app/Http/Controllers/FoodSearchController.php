@@ -37,9 +37,6 @@ class FoodSearchController extends Controller
                 $user = Auth::user();
                 $restrictions = $user->getRestrictions();
             }
-            $carbUnits = Nutrient::Carbohydrates()->getUnits();
-            $proteinUnits = Nutrient::Protein()->getUnits();
-            $fatUnits = Nutrient::Fat()->getUnits();
             if($method == 'similar'){
                 $foods = Food::getNameSimilarTo($query,$restrictions);
             } else if ($method == 'search'){
@@ -63,7 +60,7 @@ class FoodSearchController extends Controller
             }
 
 
-            return view('food.searchresults')->with(compact('foods','method','query','useRestrictions','fatUnits','carbUnits','proteinUnits','sort'));
+            return view('food.searchresults')->with(compact('foods','method','query','useRestrictions','sort'));
         }
     }
 }
